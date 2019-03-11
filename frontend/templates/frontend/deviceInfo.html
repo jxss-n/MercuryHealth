@@ -1,0 +1,23 @@
+{% extends './base.html' %}
+{% block title %} DeviceInfo {% endblock %}
+ {% block content %}
+ <h2>Device Info</h2>
+
+{% if form.errors %}
+<p>wrong input</p>
+{% endif %}
+
+
+{% if auth != "null" %}
+
+
+{{ errorMessage }}
+<form action="{% url 'deviceInfo' %}" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% endif %}
+{% endblock %}

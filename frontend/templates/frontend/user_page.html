@@ -1,0 +1,126 @@
+{% extends "./base.html" %}
+
+{% block navContent%}
+        <header class="header2">
+            <div class="sidetabs">
+                <div class="sidetabs__logo">
+
+                </div>
+                <div class="sidetabs__contents">
+                    <p class="sidetabs__tab">
+                        <a href="#profile" class="sidetabs__link sidetabs__profile">profile</a>
+                    </p>
+                    <p class="sidetabs__tab">
+                        <a href="#emergencycontact" class="sidetabs__link sidetabs__emergencycontact">emergency contact</a>
+                    </p>
+                </div>
+            </div>
+            <nav class="nav">
+                <div class="nav__tab">
+                    <div class="nav__logo" >
+                        Mercury Health
+                    </div>
+                    <div class="nav__navigation">
+                        <span class="nav__login"><a href="#" class="nav__login--link nav__link nav__tablink sidetabs__profile">profile</a></span>
+                        <span class="nav__login"><a href="#" class="nav__login--link nav__link nav__tablink sidetabs__emergencycontact">emergency contact</a></span>
+                        <span class="nav__login"><a href="/logout" class="nav__login--link nav__link">logout</a></span>
+                    </div>
+                </div>
+            </nav>
+                <div class="header2__content header2__content--profile" id="profile">
+                    <h3 class="header2__title margin-bottom-big">
+                        My Profile
+                    </h3>
+                </div>
+                <div class="header2__content header2__content--emergencycontact" id="emergencycontact">
+                      <div class="margin-bottom-medium">
+                        <h2 class="header2__title header2__title--emergencycontact center-text">
+                          Emergency Contact
+                        </h2>
+                      </div>
+                      <form action="/user_page/" class="form" method="post">
+                      <div class="form__group form__emergent--text">
+
+                          {{ message }}
+                      </div>
+                          {% csrf_token %}
+                        <div class="header2__form">
+                        <div class="form__group header2__input">
+                            <span class="header2__contact--text">Name</span>
+                          <input type="text"  name="Name" value='{{name}}' class="form__input form__input--emergency contactInput" placeholder="Full name" id="name" required disabled>
+                        </div>
+                        <div class="form__group header2__input">
+                            <span class="header2__contact--text">Phone Number</span>
+                          <input type="text"  name="Number" value='{{number}}' maxlength="12" class="form__input form__input--emergency contactInput" placeholder="xxxxxxxxxxx"id="phone-number" required disabled>
+                        </div>
+                        </div>
+                        <div class="header2__form">
+                        <div class="form__group header2__input">
+                            <span class="header2__contact--text">Name</span>
+                          <input type="text"  name="Name2" value='{{name2}}' class="form__input form__input--emergency contactInput" placeholder="Full name" id="name2" required disabled>
+                        </div>
+                        <div class="form__group header2__input">
+                            <span class="header2__contact--text">Phone Number</span>
+                          <input type="text"  name="Number2" value='{{number2}}' maxlength="12" class="form__input form__input--emergency contactInput" placeholder="xxxxxxxxxxx" id="phone-number2" required disabled>
+                        </div>
+                        </div>
+                        <div class="header2__form">
+                        <div class="form__group header2__input">
+                            <span class="header2__contact--text">Name</span>
+                          <input type="text"  name="Name3" value='{{name3}}' class="form__input form__input--emergency contactInput" placeholder="Full name" id="name3" required disabled>
+                        </div>
+                        <div class="form__group header2__input">
+                            <span class="header2__contact--text">Phone Number</span>
+                          <input type="text"  name="Number3" value='{{number3}}' maxlength="12" class="form__input form__input--emergency contactInput" placeholder="xxxxxxxxxxx" id="phone-number3" required disabled>
+                        </div>
+                        </div>
+                        <div class="form__group">
+                            <input type="button" value="EDIT" class="btn--input editButtonContacts btn btn--green" />
+
+                        </div>
+                    </form>
+                </div>
+
+
+        </header>
+        {% endblock %}
+
+        {% block content%}
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            $('.sidetabs__profile').click(function(){
+                $('#emergencycontact').css('opacity', '0');
+                $('#emergencycontact').css("visibility", "hidden");
+                $('#profile').css('opacity','1');
+                $('#profile').css("visibility", "visible");
+
+            });
+            $('.sidetabs__emergencycontact').click(function(){
+                $('#profile').css('opacity', '0');
+                $('#profile').css("visibility", "hidden");
+                $('#emergencycontact').css('opacity', '1');
+                $('#emergencycontact').css("visibility", "visible");
+
+            });
+            $(document).ready(function() {
+                $(".editButtonContacts").click(function(){
+                    if($(".editButtonContacts").attr("value") == "submit"){
+                        $(".editButtonContacts").prop("type", "submit");
+                    }
+                    else{
+                        $(".contactInput").prop("disabled", false);
+                        $(".editButtonContacts").prop("value", "submit");
+                    }
+                });
+
+
+
+            });
+            if($(".editButtonContacts").attr("value") == "submit"){
+                $(".editButtonContacts").click(function(){
+                    $(".editButtonContacts").prop("type", "submit");
+                });
+            }
+        </script>
+
+{% endblock %}
