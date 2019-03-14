@@ -526,6 +526,13 @@ body {
     text-align: center;
   }
 
+.team_row {
+  height: 33rem;
+} @media only screen and (max-width: 500px) {
+  .team_row{
+    height: 100%;
+  }
+}
 .card {
   perspective: 150rem;
   -moz-perspective: 150rem;
@@ -540,7 +547,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 275px;
+    height: 17em;
     backface-visibility: hidden;
     border-radius: 3px;
     overflow: hidden;
