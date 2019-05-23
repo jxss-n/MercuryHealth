@@ -21,13 +21,11 @@
   <header class="header">
     <div class="header__logo-box"></div>
     <div class="main-head">
-      <h1 class="main-head__content">
+      <h1 class="main-head__content margin-bottom-small">
           <span class="main-head__content--title">Live Life Without Worry</span>
       </h1>
-      <h1 class="main-head__content--subtitle">Introducing <i>HeraHome.</i></h1>
-      <a href="#myModal" role="button" data-toggle="modal">
-        <img class="zoom" src="../../static/img/device.png" width="400vw">
-      </a>
+      <hr class="headerline">
+      <h1 class="main-head__content--subtitle margin-top-small">Introducing our <i>Mercury Device.</i></h1>
       <h2 class="main-head__content--caption margin-bottom-small">A hands-free medical alert system installed at home to detect and respond to emergency situations.</h2>
       <button type="button" class="btn-primary video-btn zoom" data-toggle="modal" data-target="#myModal">
         WATCH VIDEO
@@ -41,7 +39,7 @@
 {% if errorMessage != None and cred == 'login'%}
 
 <script>
-    window.location.href="http://" + 127.0.0.1:8000 + "/#login";
+    window.location.href="http://" + window.location.href + "/#login";
 
 //Another url redirect
 
@@ -50,7 +48,7 @@
 
 {% if errorMessage != None and cred == 'signup'%}
 <script>
-    window.location.href="http://" + 127.0.0.1:8000+ "/#signup";
+    window.location.href="http://" + window.location.href + "/#signup";
 
 //Another url redirect
 
@@ -58,21 +56,21 @@
 {% endif %}
 {% if errorMessage == None %}
 <script>
-    window.location.href="http://" + 127.0.0.1:8000+ "/#";
+    window.location.href="http://" + window.location.href + "/#";
     //Another url redirect
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'forgot-password'%}
 <script>
-    window.location.href="http://" + 127.0.0.1:8000 + "/#forgot-password";
+    window.location.href="http://" + window.location.href + "/#forgot-password";
     //Another url redirect
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'reset_password'%}
 <script>
-    window.location.href="http://" + 127.0.0.1:8000 + "/#reset-password";
+    window.location.href="http://" + window.location.href + "/#reset-password";
     //Another url redirect
 </script>
 {% endif %}
@@ -106,50 +104,91 @@
             <h2 class="heading-secondary margin-bottom-small margin-top-small">
               Our System
             </h2>
+
         </div>
 
         <div class="container">
-          <div class="row">
-            <div class="col-sm-4 vertical-align">
+          <p class="para-about" style="text-align:center;"> <i> We aim to bring esoteric machine learning algorithms to healthcare and keep older adults safe, independent, and comfortable.
+            While we focus a lot on the technology, our first priority is to ensure patient health, and we use all means necessary to do so.</i>
+          </p>
+          <div class="row" style="background-color: #094664">
+            <div class="col-sm-4 vertical-align" style="margin-left:15px">
               <div>
                 <h1 class="header-3">Keeps your loved ones safe.</h1>
-                <p class="para-about">The small, unintrusive camera of our HeraHome device can detect elderly falls and other human actions in real time.
-                   Emergency contacts or services will be messaged instantly if anything is wrong.</p>
+                <p class="para-about" style="color:white;">Our Mercury Device consists of a small, unintrusive camera
+                  that can detect elderly falls and other human actions in real time. Emergency contacts or services
+                  will be contacted instantly if anything is wrong.
+                </p>
               </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-8" style="margin-right:-15px">
               <img class="cropped" src="../../static/img/fall.png" width="100%">
             </div>
           </div>
 
-          <div class="row flex-sm-row-reverse">
+          <div class="row flex-sm-row-reverse" style="background-color: #E7F4FC">
 
-            <div class="col-sm-4 vertical-align">
+            <div class="col-sm-4 vertical-align" style="margin-left: -15px;">
               <div>
-                <h1 class="header-3" >Encourages independence.</h1>
-                <p class="para-about">Unlike current technologies which use wearable technology (like the Apple Watch™ and Life Alert) to analyze a person’s actions,
-                   HeraHome easily installs in any desired room and monitors entirely from a distance.</p>
+                <h1 class="header-3" style="color: #265e96 !important;">Encourages independence.</h1>
+                <p class="para-about">Unlike current technologies which use wearable technology (like the Apple Watch™ and
+                  Life Alert) to analyze a person’s actions, our Mercury Device easily installs in any desired room and monitors
+                  entirely from a distance.
+                </p>
               </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-8" style="margin-right: 15px; padding: 0;">
                 <img class="cropped" src="../../static/img/mercury.png" width="100%">
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-sm-4 vertical-align">
+          <div class="row" style="background-color: #094664">
+            <div class="col-sm-4 vertical-align" style="margin-left:15px">
               <div>
-                <h1 class="header-3">Personalizes care.</h1>
-                <p class="para-about">Videos captured by HeraHome are sent to our servers, which anonymously analyze the data to look for patterns
-                   in a person's movement.</p>
+                <h1 class="header-3"">Personalizes care.</h1>
+                <p class="para-about" style="color:white;">Video captured is sent to our servers, which anonymously analyze the
+                  data to look for patterns in a person's movement. Anything important we notice is saved for you to view via our
+                  online patient portal.
+                </p>
               </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-8" style="margin-right:-15px">
               <img class="cropped" src="../../static/img/personalize.png" width="100%">
             </div>
           </div>
         </div>
 
+      </section>
+
+      <section>
+        <div class="container" style="border: solid black thin; width: 87vw; margin-top: 3rem; margin-bottom: 3rem;">
+          <div class="row">
+            <div class="col" style="margin:auto; text-align:center;">
+              <a href="#myModal" role="button" data-toggle="modal">
+                <img class="zoom" src="../../static/img/device.png" width="300vw">
+              </a>
+            </div>
+            <div class="col" style="padding-bottom: 3rem;">
+              <h2 class="heading-secondary margin-bottom-small margin-top-small">
+                Our Device
+              </h2>
+              <p class="para-about">
+                <i class="fas fa-wifi"></i><b>  Wifi Streaming</b><br>
+                  Wifi is used to stream video data captured from your home to our secure servers.<br><br>
+                <i class="fas fa-network-wired"></i><b> Deep Learning Visual Recognition Models</b><br>
+                 The servers apply custom, proprietary Deep Learning Visual Recognition Models to analyze video
+                 data received. These algorithms look for specific person movements, similar to a person monitoring
+                 a surveillance camera.<br><br>
+                <i class="fas fa-exclamation-circle"></i><b>  Incident Detection</b><br>
+                 If our algorithms detect an incident, servers instantly text all registered
+                 emergency contacts and ensure help is on the way.<br><br>
+                <i class="fas fa-address-card"></i><b>  Activity Logging</b><br>
+                 Meanwhile your personal online profile is updated
+                 with the incident, so we can track long term patterns and help prevent future occurrences.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- HOW IT WORKS -->
@@ -163,22 +202,22 @@
           <div class="row">
             <div class="col">
                   <img src="../../static/img/install.png" alt="" class="feature-box">
-                <p class="feature-box__text"> <b>INSTALL</b> <br> Our team will install the device in a desired room.</p>
+                <p class="feature-box__text"> <b>INSTALL</b> <br> Our team will install the Mercury Device in a desired room.</p>
             </div>
 
             <div class="col">
                   <img src="../../static/img/register.png" alt="" class="feature-box">
-                <p class="feature-box__text"><b>REGISTER</b> <br> Create a login and register your device to receive notifications. </p>
+                <p class="feature-box__text"><b>REGISTER</b> <br> Create a login and add emergency contact details to receive text notifications when events are detected. </p>
             </div>
 
             <div class="col">
                 <img src="../../static/img/monitor2.png" alt="" class="feature-box">
-                <p class="feature-box__text"><b>CAPTURE + IDENTIFY</b> <br> Videos captured by the device will analyze patterns in movement.</p>
+                <p class="feature-box__text"><b>CAPTURE + IDENTIFY</b> <br> Videos captured by the device are encrypted and anonymized, sent to our cloud to analyze for specific patterns in movement.</p>
             </div>
 
             <div class="col">
                 <img src="../../static/img/alert.png" alt="" class="feature-box">
-                <p class="feature-box__text"><b>ALERT</b> <br> Emergency contact/services will be notified when a fall is detected. </p>
+                <p class="feature-box__text"><b>ALERT</b> <br> Emergency contacts/services are notified when a fall or other occurrence is detected. </p>
             </div>
           </div>
         </div>
@@ -200,7 +239,7 @@
                       <img src="{%static 'img/brandonpeckphoto.jpg'%}" class="story__image">
                     </figure>
                     <p style="margin-bottom:0;"><b>BRANDON PECK</b></p>
-                    <p style="font-size:1.5rem;"><i>CoFounder - Machine Learning Engineer</i></p>
+                    <p style="font-size:1.5rem;"><i>CoFounder /<br> Machine Learning Engineer</i></p>
                   </div>
                   <div class="card__side card__side--back card__side--back--1">
                     <div class="card__back story__text">
@@ -277,7 +316,7 @@
                 <div class="card">
                   <div class="card__side card__side--front">
                     <figure class="story__shape margin-bottom-small">
-                      <img src="../../static/img/gradient.jpg"class="story__image">
+                      <img src="../../static/img/alistair.jpg"class="story__image" style="transform: translateX(-3rem) scale(1.4);">
                     </figure>
                     <p style="margin-bottom:0;"><b>ALISTAIR TWOMBLY</b></p>
                     <p style="font-size:1.5rem;"><i>Data Engineer</i></p>
@@ -337,41 +376,21 @@
                 <div class="card">
                   <div class="card__side card__side--front">
                     <figure class="story__shape margin-bottom-small">
-                      <img src="../../static/img/gradient.jpg"class="story__image">
+                      <img src="../../static/img/han.jpg"class="story__image">
                     </figure>
                     <p style="margin-bottom:0;"><b>HAN LI</b></p>
                     <p style="font-size:1.5rem;"><i>Machine Learning Engineer</i></p>
                   </div>
                   <div class="card__side card__side--back card__side--back--1">
                     <div class="card__back story__text">
-                      <p>Third year Cognitive Science (UCSD studying Math-Computer Science.</p>
+                      <p>Third year UCSD studying Math-Computer Science. Has experience in Deep learning/Machine Learning models and software engineering.
+                        Primary interests are in Computer Vision and Natural Language Processing.</p>
                     </div>
                   </div>
                 </div>
               </div>
           </div>
 
-          <div class="row team_row">
-            <div class="col-sm-3">
-              <div class="card">
-                <div class="card__side card__side--front">
-                  <figure class="story__shape margin-bottom-small">
-                    <img src="../../static/img/wayde.jpg"class="story__image" style="transform:none !important;">
-                  </figure>
-                  <p style="margin-bottom:0;"><b>WAYDE GILLIAM</b></p>
-                  <p style="font-size:1.5rem;"><i>Machine Learning Engineer</i></p>
-                </div>
-                <div class="card__side card__side--back card__side--back--1">
-                  <div class="card__back story__text">
-                    <p>First year Cognitive Science (Machine Learning) student at UC San Diego.
-                        Has work experience on various Machine/Deep Learning applications for real-world use.
-                        Passionate about robotics and computer vision.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
       </section>

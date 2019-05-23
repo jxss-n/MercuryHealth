@@ -105,17 +105,17 @@ def user_page(request):
 
     #TODO change the ipaddress to cookies
     #TODO auth = request.COOKIES.get('auth', 'somedefaultvalue') - if its default then do something else
-        try:
-            print("it is working 1")
-            if request.session['ip_address']:
-                refresh_token = auth["RefreshToken"]
-                id_token = auth["token"]
-                access_token =  auth['AccessToken']
+        #try:
+            #print("it is working 1")
+            #if request.session['ip_address']:
+                #refresh_token = auth["RefreshToken"]
+                #id_token = auth["token"]
+                #access_token =  auth['AccessToken']
         #send all the data to the device
         #TODO going to use the cookie instead.
-                del request.session['ip_address']
-        except Exception as e:
-            pass
+                #del request.session['ip_address']
+        #except Exception as e:
+            #pass
         try:
             print("it is working 2")
             print(auth['AccessToken'])
@@ -123,54 +123,68 @@ def user_page(request):
             print(user_data_response)
         except Exception as e:
             return render( request, 'frontend/user_page.html', {'message': ERROR_OBTAIN_DATA})
+        try:
+            User_Analytics = requests.get("https://mwnpu1mot0.execute-api.us-west-2.amazonaws.com/Production/user-analytics", params = {"AccessToken": auth['AccessToken']}, headers = {"Authorization": auth["token"]})
+        except Exception as e:
+            return render( request, 'frontend/user_page.html', {'message': ERROR_OBTAIN_DATA})
         user_data_response = json.loads(user_data_response.content)
+        user_analytics_response = json.loads(User_Analytics.content)
+        print(user_analytics_response)
         print(user_data_response)
-        if 'status' in user_data_response and user_data_response['status'] == 'Success':
-            print("it is working 3")
-            content = user_data_response['emergency_contacts']
-            print(content)
-            if request.method == 'GET':
-                if content == "not set":
-                    return render(request, 'frontend/user_page.html', {'email': email, 'message': content})
+        if 'status' in user_data_response and 'status' in user_analytics_response:
+            if user_data_response['status'] == 'Success':
+                print("it is working 3")
+                content = user_data_response['emergency_contacts']
+                print(content)
+                if request.method == 'GET':
+                    if content == "not set":
+                        return render(request, 'frontend/user_page.html', {'email': email, 'message': content})
+                    else:
+                        #make the field here dynamic
+                        return render(request, 'frontend/user_page.html', {'message': 'contact saved',
+                        'email': email,
+                        'name': content['name'],
+                        'name2': content['name2'],
+                        'name3': content['name3'],
+                        'number': content['number'],
+                        'number2': content['number2'],
+                        'number3': content['number3']})
+                f = emergencyContactForm(request.POST)
+                print(f.is_valid())
+                print(f)
+                print("I contactform")
+                if f.is_valid():
+                    name = f.cleaned_data['Name']
+                    number = f.cleaned_data['Number']
+                    name2 = f.cleaned_data['Name2']
+                    number2 = f.cleaned_data['Number2']
+                    name3 = f.cleaned_data['Name3']
+                    number3 = f.cleaned_data['Number3']
+                    try:
+                        emergency_contact_response = requests.post("https://kayxrpz2ef.execute-api.us-west-2.amazonaws.com/production/data", json.dumps({ "httpMethod": 'POST', "AccessToken": auth['AccessToken'], "emergencyContacts": {"name":name, "name2":name2, "name3":name3, "number":number, "number2":number2,"number3":number3,}}), headers = {"Authorization": auth["token"]})
+                    except Exception as e:
+                        print(e)
+                        return render( request, 'frontend/user_page.html', {'message': ERROR_OBTAIN_EMERGENCY_SEND})
+                    emergency_contact_response = emergency_contact_response.json()
+                    print("I am working")
+                    if 'status' in emergency_contact_response and emergency_contact_response['status'] == 'Success':
+                        return render(request, 'frontend/user_page.html', {'message': 'contact saved',
+                        'email': email,
+                        'name': name,
+                        'name2': name2,
+                        'name3': name3,
+                        'number': number,
+                        'number2': number2,
+                        'number3': number3})
+                    return render(request, 'frontend/user_page.html', {'message': emergency_contact_response['error']})
                 else:
-                    return render(request, 'frontend/user_page.html', {'message': 'contact saved',
-                    'email': email,
-                    'name': content['name'],
-                    'name2': content['name2'],
-                    'name3': content['name3'],
-                    'number': content['number'],
-                    'number2': content['number2'],
-                    'number3': content['number3']})
-            f = emergencyContactForm(request.POST)
-            print(f.is_valid())
-            print(f)
-            print("I contactform")
-            if f.is_valid():
-                name = f.cleaned_data['Name']
-                number = f.cleaned_data['Number']
-                name2 = f.cleaned_data['Name2']
-                number2 = f.cleaned_data['Number2']
-                name3 = f.cleaned_data['Name3']
-                number3 = f.cleaned_data['Number3']
-                try:
-                    emergency_contact_response = requests.post("https://kayxrpz2ef.execute-api.us-west-2.amazonaws.com/production/data", json.dumps({ "httpMethod": 'POST', "AccessToken": auth['AccessToken'], "emergencyContacts": {"name":name, "name2":name2, "name3":name3, "number":number, "number2":number2,"number3":number3,}}), headers = {"Authorization": auth["token"]})
-                except Exception as e:
-                    print(e)
-                    return render( request, 'frontend/user_page.html', {'message': ERROR_OBTAIN_EMERGENCY_SEND})
-                emergency_contact_response = emergency_contact_response.json()
-                print("I am working")
-                if 'status' in emergency_contact_response and emergency_contact_response['status'] == 'Success':
-                    return render(request, 'frontend/user_page.html', {'message': 'contact saved',
-                    'email': email,
-                    'name': name,
-                    'name2': name2,
-                    'name3': name3,
-                    'number': number,
-                    'number2': number2,
-                    'number3': number3})
-                return render(request, 'frontend/user_page.html', {'message': emergency_contact_response['error']})
-            else:
-                return render(request, 'frontend/user_page.html', {'message': ERROR_FILL_OUT})
+                    return render(request, 'frontend/user_page.html', {'message': ERROR_FILL_OUT})
+            if user_analytics_response['status'] == 'Success':
+                analytics = user_analytics_response['situp']
+                if analytics == "not set":
+                    return render(request, 'frontend/user_page.html', {'analytics_message': "No Analytics. Make sure the device is connected"})
+                else:
+                    return render(request, 'frontend/user_page.html', {'user_analytcs': analytics})
         else: #gets a new token using the refreshToken
             try:
                 refresh_token_response = requests.get("https://bqseq2czwe.execute-api.us-west-2.amazonaws.com/prod/credential",  params = { "process": 'get_new_token', "RefreshToken": auth["RefreshToken"]})
@@ -268,11 +282,10 @@ def register(request):
             request.session['cred'] = 'signup'
             return HttpResponseRedirect(reverse('index'))
         device_reponse = device_reponse.json()
-        print(device_reponse)
         if 'status' in device_reponse and device_reponse['status'] == 'Success':
             print("working valid form")
             print(device_reponse)
-            ip_address = device_reponse['IP']
+            #ip_address = device_reponse['IP']
         #TODO use a cookie to get the data instead of getters and setters
         #Checkout singleton
         #TODO check out a different ways to store cookie
@@ -280,11 +293,11 @@ def register(request):
             token_data = {'token': user_response['id_token'], 'email': email, 'RefreshToken': user_response['RefreshToken'], 'AccessToken': user_response['AccessToken']}
             user_page.set_cookie('auth', token_data)
             p.address = ip_address'''
-            request.session['ip_address'] = ip_address
+            #request.session['ip_address'] = ip_address
         #TODO put this inside a try and catch block
         #TODO different variable names
             try:
-                register_response=requests.post("https://bqseq2czwe.execute-api.us-west-2.amazonaws.com/prod/credential",json.dumps({"process": "register","email": email, "password":password , "name":name}))
+                register_response=requests.post("https://bqseq2czwe.execute-api.us-west-2.amazonaws.com/prod/credential",json.dumps({"process": "register","email": email, "password":password , "name":name, "DevID":device_id}))
                 request.session['cred'] = 'signup'
             except Exception as e:
                 request.session['errorMessage'] = e
