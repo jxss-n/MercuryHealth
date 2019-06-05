@@ -39,7 +39,7 @@
 {% if errorMessage != None and cred == 'login'%}
 
 <script>
-    window.location.href="http://" + window.location.href + "/#login";
+    window.location.href="http://" + window.location.hostname + "/#login";
 
 //Another url redirect
 
@@ -48,7 +48,7 @@
 
 {% if errorMessage != None and cred == 'signup'%}
 <script>
-    window.location.href="http://" + window.location.href + "/#signup";
+    window.location.href="http://" + window.location.hostname + "/#signup";
 
 //Another url redirect
 
@@ -56,21 +56,21 @@
 {% endif %}
 {% if errorMessage == None %}
 <script>
-    window.location.href="http://" + window.location.href + "/#";
+    window.location.href="http://" + window.location.hostname + "/#";
     //Another url redirect
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'forgot-password'%}
 <script>
-    window.location.href="http://" + window.location.href + "/#forgot-password";
+    window.location.href="http://" + window.location.hostname + "/#forgot-password";
     //Another url redirect
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'reset_password'%}
 <script>
-    window.location.href="http://" + window.location.href + "/#reset-password";
+    window.location.href="http://" + window.location.hostname + "/#reset-password";
     //Another url redirect
 </script>
 {% endif %}
@@ -258,7 +258,7 @@
                     <img src="../../static/img/Ji.png"class="story__image">
                   </figure>
                   <p style="margin-bottom:0;"><b>JI LEE</b></p>
-                  <p style="font-size:1.5rem;"><i>Co-founder</i></p>
+                  <p style="font-size:1.5rem;"><i>Co-founder / <br>Nano Engineer</i></p>
                 </div>
                 <div class="card__side card__side--back card__side--back--1">
                   <div class="card__back story__text">
