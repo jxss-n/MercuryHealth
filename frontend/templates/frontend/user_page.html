@@ -6,20 +6,20 @@
     <p class="margin-bottom-medium" style="text-align:center;">MERCURY HEALTH</p>
     <div class="sidetabs__logo">
       <figure class="sidetabs_pic" style="width: 10rem; height: 10rem;">
-        <img src="../../static/img/gradient.jpg" height="100%">
+        <img src="./frontend/static/img/gradient.jpg" height="100%">
       </figure>
       <p class="margin-top-small margin-bottom-small" style="text-align:center; letter-spacing: 0.5rem;">
         <b>WELCOME<br>XXX</b>
       </p>
     </div>
     <div id="sidetabs" class="sidetabs__contents margin-top-small">
-      <a href="#dashboard" class="sidetabs__link"><i class="fas fa-home"></i>&nbsp&nbspDashboard</a>
+      <a id="dashboard" href="#" class="sidetabs__link"><i class="fas fa-home"></i>&nbsp&nbspDashboard</a>
 
-      <a href="#activitylog" class="sidetabs__link"><i class="fas fa-chart-line"></i>&nbsp&nbspActivity Log</a>
+      <a id="activitylog" href="#" class="sidetabs__link"><i class="fas fa-chart-line"></i>&nbsp&nbspActivity Log</a>
 
-      <!--<a href="#emergencycontact" class="sidetabs__link"><i class="far fa-address-book"></i>&nbsp&nbspEmergency Contacts</a>-->
+      <a id="emergency_contact" href="#" class="sidetabs__link"><i class="far fa-address-book"></i>&nbsp&nbspEmergency Contacts</a>
 
-      <a href="#settings" class="sidetabs__link"><i class="fas fa-cog"></i>&nbsp&nbspSettings</a>
+      <!--<a id="settings" href="#settings" class="sidetabs__link"><i class="fas fa-cog"></i>&nbsp&nbspSettings</a>-->
 
       <a href="/logout" class="sidetabs__link"><i class="fas fa-sign-out-alt"></i>&nbsp&nbspLogout</a>
     </div>
@@ -35,17 +35,17 @@
         <a class="nav-item nav-link" href="#">Dashboard</a>
         <a class="nav-item nav-link" href="#">Activity Log</a>
         <a class="nav-item nav-link" href="#">Emergency Contacts</a>
-        <a class="nav-item nav-link" href="#">Settings</a>
+        <!--<a class="nav-item nav-link" href="#">Settings</a>-->
         <a class="nav-item nav-link" href="/logout">Logout</a>
       </div>
     </div>
   </nav>
 
   <div class="header2__content">
-    <div class="container">
-      <h3 style="color: #666666;">RECENT ACTIVITY</h3>
+    <div class="container" id="activity_log">
+      <h3 id="activity_title" style="color: #666666;">RECENT ACTIVITY</h3>
       <div class="header2__content--activitylog">
-        <div id="chartdiv" style="width: 100%;"></div>
+        <div id="chartdiv" style="width:100%"></div>
       </div>
       <a class="activity_link" href="#">View Full Activity Log</a>
     </div>
@@ -62,7 +62,6 @@
                 <input type="button" value="ADD CONTACT" class="btn--input btn--green addContact" />
               </div>
 
-              {% csrf_token %}
               <div class="header2__form">
                 <div>
                     <!--<span class="header2__contact--text">Name</span>-->
@@ -89,13 +88,13 @@
           </form>
         </div>
 
-        <div class="col-md margin-top-small">
+        <div class="col-md margin-top-small" id="userprofile">
           <h3 style="color: #666666;">USER PROFILE</h3>
           <div class="header2__content--profile">
             <div class="row">
               <div class="col-4 vertical-align">
                 <figure class="profile_pic margin-top-small">
-                  <img src="../../static/img/gradient.jpg" height="100%">
+                  <img src="./frontend/static/img/gradient.jpg" height="100%">
                 </figure>
               </div>
               <div class="col-8 vertical-align">
@@ -117,33 +116,76 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script type="text/javascript">
 
-      $(".addContact").click(function(){
-        $('.header2__content--emergencycontact').css('display', 'none');
-        $('.header2__form').css('opacity', '1');
-        $('.header2__form').css("visibility", "visible");
-        $('.emergency_list').css('opacity', '0');
-        $('.emergency_list').css("visibility", "hidden");
-      });
+    $(".addContact").click(function(){
+      $('.header2__content--emergencycontact').css('display', 'none');
+      $('.header2__form').css('opacity', '1');
+      $('.header2__form').css("visibility", "visible");
+      $('.emergency_list').css('opacity', '0');
+      $('.emergency_list').css("visibility", "hidden");
+    });
 
-      $(".submitContacts").click(function(){
-          //$(".submitContacts").prop("type", "submit");
-          $(".header2__form").css('opacity', '0');
-          $('.header2__form').css("visibility", "hidden");
-          $('.emergency_list').css('opacity', '1');
-          $('.emergency_list').css("visibility", "visible");
-      });
+    /*
+    $(".editButtonContacts").click(function(){
+      if ($(".editButtonContacts").attr("value") == "submit"){
+        $(".editButtonContacts").prop("type", "submit");
+      } else{
+        $(".contactInput").prop("disabled", false);
+        $(".editButtonContacts").prop("value", "submit");
+      }
+     });
+    */
 
-      $(".cancelContacts").click(function(){
-        $('.header2__form').css('opacity', '0');
+    $(".submitContacts").click(function(){
+        //$(".submitContacts").prop("type", "submit");
+        $(".header2__form").css('opacity', '0');
         $('.header2__form').css("visibility", "hidden");
-        $('.header2__content--emergencycontact').css('display', 'block');
-      });
+        $('.emergency_list').css('opacity', '1');
+        $('.emergency_list').css("visibility", "visible");
+    });
 
-      $(function() {
-        $('#sidetabs').on('click','.sidetabs__link', function ( e ) {
-          $(this).parents('#sidetabs').find('.sidetabs__link_active').removeClass('sidetabs__link_active').end().end().addClass('sidetabs__link_active');
-        });
+    $(".cancelContacts").click(function(){
+      $('.header2__form').css('opacity', '0');
+      $('.header2__form').css("visibility", "hidden");
+      $('.header2__content--emergencycontact').css('display', 'block');
+    });
+
+    $(function() {
+      $('#sidetabs').on('click','.sidetabs__link', function ( e ) {
+        $(this).parents('#sidetabs').find('.sidetabs__link_active').removeClass('sidetabs__link_active').end().end().addClass('sidetabs__link_active');
       });
+    });
+
+    $("#activitylog, .activity_link").click(function() {
+
+      $("#activity_log").css('display','block');
+
+      $('#emergencycontact, #userprofile').css('display', 'none');
+      $('.activity_link').css('visibility', 'hidden');
+      $('.header2__content').css('position', 'initial');
+      $('.header2__content').css('margin-left', '28rem');
+
+      document.getElementById("activity_title").innerHTML = "ACTIVITY LOG";
+    });
+
+    $("#emergency_contact").click(function() {
+      if( $("#emergencycontact").css('display') == 'none') {
+        $("#emergencycontact").css('display', 'block');
+      }
+
+      $('#userprofile').css('display', 'none');
+      $('#activity_log').css('display', 'none');
+
+    });
+
+    $('#dashboard').click(function() {
+      $('#userprofile').css('display', 'block');
+      $('#activity_log').css('display', 'block');
+      $("#emergencycontact").css('display', 'block');
+
+      document.getElementById("activity_title").innerHTML = "RECENT ACTIVITY";
+      $('.activity_link').css('visibility', 'visible');
+
+    });
 
       am4core.ready(function() {
         // Themes begin
