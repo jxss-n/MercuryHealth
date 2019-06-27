@@ -49,8 +49,8 @@
 
 {% if errorMessage != None and cred == 'signup'%}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#signup";
-    //window.location.href="http://" + 127.0.0.1:8000 + "/#signup";
+    //window.location.href="http://" + window.location.hostname + "/#signup";
+    window.location.href="http://" + 127.0.0.1:8000 + "/#signup";
 
 //Another url redirect
 
@@ -58,24 +58,24 @@
 {% endif %}
 {% if errorMessage == None %}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#";
-    //window.location.href="http://" + 127.0.0.1:8000 + "/#";
+    //window.location.href="http://" + window.location.hostname + "/#";
+    window.location.href="http://" + 127.0.0.1:8000 + "/#";
     //Another url redirect
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'forgot-password'%}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#forgot-password";
-    //window.location.href="http://" + 127.0.0.1:8000 + "/#forgot-password";
+    //window.location.href="http://" + window.location.hostname + "/#forgot-password";
+    window.location.href="http://" + 127.0.0.1:8000 + "/#forgot-password";
     //Another url redirect
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'reset_password'%}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#reset-password";
-    //window.location.href="http://" + 127.0.0.1:8000 + "/#reset-password";
+    //window.location.href="http://" + window.location.hostname + "/#reset-password";
+    window.location.href="http://" + 127.0.0.1:8000 + "/#reset-password";
     //Another url redirect
 </script>
 {% endif %}

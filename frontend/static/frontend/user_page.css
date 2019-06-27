@@ -117,13 +117,13 @@ body {
   margin-top: -4rem !important; }
 
 .header2 {
-  height: 120vh;
   /* z-index: 100; */
   background-color: #f7f7f7;
+  min-height: 100vh;
   /*background-image: linear-gradient(to right bottom, rgba(48, 198, 250, 0.8), rgba(38, 94, 150, 0.8));*/
   /* background-size: cover; */
   /* background-position: top; */
-  /* position: relative; */ }
+  position: relative; }
   .header2__link:link, .header2__link:visited {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.8); }
@@ -133,6 +133,7 @@ body {
     text-align: center;
     opacity:0;
     visibility: hidden;
+    display:none;
     transition: all .5s;
     background-color:white;
     box-shadow: 0 0 3rem rgba(0, 0, 0, 0.1);
@@ -153,8 +154,8 @@ body {
       .header2__input {
         margin-bottom: 2rem; } }
   .header2__content {
-    position: absolute;
-    left: 28rem; }
+    margin-left: 28rem;
+    color: #666666;}
     @media (max-width: 56.25em) {
       .header2__content {
         left:25rem;
@@ -174,10 +175,21 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 3rem rgba(0, 0, 0, 0.1);
   }
+  #chartdiv {
+    width:100%;
+    height:60vh;
+  }
+  #activitylog {
+    display:block;
+  }
     @media (max-width: 56.25em) {
       .header2__content--activitylog{
         width: 100%;
         height: 30vh;
+      }
+      #chartdiv {
+        width:100%;
+        height:30vh;
       }
     }
     @media (max-width: 37.5em) {
@@ -193,6 +205,7 @@ body {
       border-radius: 5px;
       transition: all, .5s;
       box-shadow: 0 0 4rem rgba(0, 0, 0, 0.2);
+      display:none;
     }
     .header2__content--profile {
       background-color: white;
@@ -218,8 +231,8 @@ body {
 
     .activity_link {
       float:right;
-      text-decoration: none;
       color: #666666;
+      font-size:1.5rem;
     }
 
 
@@ -611,12 +624,8 @@ body {
     opacity:0;
     visibility:hidden;
     color:#666666;
-    margin-top:-20rem;
+    font-size: 1.25rem;
   }
-  @media (max-width: 56.25em) {
-    .emergency_list {
-      margin-top:-28rem;
-    } }
 
 .form__label {
   position: absolute;
@@ -677,22 +686,20 @@ body {
 
 .sidetabs {
   width: 25rem;
-  height: 120vh;
+  height: 100%;
   float: left;
   position: absolute;
-  /*top: 10rem;*/
+  color: white;
   padding: 3rem;
   background-color: rgba(255, 255, 255, 0.2);
   background-image: linear-gradient(to right bottom, rgba(48, 198, 250, 0.8), rgba(38, 94, 150, 0.8));
-/*border-top-right-radius: 2rem;*/ }
+}
   @media (max-width: 37.5em) {
     .sidetabs {
       opacity: 0;
       visibility: hidden;
       display: none;
       width: 0; } }
-  .sidetabs__contents {
-    width: 0; }
   .sidetabs_tab{
     text-align:center;
   }
@@ -1117,3 +1124,203 @@ body {
     @media (max-width: 56.25em) {
       .book__form {
         width: 100%; } }
+
+#contact1 {
+  display:block;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ Table ]*/
+
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+  display:none;
+}
+
+.container-table100 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.wrap-table100 {
+  width: 1170px;
+}
+
+table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+table * {
+  position: relative;
+}
+table td, table th {
+  padding-left: 8px;
+}
+table thead tr {
+  height: 50px;
+  background: rgba(38, 94, 150, 0.8);
+}
+table tbody tr {
+  height: 50px;
+}
+table tbody tr:last-child {
+  border: 0;
+}
+table td, table th {
+  text-align: left;
+}
+table td.l, table th.l {
+  text-align: right;
+}
+table td.c, table th.c {
+  text-align: center;
+}
+table td.r, table th.r {
+  text-align: center;
+}
+
+
+.table100-head th{
+  font-size: 18px;
+  color: #fff;
+  line-height: 1.2;
+  font-weight: unset;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+tbody tr {
+  font-size: 15px;
+  color: #808080;
+  line-height: 1.2;
+  font-weight: unset;
+}
+
+tbody tr:hover {
+  color: #555555;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+.column1 {
+  width: 260px;
+  padding-left: 40px;
+}
+
+.column2 {
+  width: 160px;
+}
+
+.column3 {
+  width: 245px;
+}
+
+.column4 {
+  width: 110px;
+  text-align: right;
+}
+
+.column5 {
+  width: 170px;
+  text-align: right;
+}
+
+.column6 {
+  width: 222px;
+  text-align: right;
+  padding-right: 62px;
+}
+
+
+@media screen and (max-width: 992px) {
+  table {
+    display: block;
+  }
+  table > *, table tr, table td, table th {
+    display: block;
+  }
+  table thead {
+    display: none;
+  }
+  table tbody tr {
+    height: auto;
+    padding: 37px 0;
+  }
+  table tbody tr td {
+    padding-left: 40% !important;
+    margin-bottom: 24px;
+  }
+  table tbody tr td:last-child {
+    margin-bottom: 0;
+  }
+  table tbody tr td:before {
+    font-size: 14px;
+    color: #999999;
+    line-height: 1.2;
+    font-weight: unset;
+    position: absolute;
+    width: 40%;
+    left: 30px;
+    top: 0;
+  }
+  table tbody tr td:nth-child(1):before {
+    content: "Date";
+  }
+  table tbody tr td:nth-child(2):before {
+    content: "Order ID";
+  }
+  table tbody tr td:nth-child(3):before {
+    content: "Name";
+  }
+  table tbody tr td:nth-child(4):before {
+    content: "Price";
+  }
+  table tbody tr td:nth-child(5):before {
+    content: "Quantity";
+  }
+  table tbody tr td:nth-child(6):before {
+    content: "Total";
+  }
+
+  .column4,
+  .column5,
+  .column6 {
+    text-align: left;
+  }
+
+  .column4,
+  .column5,
+  .column6,
+  .column1,
+  .column2,
+  .column3 {
+    width: 100%;
+  }
+
+  tbody tr {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container-table100 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

@@ -146,37 +146,77 @@ def user_page(request):
                         'name': content['name'],
                         'name2': content['name2'],
                         'name3': content['name3'],
+                        'name4': content['name4'],
+                        'name5': content['name5'],
                         'number': content['number'],
                         'number2': content['number2'],
-                        'number3': content['number3']})
+                        'number3': content['number3'],
+                        'number4': content['number4'],
+                        'number5': content['number5'],
+                        'relationship':content['relationship'],
+                        'relationship2':content['relationship2'],
+                        'relationship3':content['relationship3'],
+                        'relationship4':content['relationship4'],
+                        'relationship5':content['relationship5']
+                        })
                 f = emergencyContactForm(request.POST)
                 print(f.is_valid())
                 print(f)
                 print("I contactform")
                 if f.is_valid():
-                    name = f.cleaned_data['Name']
-                    number = f.cleaned_data['Number']
-                    name2 = f.cleaned_data['Name2']
-                    number2 = f.cleaned_data['Number2']
-                    name3 = f.cleaned_data['Name3']
-                    number3 = f.cleaned_data['Number3']
+                    name = f.cleaned_data['Name'] or 'not set'
+                    number = f.cleaned_data['Number'] or 'not set'
+                    relationship = f.cleaned_data['Relationship'] or 'not set'
+
+                    name2 = f.cleaned_data['Name2'] or 'not set'
+                    number2 = f.cleaned_data['Number2'] or 'not set'
+                    relationship2 = f.cleaned_data['Relationship2'] or 'not set'
+                    print(name)
+
+                    name3 = f.cleaned_data['Name3'] or 'not set'
+                    number3 = f.cleaned_data['Number3'] or 'not set'
+                    relationship3 = f.cleaned_data['Relationship3'] or 'not set'
+
+                    name4 = f.cleaned_data['Name4'] or 'not set'
+                    number4 = f.cleaned_data['Number4'] or 'not set'
+                    relationship4 = f.cleaned_data['Relationship4'] or 'not set'
+                    print(number4)
+
+                    name5 = f.cleaned_data['Name5'] or 'not set'
+                    number5 = f.cleaned_data['Number5'] or 'not set'
+                    relationship5 = f.cleaned_data['Relationship5'] or 'not set'
+
                     try:
-                        emergency_contact_response = requests.post("https://kayxrpz2ef.execute-api.us-west-2.amazonaws.com/production/data", json.dumps({ "httpMethod": 'POST', "AccessToken": auth['AccessToken'], "emergencyContacts": {"name":name, "name2":name2, "name3":name3, "number":number, "number2":number2,"number3":number3,}}), headers = {"Authorization": auth["token"]})
+                        emergency_contact_response = requests.post("https://kayxrpz2ef.execute-api.us-west-2.amazonaws.com/production/data", json.dumps({ "httpMethod": 'POST', "AccessToken": auth['AccessToken'], "emergencyContacts": {"name":name, "name2":name2, "name3":name3,"name4":name4, "name5":name5,
+                         "number":number, "number2":number2, "number3":number3,"number4":number4, "number5":number5,
+                         "relationship":relationship, "relationship2":relationship2, "relationship3":relationship3, "relationship4":relationship4, "relationship5":relationship5}}), headers = {"Authorization": auth["token"]})
                     except Exception as e:
                         print(e)
                         return render( request, 'frontend/user_page.html', {'message': ERROR_OBTAIN_EMERGENCY_SEND})
                     emergency_contact_response = emergency_contact_response.json()
                     print("I am working")
+
                     if 'status' in emergency_contact_response and emergency_contact_response['status'] == 'Success':
                         return render(request, 'frontend/user_page.html', {'message': 'contact saved',
                         'email': email,
                         'name': name,
                         'name2': name2,
                         'name3': name3,
+                        'name4': name4,
+                        'name5': name5,
                         'number': number,
                         'number2': number2,
-                        'number3': number3})
-                    return render(request, 'frontend/user_page.html', {'message': emergency_contact_response['error']})
+                        'number3': number3,
+                        'number4': number4,
+                        'number5': number5,
+                        'relationship':relationship,
+                        'relationship2':relationship2,
+                        'relationship3':relationship3,
+                        'relationship4':relationship4,
+                        'relationship5':relationship5
+                        })
+                    print(emergency_contact_response);
+                    return render(request, 'frontend/user_page.html', {'message': emergency_contact_response['msg']})
                 else:
                     return render(request, 'frontend/user_page.html', {'message': ERROR_FILL_OUT})
             if user_analytics_response['status'] == 'Success':
@@ -236,7 +276,6 @@ def login(request):
             request.session['cred'] = 'login'
             return HttpResponseRedirect(reverse('index'))
         user_response = json.loads(user_response.content)
-        print(user_response['status'])
         if 'status' in user_response and user_response['status'] == 'Success':
             user_page = HttpResponseRedirect(reverse('user_page'))
             token_data = {'token': user_response['id_token'], 'email': email, 'RefreshToken': user_response['RefreshToken'], 'AccessToken': user_response['AccessToken']}

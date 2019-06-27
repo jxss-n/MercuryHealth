@@ -3,17 +3,17 @@
 {% block navContent%}
 <div class="header2">
   <div class="sidetabs">
-    <p class="margin-bottom-medium" style="text-align:center;">MERCURY HEALTH</p>
+    <p class="margin-bottom-medium" style="text-align:center; font-size: 1.75rem;">MERCURY HEALTH</p>
     <div class="sidetabs__logo">
       <figure class="sidetabs_pic" style="width: 10rem; height: 10rem;">
-        <img src="./frontend/static/img/gradient.jpg" height="100%">
+        <img src="../../static/img/gradient.jpg" height="100%">
       </figure>
-      <p class="margin-top-small margin-bottom-small" style="text-align:center; letter-spacing: 0.5rem;">
-        <b>WELCOME<br>XXX</b>
+      <p class="margin-top-small margin-bottom-small" style="text-align:center; letter-spacing: 0.5rem; font-size: 1.5rem;">
+        <b>WELCOME</b>
       </p>
     </div>
-    <div id="sidetabs" class="sidetabs__contents margin-top-small">
-      <a id="dashboard" href="#" class="sidetabs__link"><i class="fas fa-home"></i>&nbsp&nbspDashboard</a>
+    <div id="sidetabs" class="margin-top-small">
+      <a id="dashboard" href="#" class="sidetabs__link sidetabs__link_active"><i class="fas fa-home"></i>&nbsp&nbspDashboard</a>
 
       <a id="activitylog" href="#" class="sidetabs__link"><i class="fas fa-chart-line"></i>&nbsp&nbspActivity Log</a>
 
@@ -43,17 +43,73 @@
 
   <div class="header2__content">
     <div class="container" id="activity_log">
-      <h3 id="activity_title" style="color: #666666;">RECENT ACTIVITY</h3>
+      <h3 id="activity_title">RECENT ACTIVITY</h3>
       <div class="header2__content--activitylog">
-        <div id="chartdiv" style="width:100%"></div>
+        <div id="chartdiv"></div>
       </div>
       <a class="activity_link" href="#">View Full Activity Log</a>
     </div>
 
+    <div class="limiter container">
+      <h3 id="activity_title" class="margin-top-small">ALL ACTIVITY</h3>
+  		<div class="container-table100">
+  			<div class="wrap-table100">
+  				<div class="table100">
+  					<table>
+  						<thead>
+  							<tr class="table100-head">
+  								<th class="column1">Date/Time</th>
+  								<th class="column3">Activity</th>
+  							</tr>
+  						</thead>
+  						<tbody>
+  								<tr>
+  									<td class="column1">2017-09-29 01:22</td>
+  									<td class="column3">iPhone X 64Gb Grey</td>
+  								</tr>
+  								<tr>
+  									<td class="column1">2017-09-28 05:57</td>
+  									<td class="column3">Samsung S8 Black</td>
+  								</tr>
+  								<tr>
+  									<td class="column1">2017-09-26 05:57</td>
+  									<td class="column3">Game Console Controller</td>
+  								</tr>
+  								<tr>
+  									<td class="column1">2017-09-25 23:06</td>
+  									<td class="column3">USB 3.0 Cable</td>
+  								</tr>
+  								<tr>
+  									<td class="column1">2017-09-24 05:57</td>
+  									<td class="column3">Smartwatch 4.0 LTE Wifi</td>
+  								</tr>
+  								<tr>
+  									<td class="column1">2017-09-23 05:57</td>
+  									<td class="column3">Camera C430W 4k</td>
+  								</tr>
+  								<tr>
+  									<td class="column1">2017-09-22 05:57</td>
+  									<td class="column3">Macbook Pro Retina 2017</td>
+  								</tr>
+  								<tr>
+  									<td class="column1">2017-09-21 05:57</td>
+  									<td class="column3">Game Console Controller</td>
+  								</tr>
+  								<tr>
+  									<td class="column1">2017-09-19 05:57</td>
+  									<td class="column3">iPhone X 64Gb Grey</td>
+  								</tr>
+  						</tbody>
+  					</table>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+
     <div class="container">
       <div class="row" style="width: 100%; margin:auto;">
         <div class="col-md  margin-top-small" id="emergencycontact">
-          <h3 style="color: #666666;">EMERGENCY CONTACTS</h3>
+          <h3>EMERGENCY CONTACTS</h3>
 
             <form action="/user_page/" class="form" method="post">
 
@@ -62,45 +118,115 @@
                 <input type="button" value="ADD CONTACT" class="btn--input btn--green addContact" />
               </div>
 
+              {% csrf_token %}
               <div class="header2__form">
                 <div>
                     <!--<span class="header2__contact--text">Name</span>-->
-                  <input type="text" name="Name" value='{{name}}' class="form__input_u form__input--emergency contactInput" placeholder="Full Name" id="name" required disabled>
+                  <input type="text" name="Name" value='{{name}}' class="form__input_u form__input--emergency contactInput" placeholder="Full Name" id="name" required >
                 </div>
                 <div class="header2__input">
                   <!--<span class="header2__contact--text">Phone Number</span>-->
-                  <input type="text" name="Relationship" value='{{relationship}}' class="form__input_u form__input--emergency contactInput" placeholder="Relationship"id="relationship" required disabled>
+                  <input type="text" name="Relationship" value='{{relationship}}' class="form__input_u form__input--emergency contactInput" placeholder="Relationship" id="relationship" required >
                 </div>
                 <div class="header2__input">
                 <!--<span class="header2__contact--text">Phone Number</span>-->
-                  <input type="text" name="Number" value='{{number}}' maxlength="12" class="form__input_u form__input--emergency contactInput" placeholder="xxx-xxx-xxxx"id="phone-number" required disabled>
+                  <input type="text" name="Number" value='{{number}}' maxlength="12" class="form__input_u form__input--emergency contactInput" placeholder="xxx-xxx-xxxx"id="phone-number" required >
                 </div>
                 <input type="button" value="CANCEL" class="btn--input cancelContacts btn--red margin-top-small"/>
-                <input type="button" value="SUBMIT" class="btn--input submitContacts btn--green margin-top-small"/>
+                <input type="submit" value="SUBMIT" class="btn--input submitContacts btn--green margin-top-small"/>
+              </div>
+
+              <div class="header2__form" id="contact2">
+                <div>
+                    <!--<span class="header2__contact--text">Name</span>-->
+                  <input type="text" name="Name2" value='{{name2}}' class="form__input_u form__input--emergency contactInput" placeholder="Full Name" id="name" required >
+                </div>
+                <div class="header2__input">
+                  <!--<span class="header2__contact--text">Phone Number</span>-->
+                  <input type="text" name="Relationship2" value='{{relationship2}}' class="form__input_u form__input--emergency contactInput" placeholder="Relationship" id="relationship" required >
+                </div>
+                <div class="header2__input">
+                <!--<span class="header2__contact--text">Phone Number</span>-->
+                  <input type="text" name="Number2" value='{{number2}}' maxlength="12" class="form__input_u form__input--emergency contactInput" placeholder="xxx-xxx-xxxx"id="phone-number" required >
+                </div>
+                <input type="button" value="CANCEL" class="btn--input cancelContacts btn--red margin-top-small"/>
+                <input type="submit" value="SUBMIT" class="btn--input submitContacts btn--green margin-top-small"/>
+              </div>
+
+              <div class="header2__form" id="contact3">
+                <div>
+                    <!--<span class="header2__contact--text">Name</span>-->
+                  <input type="text" name="Name3" value='{{name3}}' class="form__input_u form__input--emergency contactInput" placeholder="Full Name" id="name" required >
+                </div>
+                <div class="header2__input">
+                  <!--<span class="header2__contact--text">Phone Number</span>-->
+                  <input type="text" name="Relationship3" value='{{relationship3}}' class="form__input_u form__input--emergency contactInput" placeholder="Relationship" id="relationship" required >
+                </div>
+                <div class="header2__input">
+                <!--<span class="header2__contact--text">Phone Number</span>-->
+                  <input type="text" name="Number3" value='{{number3}}' maxlength="12" class="form__input_u form__input--emergency contactInput" placeholder="xxx-xxx-xxxx"id="phone-number" required >
+                </div>
+                <input type="button" value="CANCEL" class="btn--input cancelContacts btn--red margin-top-small"/>
+                <input type="submit" value="SUBMIT" class="btn--input submitContacts btn--green margin-top-small"/>
+              </div>
+
+              <div class="header2__form" id="contact4">
+                <div>
+                    <!--<span class="header2__contact--text">Name</span>-->
+                  <input type="text" name="Name4" value='{{name4}}' class="form__input_u form__input--emergency contactInput" placeholder="Full Name" id="name" required >
+                </div>
+                <div class="header2__input">
+                  <!--<span class="header2__contact--text">Phone Number</span>-->
+                  <input type="text" name="Relationship4" value='{{relationship4}}' class="form__input_u form__input--emergency contactInput" placeholder="Relationship" id="relationship" required >
+                </div>
+                <div class="header2__input">
+                <!--<span class="header2__contact--text">Phone Number</span>-->
+                  <input type="text" name="Number4" value='{{number4}}' maxlength="12" class="form__input_u form__input--emergency contactInput" placeholder="xxx-xxx-xxxx"id="phone-number" required >
+                </div>
+                <input type="button" value="CANCEL" class="btn--input cancelContacts btn--red margin-top-small"/>
+                <input type="submit" value="SUBMIT" class="btn--input submitContacts btn--green margin-top-small"/>
+              </div>
+
+              <div class="header2__form" id="contact5">
+                <div>
+                    <!--<span class="header2__contact--text">Name</span>-->
+                  <input type="text" name="Name5" value='{{name5}}' class="form__input_u form__input--emergency contactInput" placeholder="Full Name" id="name" required >
+                </div>
+                <div class="header2__input">
+                  <!--<span class="header2__contact--text">Phone Number</span>-->
+                  <input type="text" name="Relationship5" value='{{relationship5}}' class="form__input_u form__input--emergency contactInput" placeholder="Relationship" id="relationship" required >
+                </div>
+                <div class="header2__input">
+                <!--<span class="header2__contact--text">Phone Number</span>-->
+                  <input type="text" name="Number5" value='{{number5}}' maxlength="12" class="form__input_u form__input--emergency contactInput" placeholder="xxx-xxx-xxxx"id="phone-number" required >
+                </div>
+                <input type="button" value="CANCEL" class="btn--input cancelContacts btn--red margin-top-small"/>
+                <input type="submit" value="SUBMIT" class="btn--input submitContacts btn--green margin-top-small"/>
               </div>
 
               <div class="emergency_list"> <hr>
-                <ul>NAME (relationship)<br> phone number</ul> <hr>
-                <ul>NAME (relationship)<br> phone number</ul> <hr>
-                <ul>NAME (relationship)<br> phone number</ul> <hr>
+                <ul id="name1"><b>{{name}}</b> ({{relationship}}) <br> {{number}}</ul> <hr>
+                <ul id="name2"><b>{{name2}}</b> ({{relationship2}}) <br> {{number2}}</ul> <hr>
+                <ul id="name3"><b>{{name3}}</b> ({{relationship3}}) <br> {{number3}}</ul> <hr>
+                <ul id="name4"><b>{{name4}}</b> ({{relationship4}}) <br> {{number4}}</ul> <hr>
+                <ul id="name5"><b>{{name5}}</b> ({{relationship5}}) <br> {{number5}}</ul> <hr>
                 <input type="button" value="ADD CONTACT" class="btn--input btn--green addContact" style="float:right;"/>
               </div>
           </form>
         </div>
 
         <div class="col-md margin-top-small" id="userprofile">
-          <h3 style="color: #666666;">USER PROFILE</h3>
+          <h3>USER PROFILE</h3>
           <div class="header2__content--profile">
             <div class="row">
               <div class="col-4 vertical-align">
                 <figure class="profile_pic margin-top-small">
-                  <img src="./frontend/static/img/gradient.jpg" height="100%">
+                  <img src="../../static/img/gradient.jpg" height="100%">
                 </figure>
               </div>
               <div class="col-8 vertical-align">
-                <p style="color:black; text-align:left; color: #666666;">  Full Name:
-                <br> D.O.B: XX/XX/XXXX
-                <br> Address:
+                <p style="text-align:left; font-size: 1.5rem;">  Full Name:
+                <br>  Email Address:
                 </p>
               </div>
             </div>
@@ -116,12 +242,67 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script type="text/javascript">
 
+    // Display the emergency list if there is at least one emergency contact
+    $( document ).ready(function() {
+      // Highlight active tab
+      $('#sidetabs').on('click','.sidetabs__link', function ( e ) {
+        $(this).parents('#sidetabs').find('.sidetabs__link_active').removeClass('sidetabs__link_active').end().end().addClass('sidetabs__link_active');
+      });
+
+      if (document.getElementById("name1").innerHTML != "NAME (relationship) <br> phone number") {
+        $('.header2__content--emergencycontact').css('display', 'none');
+        $('.emergency_list').css('opacity', '1');
+        $('.emergency_list').css("visibility", "visible");
+      } else {
+        $('.header2__content--emergencycontact').css('display', 'block');
+      }
+
+      // Remove ability to add contact once 5 contacts have been added
+      if (document.getElementById("name5").innerHTML != "not set (not set) <br> not set") {
+        $('.addContact').css('display', 'none');
+      }
+
+    });
+
     $(".addContact").click(function(){
       $('.header2__content--emergencycontact').css('display', 'none');
       $('.header2__form').css('opacity', '1');
       $('.header2__form').css("visibility", "visible");
       $('.emergency_list').css('opacity', '0');
       $('.emergency_list').css("visibility", "hidden");
+
+      // Toggle contact form based on which emergency contact has been filled out
+      if (document.getElementById("name1").innerHTML != "not set (not set) <br> not set") {
+        $("#contact1").css('display', 'none');
+        $('#contact2').css("display", "block");
+        $('#contact3').css('display', 'none');
+        $('#contact4').css('display', 'none');
+        $('#contact5').css('display', 'none');
+      }
+
+      if (document.getElementById("name2").innerHTML != "not set (not set) <br> not set") {
+        $("#contact1").css('display', 'none');
+        $('#contact2').css('display', 'none');
+        $('#contact3').css('display', 'block');
+        $('#contact4').css('display', 'none');
+        $('#contact5').css('display', 'none');
+      }
+
+      if (document.getElementById("name3").innerHTML != "not set (not set) <br> not set") {
+        $("#contact1").css('display', 'none');
+        $('#contact2').css('display', 'none');
+        $('#contact3').css('display', 'none');
+        $('#contact4').css('display', 'block');
+        $('#contact5').css('display', 'none');
+      }
+
+      if (document.getElementById("name4").innerHTML != "not set (not set) <br> not set") {
+        $("#contact1").css('display', 'none');
+        $('#contact2').css('display', 'none');
+        $('#contact3').css('display', 'none');
+        $('#contact4').css('display', 'none');
+        $('#contact5').css('display', 'block');
+      }
     });
 
     /*
@@ -149,24 +330,20 @@
       $('.header2__content--emergencycontact').css('display', 'block');
     });
 
-    $(function() {
-      $('#sidetabs').on('click','.sidetabs__link', function ( e ) {
-        $(this).parents('#sidetabs').find('.sidetabs__link_active').removeClass('sidetabs__link_active').end().end().addClass('sidetabs__link_active');
-      });
-    });
-
+    // Activity Log Sidetab
     $("#activitylog, .activity_link").click(function() {
 
       $("#activity_log").css('display','block');
 
       $('#emergencycontact, #userprofile').css('display', 'none');
       $('.activity_link').css('visibility', 'hidden');
-      $('.header2__content').css('position', 'initial');
-      $('.header2__content').css('margin-left', '28rem');
+
+      $('.limiter').css('display', 'block');
 
       document.getElementById("activity_title").innerHTML = "ACTIVITY LOG";
     });
 
+    // Emergency Contact Sidetab
     $("#emergency_contact").click(function() {
       if( $("#emergencycontact").css('display') == 'none') {
         $("#emergencycontact").css('display', 'block');
@@ -174,175 +351,177 @@
 
       $('#userprofile').css('display', 'none');
       $('#activity_log').css('display', 'none');
-
+      $('.limiter').css('display', 'none');
     });
 
+    // Dashboard Sidetab
     $('#dashboard').click(function() {
       $('#userprofile').css('display', 'block');
       $('#activity_log').css('display', 'block');
       $("#emergencycontact").css('display', 'block');
+      $('.limiter').css('display', 'none');
 
       document.getElementById("activity_title").innerHTML = "RECENT ACTIVITY";
       $('.activity_link').css('visibility', 'visible');
 
     });
 
-      am4core.ready(function() {
-        // Themes begin
-        am4core.useTheme(am4themes_dataviz);
-        am4core.useTheme(am4themes_animated);
-        // Themes end
+    am4core.ready(function() {
+      // Themes begin
+      am4core.useTheme(am4themes_dataviz);
+      am4core.useTheme(am4themes_animated);
+      // Themes end
 
-        // Create chart instance
-        var chart = am4core.create("chartdiv", am4charts.XYChart);
+      // Create chart instance
+      var chart = am4core.create("chartdiv", am4charts.XYChart);
 
-        // Add data
-        chart.data = [{
-          "date": "2013-01-01",
-          "value": 60
-        }, {
-          "date": "2013-01-02",
-          "value": 67
-        }, {
-          "date": "2013-01-03",
-          "value": 64
-        }, {
-          "date": "2013-01-04",
-          "value": 66
-        }, {
-          "date": "2013-01-05",
-          "value": 60
-        }, {
-          "date": "2013-01-06",
-          "value": 63
-        }, {
-          "date": "2013-01-07",
-          "value": 61
-        }, {
-          "date": "2013-01-08",
-          "value": 60
-        }, {
-          "date": "2013-01-09",
-          "value": 65
-        }, {
-          "date": "2013-01-10",
-          "value": 75
-        }, {
-          "date": "2013-01-11",
-          "value": 77
-        }, {
-          "date": "2013-01-12",
-          "value": 78
-        }, {
-          "date": "2013-01-13",
-          "value": 70
-        }, {
-          "date": "2013-01-14",
-          "value": 70
-        }, {
-          "date": "2013-01-15",
-          "value": 73
-        }, {
-          "date": "2013-01-16",
-          "value": 71
-        }, {
-          "date": "2013-01-17",
-          "value": 74
-        }, {
-          "date": "2013-01-18",
-          "value": 78
-        }, {
-          "date": "2013-01-19",
-          "value": 85
-        }, {
-          "date": "2013-01-20",
-          "value": 82
-        }, {
-          "date": "2013-01-21",
-          "value": 83
-        }, {
-          "date": "2013-01-22",
-          "value": 88
-        }, {
-          "date": "2013-01-23",
-          "value": 85
-        }, {
-          "date": "2013-01-24",
-          "value": 85
-        }, {
-          "date": "2013-01-25",
-          "value": 80
-        }, {
-          "date": "2013-01-26",
-          "value": 87
-        }, {
-          "date": "2013-01-27",
-          "value": 84
-        }, {
-          "date": "2013-01-28",
-          "value": 83
-        }, {
-          "date": "2013-01-29",
-          "value": 84
-        }, {
-          "date": "2013-01-30",
-          "value": 81
-        }];
+      // Add data
+      chart.data = [{
+        "date": "2013-01-01",
+        "value": 60
+      }, {
+        "date": "2013-01-02",
+        "value": 67
+      }, {
+        "date": "2013-01-03",
+        "value": 64
+      }, {
+        "date": "2013-01-04",
+        "value": 66
+      }, {
+        "date": "2013-01-05",
+        "value": 60
+      }, {
+        "date": "2013-01-06",
+        "value": 63
+      }, {
+        "date": "2013-01-07",
+        "value": 61
+      }, {
+        "date": "2013-01-08",
+        "value": 60
+      }, {
+        "date": "2013-01-09",
+        "value": 65
+      }, {
+        "date": "2013-01-10",
+        "value": 75
+      }, {
+        "date": "2013-01-11",
+        "value": 77
+      }, {
+        "date": "2013-01-12",
+        "value": 78
+      }, {
+        "date": "2013-01-13",
+        "value": 70
+      }, {
+        "date": "2013-01-14",
+        "value": 70
+      }, {
+        "date": "2013-01-15",
+        "value": 73
+      }, {
+        "date": "2013-01-16",
+        "value": 71
+      }, {
+        "date": "2013-01-17",
+        "value": 74
+      }, {
+        "date": "2013-01-18",
+        "value": 78
+      }, {
+        "date": "2013-01-19",
+        "value": 85
+      }, {
+        "date": "2013-01-20",
+        "value": 82
+      }, {
+        "date": "2013-01-21",
+        "value": 83
+      }, {
+        "date": "2013-01-22",
+        "value": 88
+      }, {
+        "date": "2013-01-23",
+        "value": 85
+      }, {
+        "date": "2013-01-24",
+        "value": 85
+      }, {
+        "date": "2013-01-25",
+        "value": 80
+      }, {
+        "date": "2013-01-26",
+        "value": 87
+      }, {
+        "date": "2013-01-27",
+        "value": 84
+      }, {
+        "date": "2013-01-28",
+        "value": 83
+      }, {
+        "date": "2013-01-29",
+        "value": 84
+      }, {
+        "date": "2013-01-30",
+        "value": 81
+      }];
 
-        // Set input format for the dates
-        chart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
+      // Set input format for the dates
+      chart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
 
-        // Create axes
-        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+      // Create axes
+      var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+      var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 
-        // Create series
-        var series = chart.series.push(new am4charts.LineSeries());
-        series.dataFields.valueY = "value";
-        series.dataFields.dateX = "date";
-        series.tooltipText = "{value}"
-        series.strokeWidth = 2;
-        series.minBulletDistance = 15;
+      // Create series
+      var series = chart.series.push(new am4charts.LineSeries());
+      series.dataFields.valueY = "value";
+      series.dataFields.dateX = "date";
+      series.tooltipText = "{value}"
+      series.strokeWidth = 2;
+      series.minBulletDistance = 15;
 
-        // Drop-shaped tooltips
-        series.tooltip.background.cornerRadius = 20;
-        series.tooltip.background.strokeOpacity = 0;
-        series.tooltip.pointerOrientation = "vertical";
-        series.tooltip.label.minWidth = 40;
-        series.tooltip.label.minHeight = 40;
-        series.tooltip.label.textAlign = "middle";
-        series.tooltip.label.textValign = "middle";
+      // Drop-shaped tooltips
+      series.tooltip.background.cornerRadius = 20;
+      series.tooltip.background.strokeOpacity = 0;
+      series.tooltip.pointerOrientation = "vertical";
+      series.tooltip.label.minWidth = 40;
+      series.tooltip.label.minHeight = 40;
+      series.tooltip.label.textAlign = "middle";
+      series.tooltip.label.textValign = "middle";
 
-        // Make bullets grow on hover
-        var bullet = series.bullets.push(new am4charts.CircleBullet());
-        bullet.circle.strokeWidth = 2;
-        bullet.circle.radius = 4;
-        bullet.circle.fill = am4core.color("#fff");
+      // Make bullets grow on hover
+      var bullet = series.bullets.push(new am4charts.CircleBullet());
+      bullet.circle.strokeWidth = 2;
+      bullet.circle.radius = 4;
+      bullet.circle.fill = am4core.color("#fff");
 
-        var bullethover = bullet.states.create("hover");
-        bullethover.properties.scale = 1.3;
+      var bullethover = bullet.states.create("hover");
+      bullethover.properties.scale = 1.3;
 
-        // Make a panning cursor
-        chart.cursor = new am4charts.XYCursor();
-        chart.cursor.behavior = "panXY";
-        chart.cursor.xAxis = dateAxis;
-        chart.cursor.snapToSeries = series;
+      // Make a panning cursor
+      chart.cursor = new am4charts.XYCursor();
+      chart.cursor.behavior = "panXY";
+      chart.cursor.xAxis = dateAxis;
+      chart.cursor.snapToSeries = series;
 
-        // Create vertical scrollbar and place it before the value axis
-        chart.scrollbarY = new am4core.Scrollbar();
-        chart.scrollbarY.parent = chart.leftAxesContainer;
-        chart.scrollbarY.toBack();
+      // Create vertical scrollbar and place it before the value axis
+      chart.scrollbarY = new am4core.Scrollbar();
+      chart.scrollbarY.parent = chart.leftAxesContainer;
+      chart.scrollbarY.toBack();
 
-        // Create a horizontal scrollbar with previe and place it underneath the date axis
-        chart.scrollbarX = new am4charts.XYChartScrollbar();
-        chart.scrollbarX.series.push(series);
-        chart.scrollbarX.parent = chart.bottomAxesContainer;
+      // Create a horizontal scrollbar with previe and place it underneath the date axis
+      chart.scrollbarX = new am4charts.XYChartScrollbar();
+      chart.scrollbarX.series.push(series);
+      chart.scrollbarX.parent = chart.bottomAxesContainer;
 
-        chart.events.on("ready", function () {
-          dateAxis.zoom({start:0.79, end:1});
-        });
+      chart.events.on("ready", function () {
+        dateAxis.zoom({start:0.79, end:1});
+      });
 
-      }); // end am4core.ready()
+    }); // end am4core.ready()
 
   </script>
 
