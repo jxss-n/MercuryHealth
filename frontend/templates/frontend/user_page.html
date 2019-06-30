@@ -55,7 +55,7 @@
   		<div class="container-table100">
   			<div class="wrap-table100">
   				<div class="table100">
-  					<table>
+  					<table id="all_data">
   						<thead>
   							<tr class="table100-head">
   								<th class="column1">Date/Time</th>
@@ -244,12 +244,14 @@
 
     // Display the emergency list if there is at least one emergency contact
     $( document ).ready(function() {
+
       // Highlight active tab
       $('#sidetabs').on('click','.sidetabs__link', function ( e ) {
         $(this).parents('#sidetabs').find('.sidetabs__link_active').removeClass('sidetabs__link_active').end().end().addClass('sidetabs__link_active');
       });
 
-      if (document.getElementById("name1").innerHTML != "NAME (relationship) <br> phone number") {
+      if ("{{name1}}" != "not set") {
+      //if (document.getElementById("name1").innerHTML != "NAME (relationship) <br> phone number") {
         $('.header2__content--emergencycontact').css('display', 'none');
         $('.emergency_list').css('opacity', '1');
         $('.emergency_list').css("visibility", "visible");
@@ -258,7 +260,8 @@
       }
 
       // Remove ability to add contact once 5 contacts have been added
-      if (document.getElementById("name5").innerHTML != "not set (not set) <br> not set") {
+      if ("{{name5}}" != "not set") {
+      //if (document.getElementById("name5").innerHTML != "not set (not set)\nnot set") {
         $('.addContact').css('display', 'none');
       }
 
@@ -272,7 +275,8 @@
       $('.emergency_list').css("visibility", "hidden");
 
       // Toggle contact form based on which emergency contact has been filled out
-      if (document.getElementById("name1").innerHTML != "not set (not set) <br> not set") {
+      if ("{{name1}}" != "not set") {
+      //if (document.getElementById("name1").innerHTML != "not set (not set) <br> not set") {
         $("#contact1").css('display', 'none');
         $('#contact2').css("display", "block");
         $('#contact3').css('display', 'none');
@@ -280,7 +284,8 @@
         $('#contact5').css('display', 'none');
       }
 
-      if (document.getElementById("name2").innerHTML != "not set (not set) <br> not set") {
+      if ("{{name2}}" != "not set") {
+      //if (document.getElementById("name2").innerHTML != "not set (not set) <br> not set") {
         $("#contact1").css('display', 'none');
         $('#contact2').css('display', 'none');
         $('#contact3').css('display', 'block');
@@ -288,7 +293,8 @@
         $('#contact5').css('display', 'none');
       }
 
-      if (document.getElementById("name3").innerHTML != "not set (not set) <br> not set") {
+      if ("{{name3}}" != "not set") {
+      //if (document.getElementById("name3").innerHTML != "not set (not set) <br> not set") {
         $("#contact1").css('display', 'none');
         $('#contact2').css('display', 'none');
         $('#contact3').css('display', 'none');
@@ -296,7 +302,8 @@
         $('#contact5').css('display', 'none');
       }
 
-      if (document.getElementById("name4").innerHTML != "not set (not set) <br> not set") {
+      if ("{{name4}}" != "not set") {
+      //if (document.getElementById("name4").innerHTML != "not set (not set) <br> not set") {
         $("#contact1").css('display', 'none');
         $('#contact2').css('display', 'none');
         $('#contact3').css('display', 'none');
@@ -376,97 +383,37 @@
       var chart = am4core.create("chartdiv", am4charts.XYChart);
 
       // Add data
-      chart.data = [{
-        "date": "2013-01-01",
-        "value": 60
-      }, {
-        "date": "2013-01-02",
-        "value": 67
-      }, {
-        "date": "2013-01-03",
-        "value": 64
-      }, {
-        "date": "2013-01-04",
-        "value": 66
-      }, {
-        "date": "2013-01-05",
-        "value": 60
-      }, {
-        "date": "2013-01-06",
-        "value": 63
-      }, {
-        "date": "2013-01-07",
-        "value": 61
-      }, {
-        "date": "2013-01-08",
-        "value": 60
-      }, {
-        "date": "2013-01-09",
-        "value": 65
-      }, {
-        "date": "2013-01-10",
-        "value": 75
-      }, {
-        "date": "2013-01-11",
-        "value": 77
-      }, {
-        "date": "2013-01-12",
-        "value": 78
-      }, {
-        "date": "2013-01-13",
-        "value": 70
-      }, {
-        "date": "2013-01-14",
-        "value": 70
-      }, {
-        "date": "2013-01-15",
-        "value": 73
-      }, {
-        "date": "2013-01-16",
-        "value": 71
-      }, {
-        "date": "2013-01-17",
-        "value": 74
-      }, {
-        "date": "2013-01-18",
-        "value": 78
-      }, {
-        "date": "2013-01-19",
-        "value": 85
-      }, {
-        "date": "2013-01-20",
-        "value": 82
-      }, {
-        "date": "2013-01-21",
-        "value": 83
-      }, {
-        "date": "2013-01-22",
-        "value": 88
-      }, {
-        "date": "2013-01-23",
-        "value": 85
-      }, {
-        "date": "2013-01-24",
-        "value": 85
-      }, {
-        "date": "2013-01-25",
-        "value": 80
-      }, {
-        "date": "2013-01-26",
-        "value": 87
-      }, {
-        "date": "2013-01-27",
-        "value": 84
-      }, {
-        "date": "2013-01-28",
-        "value": 83
-      }, {
-        "date": "2013-01-29",
-        "value": 84
-      }, {
-        "date": "2013-01-30",
-        "value": 81
-      }];
+      chart.data = [];
+
+      var table = document.getElementById("all_data");
+      var i;
+      // Iterate through all data
+      for (i = 0; i < "{{userData}}".length; i++) {
+
+        // Separate the date and time from the string
+        var dataDate = "{{userData}}"[i][name].split(' ')[0];
+        var dataTime = "{{userData}}"[i][name].split(' ')[1];
+
+        // Check if the date has been pushed into chart data already
+        const found = chart.data.some(el => el.date == dataDate); //https://stackoverflow.com/questions/22844560/check-if-object-value-exists-within-a-javascript-array-of-objects-and-if-not-add/22844712
+
+        // If the date doesn't exist, push it.
+        if (!found) {
+          chart.data.push({"date": dataDate, "value": 1});
+
+          // Insert activity data into the history log
+          var row = table.insertRow(0);
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          cell1.innerHTML = dataDate + " " + dataTime;
+          cell2.innerHTML = "1";
+
+        //Otherwise, increment the value for the appropriate date
+        } else {
+          var index = chart.data.map(function(o) { return o.date; }).indexOf(dataDate); //https://stackoverflow.com/questions/11258077/how-to-find-index-of-an-object-by-key-and-value-in-an-javascript-array
+          chart.data[index][value]++;
+        }
+      }
 
       // Set input format for the dates
       chart.dateFormatter.inputDateFormat = "yyyy-MM-dd";

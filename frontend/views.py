@@ -132,13 +132,15 @@ def user_page(request):
         print(user_analytics_response)
         print(user_data_response)
         if 'status' in user_data_response and 'status' in user_analytics_response:
-            if user_data_response['status'] == 'Success':
-                print("it is working 3")
+            #I need to be more robust about the failed cases, but for not go as it is.
+            if user_data_response['status'] == 'Success' and user_analytics_response['status'] == 'Success':
+                analytics = user_analytics_response['userData']
+                print(analytics)
                 content = user_data_response['emergency_contacts']
                 print(content)
                 if request.method == 'GET':
                     if content == "not set":
-                        return render(request, 'frontend/user_page.html', {'email': email, 'message': content})
+                        return render(request, 'frontend/user_page.html', {'email': email, 'message': content, 'user_analytcs': analytics})
                     else:
                         #make the field here dynamic
                         return render(request, 'frontend/user_page.html', {'message': 'contact saved',
@@ -157,7 +159,8 @@ def user_page(request):
                         'relationship2':content['relationship2'],
                         'relationship3':content['relationship3'],
                         'relationship4':content['relationship4'],
-                        'relationship5':content['relationship5']
+                        'relationship5':content['relationship5'],
+                        'user_analytcs': analytics
                         })
                 f = emergencyContactForm(request.POST)
                 print(f.is_valid())
@@ -219,12 +222,6 @@ def user_page(request):
                     return render(request, 'frontend/user_page.html', {'message': emergency_contact_response['msg']})
                 else:
                     return render(request, 'frontend/user_page.html', {'message': ERROR_FILL_OUT})
-            if user_analytics_response['status'] == 'Success':
-                analytics = user_analytics_response['situp']
-                if analytics == "not set":
-                    return render(request, 'frontend/user_page.html', {'analytics_message': "No Analytics. Make sure the device is connected"})
-                else:
-                    return render(request, 'frontend/user_page.html', {'user_analytcs': analytics})
         else: #gets a new token using the refreshToken
             try:
                 refresh_token_response = requests.get("https://bqseq2czwe.execute-api.us-west-2.amazonaws.com/prod/credential",  params = { "process": 'get_new_token', "RefreshToken": auth["RefreshToken"]})
