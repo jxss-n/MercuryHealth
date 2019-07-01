@@ -3,7 +3,7 @@
 {% block navContent%}
 <div class="header2">
   <div class="sidetabs">
-    <p class="margin-bottom-medium" style="text-align:center; font-size: 1.75rem;">MERCURY HEALTH</p>
+    <p class="margin-bottom-medium" style="text-align:center;"><a href="/#" style="font-size: 1.75rem; text-decoration:none; color:white;">MERCURY HEALTH</a></p>
     <div class="sidetabs__logo">
       <figure class="sidetabs_pic" style="width: 10rem; height: 10rem;">
         <img src="../../static/img/gradient.jpg" height="100%">
@@ -55,50 +55,14 @@
   		<div class="container-table100">
   			<div class="wrap-table100">
   				<div class="table100">
-  					<table id="all_data">
+  					<table>
   						<thead>
   							<tr class="table100-head">
   								<th class="column1">Date/Time</th>
   								<th class="column3">Activity</th>
   							</tr>
   						</thead>
-  						<tbody>
-  								<tr>
-  									<td class="column1">2017-09-29 01:22</td>
-  									<td class="column3">iPhone X 64Gb Grey</td>
-  								</tr>
-  								<tr>
-  									<td class="column1">2017-09-28 05:57</td>
-  									<td class="column3">Samsung S8 Black</td>
-  								</tr>
-  								<tr>
-  									<td class="column1">2017-09-26 05:57</td>
-  									<td class="column3">Game Console Controller</td>
-  								</tr>
-  								<tr>
-  									<td class="column1">2017-09-25 23:06</td>
-  									<td class="column3">USB 3.0 Cable</td>
-  								</tr>
-  								<tr>
-  									<td class="column1">2017-09-24 05:57</td>
-  									<td class="column3">Smartwatch 4.0 LTE Wifi</td>
-  								</tr>
-  								<tr>
-  									<td class="column1">2017-09-23 05:57</td>
-  									<td class="column3">Camera C430W 4k</td>
-  								</tr>
-  								<tr>
-  									<td class="column1">2017-09-22 05:57</td>
-  									<td class="column3">Macbook Pro Retina 2017</td>
-  								</tr>
-  								<tr>
-  									<td class="column1">2017-09-21 05:57</td>
-  									<td class="column3">Game Console Controller</td>
-  								</tr>
-  								<tr>
-  									<td class="column1">2017-09-19 05:57</td>
-  									<td class="column3">iPhone X 64Gb Grey</td>
-  								</tr>
+  						<tbody id="all_data">
   						</tbody>
   					</table>
   				</div>
@@ -225,8 +189,8 @@
                 </figure>
               </div>
               <div class="col-8 vertical-align">
-                <p style="text-align:left; font-size: 1.5rem;">  Full Name:
-                <br>  Email Address:
+                <p style="text-align:left; font-size: 1.5rem;"><b>Full Name:</b>
+                <br><b>Email Address:</b> {{email}}
                 </p>
               </div>
             </div>
@@ -251,7 +215,6 @@
       });
 
       if ("{{name1}}" != "not set") {
-      //if (document.getElementById("name1").innerHTML != "NAME (relationship) <br> phone number") {
         $('.header2__content--emergencycontact').css('display', 'none');
         $('.emergency_list').css('opacity', '1');
         $('.emergency_list').css("visibility", "visible");
@@ -261,8 +224,37 @@
 
       // Remove ability to add contact once 5 contacts have been added
       if ("{{name5}}" != "not set") {
-      //if (document.getElementById("name5").innerHTML != "not set (not set)\nnot set") {
         $('.addContact').css('display', 'none');
+      }
+
+      var table, rows, switching, i, x, y, shouldSwitch;
+      table = document.getElementById("all_data");
+      switching = true;
+
+      while (switching) { //https://www.w3schools.com/howto/howto_js_sort_table.asp
+        //start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+
+        // Loop through all table rows
+        for (i = 0; i < rows.length; i++) {
+
+          shouldSwitch = false;
+          // Get the two elements to compare
+          x = rows[i].getElementsByTagName("TD")[0];
+          y = rows[i + 1].getElementsByTagName("TD")[0];
+          // Check if the two rows should switch place:
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        }
+
+        if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+        }
       }
 
     });
@@ -276,7 +268,6 @@
 
       // Toggle contact form based on which emergency contact has been filled out
       if ("{{name1}}" != "not set") {
-      //if (document.getElementById("name1").innerHTML != "not set (not set) <br> not set") {
         $("#contact1").css('display', 'none');
         $('#contact2').css("display", "block");
         $('#contact3').css('display', 'none');
@@ -285,7 +276,6 @@
       }
 
       if ("{{name2}}" != "not set") {
-      //if (document.getElementById("name2").innerHTML != "not set (not set) <br> not set") {
         $("#contact1").css('display', 'none');
         $('#contact2').css('display', 'none');
         $('#contact3').css('display', 'block');
@@ -294,7 +284,6 @@
       }
 
       if ("{{name3}}" != "not set") {
-      //if (document.getElementById("name3").innerHTML != "not set (not set) <br> not set") {
         $("#contact1").css('display', 'none');
         $('#contact2').css('display', 'none');
         $('#contact3').css('display', 'none');
@@ -303,7 +292,6 @@
       }
 
       if ("{{name4}}" != "not set") {
-      //if (document.getElementById("name4").innerHTML != "not set (not set) <br> not set") {
         $("#contact1").css('display', 'none');
         $('#contact2').css('display', 'none');
         $('#contact3').css('display', 'none');
@@ -311,17 +299,6 @@
         $('#contact5').css('display', 'block');
       }
     });
-
-    /*
-    $(".editButtonContacts").click(function(){
-      if ($(".editButtonContacts").attr("value") == "submit"){
-        $(".editButtonContacts").prop("type", "submit");
-      } else{
-        $(".contactInput").prop("disabled", false);
-        $(".editButtonContacts").prop("value", "submit");
-      }
-     });
-    */
 
     $(".submitContacts").click(function(){
         //$(".submitContacts").prop("type", "submit");
@@ -373,6 +350,8 @@
 
     });
 
+
+    // Populating Graph and Table
     am4core.ready(function() {
       // Themes begin
       am4core.useTheme(am4themes_dataviz);
@@ -387,12 +366,34 @@
 
       var table = document.getElementById("all_data");
       var i;
+
+      /*
+      var decodeHtmlEntity = function(str) {
+        return str.replace(/&#(\d+);/g, function(match, dec) {
+          return String.fromCharCode(dec);
+        });
+      };
+
+      var userdata = decodeHtmlEntity("{{user_analytcs}}");
+      */
+      var userdata = [['5', '2019-06-28 22:42:34.898128'], ['5', '2019-06-28 22:43:16.541722'], ['5', '2019-06-29 22:43:27.501661'], ['5', '2019-06-30 22:43:28.981654'], ['5', '2019-06-28 22:43:30.121084'], ['5', '2019-06-29 22:43:31.881059'], ['5', '2019-06-30 22:43:33.117917']];
+
       // Iterate through all data
-      for (i = 0; i < "{{userData}}".length; i++) {
+      for (i = 0; i < userdata.length; i++) {
 
         // Separate the date and time from the string
-        var dataDate = "{{userData}}"[i][name].split(' ')[0];
-        var dataTime = "{{userData}}"[i][name].split(' ')[1];
+        var dataDate = userdata[i][1].split(' ')[0];
+        var dataTime = userdata[i][1].split(' ')[1];
+        var dataTime_s = dataTime.substring(0,8);
+
+        // Insert activity data into the history log
+        var row = table.insertRow(0);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.className = 'column1';
+        cell2.className = 'column3';
+        cell1.innerHTML = dataDate + " " + dataTime_s;
+        cell2.innerHTML = 1;
 
         // Check if the date has been pushed into chart data already
         const found = chart.data.some(el => el.date == dataDate); //https://stackoverflow.com/questions/22844560/check-if-object-value-exists-within-a-javascript-array-of-objects-and-if-not-add/22844712
@@ -401,17 +402,22 @@
         if (!found) {
           chart.data.push({"date": dataDate, "value": 1});
 
-          // Insert activity data into the history log
-          var row = table.insertRow(0);
-          var cell1 = row.insertCell(0);
-          var cell2 = row.insertCell(1);
-          cell1.innerHTML = dataDate + " " + dataTime;
-          cell2.innerHTML = "1";
-
         //Otherwise, increment the value for the appropriate date
         } else {
           var index = chart.data.map(function(o) { return o.date; }).indexOf(dataDate); //https://stackoverflow.com/questions/11258077/how-to-find-index-of-an-object-by-key-and-value-in-an-javascript-array
-          chart.data[index][value]++;
+          chart.data[index]['value']++;
+
+          /*
+          for (var j = 0; j < table.rows.length; j++) {
+            var table_date = table.rows[j].cells[0].innerHTML.substring(0,10);
+
+            // Increment counter for same date in table
+            if (table_date == dataDate) {
+              var count = parseInt(table.rows[j].cells[1].innerHTML,10) + 1;
+              table.rows[j].cells[1].innerHTML = count;
+            }
+
+          }*/
         }
       }
 
