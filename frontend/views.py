@@ -136,6 +136,15 @@ def user_page(request):
             if user_data_response['status'] == 'Success' and user_analytics_response['status'] == 'Success':
                 analytics = user_analytics_response['userData']
                 print(analytics)
+                userAnalytics = analytics.split(' , ')
+                userDataList = {}
+                for i in userAnalytics:
+                    userDatas = i.split(' ')
+                    if userDatas[0] in userDataList:
+                        userDataList[userDatas[0]].append(userDatas[1])
+                    else:
+                        userDataList[userDatas[0]] = [userDatas[1]]
+                print(userDataList)
                 content = user_data_response['emergency_contacts']
                 print(content)
                 if request.method == 'GET':

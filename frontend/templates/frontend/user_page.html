@@ -367,59 +367,40 @@
       var table = document.getElementById("all_data");
       var i;
 
-      /*
-      var decodeHtmlEntity = function(str) {
-        return str.replace(/&#(\d+);/g, function(match, dec) {
-          return String.fromCharCode(dec);
-        });
-      };
-
-      var userdata = decodeHtmlEntity("{{user_analytcs}}");
-      */
-      var userdata = [['5', '2019-06-28 22:42:34.898128'], ['5', '2019-06-28 22:43:16.541722'], ['5', '2019-06-29 22:43:27.501661'], ['5', '2019-06-30 22:43:28.981654'], ['5', '2019-06-28 22:43:30.121084'], ['5', '2019-06-29 22:43:31.881059'], ['5', '2019-06-30 22:43:33.117917']];
-
-      // Iterate through all data
-      for (i = 0; i < userdata.length; i++) {
-
-        // Separate the date and time from the string
-        var dataDate = userdata[i][1].split(' ')[0];
-        var dataTime = userdata[i][1].split(' ')[1];
-        var dataTime_s = dataTime.substring(0,8);
-
-        // Insert activity data into the history log
-        var row = table.insertRow(0);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        cell1.className = 'column1';
-        cell2.className = 'column3';
-        cell1.innerHTML = dataDate + " " + dataTime_s;
-        cell2.innerHTML = 1;
-
-        // Check if the date has been pushed into chart data already
-        const found = chart.data.some(el => el.date == dataDate); //https://stackoverflow.com/questions/22844560/check-if-object-value-exists-within-a-javascript-array-of-objects-and-if-not-add/22844712
-
-        // If the date doesn't exist, push it.
-        if (!found) {
-          chart.data.push({"date": dataDate, "value": 1});
-
-        //Otherwise, increment the value for the appropriate date
-        } else {
-          var index = chart.data.map(function(o) { return o.date; }).indexOf(dataDate); //https://stackoverflow.com/questions/11258077/how-to-find-index-of-an-object-by-key-and-value-in-an-javascript-array
-          chart.data[index]['value']++;
-
-          /*
-          for (var j = 0; j < table.rows.length; j++) {
-            var table_date = table.rows[j].cells[0].innerHTML.substring(0,10);
-
-            // Increment counter for same date in table
-            if (table_date == dataDate) {
-              var count = parseInt(table.rows[j].cells[1].innerHTML,10) + 1;
-              table.rows[j].cells[1].innerHTML = count;
-            }
-
-          }*/
+      var userAnalytics = "{{user_analytcs}}".split(' , ');
+      var userDataList = new Object();
+      for (i in userAnalytics){
+        userDatas = userAnalytics[i].split(' ');
+        console.log(userDatas);
+        if (userDatas[0] in userDataList){
+            (userDataList[userDatas[0]]).push(userDatas[1]);
         }
-      }
+        else{
+            userDataList[userDatas[0]] = [userDatas[1]];
+        }
+   }
+   console.log("here's the list");
+   console.log(userDataList[userDatas[0]].length);
+
+      // Iterate through all timestamps to update table
+
+      Object.keys(userDataList).forEach(function eachKey(key) {
+
+        chart.data.push({"date": key, "value": userDataList[key].length, "timestamps":userDataList[key]});
+
+        for(var time in userDataList[key]) {
+          var dataTime = userDataList[key][time].substring(0,8);
+          var row = table.insertRow(0);
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          cell1.className = 'column1';
+          cell2.className = 'column3';
+          cell1.innerHTML = key + " / " + dataTime;
+          cell2.innerHTML = "Sit-up detected";
+        }
+      });
+
+      //Object.keys(userDataList)[0];
 
       // Set input format for the dates
       chart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
@@ -432,7 +413,16 @@
       var series = chart.series.push(new am4charts.LineSeries());
       series.dataFields.valueY = "value";
       series.dataFields.dateX = "date";
-      series.tooltipText = "{value}"
+
+      var times = "Activity Detected At:\n";
+
+      Object.keys(userDataList).forEach(function eachKey(key) {
+        for(var time in userDataList[key]) {
+          times += "\n" + userDataList[key][time];
+        }
+      });
+
+      series.tooltipText = times;
       series.strokeWidth = 2;
       series.minBulletDistance = 15;
 
