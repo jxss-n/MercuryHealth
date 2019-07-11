@@ -209,6 +209,8 @@
     // Display the emergency list if there is at least one emergency contact
     $( document ).ready(function() {
 
+      var contact = 1;
+
       // Highlight active tab
       $('#sidetabs').on('click','.sidetabs__link', function ( e ) {
         $(this).parents('#sidetabs').find('.sidetabs__link_active').removeClass('sidetabs__link_active').end().end().addClass('sidetabs__link_active');
@@ -268,6 +270,7 @@
 
       // Toggle contact form based on which emergency contact has been filled out
       if ("{{name1}}" != "not set") {
+        contact = 2;
         $("#contact1").css('display', 'none');
         $('#contact2').css("display", "block");
         $('#contact3').css('display', 'none');
@@ -276,6 +279,7 @@
       }
 
       if ("{{name2}}" != "not set") {
+        contact = 3;
         $("#contact1").css('display', 'none');
         $('#contact2').css('display', 'none');
         $('#contact3').css('display', 'block');
@@ -284,6 +288,7 @@
       }
 
       if ("{{name3}}" != "not set") {
+        contact = 4;
         $("#contact1").css('display', 'none');
         $('#contact2').css('display', 'none');
         $('#contact3').css('display', 'none');
@@ -292,6 +297,7 @@
       }
 
       if ("{{name4}}" != "not set") {
+        contact = 5;
         $("#contact1").css('display', 'none');
         $('#contact2').css('display', 'none');
         $('#contact3').css('display', 'none');
@@ -311,7 +317,16 @@
     $(".cancelContacts").click(function(){
       $('.header2__form').css('opacity', '0');
       $('.header2__form').css("visibility", "hidden");
-      $('.header2__content--emergencycontact').css('display', 'block');
+      if ("{{name1}}" != "not set") {
+        $('.emergency_list').css('opacity', '1');
+        $('.emergency_list').css("visibility", "visible");
+        $('.header2__content--emergencycontact').css('display', 'none');
+        var hideContact = "#contact" + contact;
+        console.log("hide contact" + hideContact);
+        $(hideContact).css('display', 'none');
+      } else {
+        $('.header2__content--emergencycontact').css('display', 'block');
+      }
     });
 
     // Activity Log Sidetab
