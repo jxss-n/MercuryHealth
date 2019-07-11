@@ -326,6 +326,9 @@
         $(hideContact).css('display', 'none');
       } else {
         $('.header2__content--emergencycontact').css('display', 'block');
+        var hideContact = "#contact" + contact;
+        console.log("hide contact" + hideContact);
+        $(hideContact).css('display', 'none');
       }
     });
 
