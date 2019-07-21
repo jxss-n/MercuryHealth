@@ -83,7 +83,7 @@
               </div>
 
               {% csrf_token %}
-              <div class="header2__form">
+              <div class="header2__form" id="contact1">
                 <div>
                     <!--<span class="header2__contact--text">Name</span>-->
                   <input type="text" name="Name" value='{{name}}' class="form__input_u form__input--emergency contactInput" placeholder="Full Name" id="name" required >
@@ -216,18 +216,38 @@
         $(this).parents('#sidetabs').find('.sidetabs__link_active').removeClass('sidetabs__link_active').end().end().addClass('sidetabs__link_active');
       });
 
-      if ("{{name1}}" != "not set") {
+      if ("{{name}}" != "not set") {
         $('.header2__content--emergencycontact').css('display', 'none');
         $('.emergency_list').css('opacity', '1');
         $('.emergency_list').css("visibility", "visible");
+        $('.header2__content--emergencycontact').css('display', 'none');
+        var hideContact = "#contact" + contact;
+        console.log("hide contact" + hideContact);
+        $(hideContact).css('display', 'none');
       } else {
         $('.header2__content--emergencycontact').css('display', 'block');
       }
 
+      /*if ("{{name}}" != "not set") {
+        $('.emergency_list').css('opacity', '1');
+        $('.emergency_list').css("visibility", "visible");
+        $('.header2__content--emergencycontact').css('display', 'none');
+        var hideContact = "#contact" + contact;
+        console.log("hide contact" + hideContact);
+        $(hideContact).css('display', 'none');
+      } else {
+        $('.header2__content--emergencycontact').css('display', 'block');
+        var hideContact = "#contact" + contact;
+        console.log("hide contact" + hideContact);
+        $(hideContact).css('display', 'none');
+      }
+      */
+
       // Remove ability to add contact once 5 contacts have been added
-      if ("{{name5}}" != "not set") {
+      if ("{{name}}" != "not set" && "{{name2}}" != "not set" && "{{name3}}" != "not set" && "{{name4}}" != "not set" && "{{name5}}" != "not set") {
         $('.addContact').css('display', 'none');
       }
+
 
       var table, rows, switching, i, x, y, shouldSwitch;
       table = document.getElementById("all_data");
@@ -269,7 +289,19 @@
       $('.emergency_list').css("visibility", "hidden");
 
       // Toggle contact form based on which emergency contact has been filled out
-      if ("{{name1}}" != "not set") {
+      console.log("name 1 not set");
+      if ("{{name}}" == "not set") {
+        console.log("name 1 not set");
+        contact = 1;
+        $("#contact1").css('display', "block");
+        $('#contact2').css("display", 'none');
+        $('#contact3').css('display', 'none');
+        $('#contact4').css('display', 'none');
+        $('#contact5').css('display', 'none');
+      }
+
+      else if ("{{name2}}" == "not set") {
+        console.log("name 2 not set");
         contact = 2;
         $("#contact1").css('display', 'none');
         $('#contact2').css("display", "block");
@@ -278,7 +310,8 @@
         $('#contact5').css('display', 'none');
       }
 
-      if ("{{name2}}" != "not set") {
+      else if ("{{name3}}" == "not set") {
+        console.log("name 3 not set");
         contact = 3;
         $("#contact1").css('display', 'none');
         $('#contact2').css('display', 'none');
@@ -287,7 +320,8 @@
         $('#contact5').css('display', 'none');
       }
 
-      if ("{{name3}}" != "not set") {
+      else if ("{{name4}}" == "not set") {
+        console.log("name 4 not set");
         contact = 4;
         $("#contact1").css('display', 'none');
         $('#contact2').css('display', 'none');
@@ -296,7 +330,8 @@
         $('#contact5').css('display', 'none');
       }
 
-      if ("{{name4}}" != "not set") {
+      else if ("{{name5}}" == "not set") {
+        console.log("name 5 not set");
         contact = 5;
         $("#contact1").css('display', 'none');
         $('#contact2').css('display', 'none');
@@ -317,7 +352,7 @@
     $(".cancelContacts").click(function(){
       $('.header2__form').css('opacity', '0');
       $('.header2__form').css("visibility", "hidden");
-      if ("{{name1}}" != "not set") {
+      if ("{{name}}" != "not set") {
         $('.emergency_list').css('opacity', '1');
         $('.emergency_list').css("visibility", "visible");
         $('.header2__content--emergencycontact').css('display', 'none');
@@ -379,12 +414,13 @@
       // Create chart instance
       var chart = am4core.create("chartdiv", am4charts.XYChart);
 
-      // Add data
+      // Create chart data array
       chart.data = [];
 
       var table = document.getElementById("all_data");
       var i;
 
+      // Reformat data from database and store in userDataList
       var userAnalytics = "{{user_analytcs}}".split(' , ');
       var userDataList = new Object();
       for (i in userAnalytics){
@@ -397,16 +433,23 @@
             userDataList[userDatas[0]] = [userDatas[1]];
         }
    }
-   console.log("here's the list");
-   console.log(userDataList[userDatas[0]].length);
 
-      // Iterate through all timestamps to update table
-
+      // Iterate through all timestamps to update table and push to chart data array
       Object.keys(userDataList).forEach(function eachKey(key) {
 
-        chart.data.push({"date": key, "value": userDataList[key].length, "timestamps":userDataList[key]});
+        // Format tooltip text
+        var tStamp = "Activity Detected At:\n";
 
-        for(var time in userDataList[key]) {
+        for (var i in userDataList[key]) {
+          var t = userDataList[key][i].substring(0,8);
+          tStamp += t +"\n";
+        }
+
+        console.log(key);
+        chart.data.push({"date": key, "value": userDataList[key].length, "timestamps": tStamp});
+
+        // Update activity log table
+        for (var time in userDataList[key]) {
           var dataTime = userDataList[key][time].substring(0,8);
           var row = table.insertRow(0);
           var cell1 = row.insertCell(0);
@@ -431,16 +474,9 @@
       var series = chart.series.push(new am4charts.LineSeries());
       series.dataFields.valueY = "value";
       series.dataFields.dateX = "date";
+      series.dataFields.tStamp = "timestamps";
 
-      var times = "Activity Detected At:\n";
-
-      Object.keys(userDataList).forEach(function eachKey(key) {
-        for(var time in userDataList[key]) {
-          times += "\n" + userDataList[key][time];
-        }
-      });
-
-      series.tooltipText = times;
+      series.tooltipText = "{tStamp}";
       series.strokeWidth = 2;
       series.minBulletDistance = 15;
 

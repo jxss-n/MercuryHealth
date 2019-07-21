@@ -225,7 +225,8 @@ def user_page(request):
                         'relationship2':relationship2,
                         'relationship3':relationship3,
                         'relationship4':relationship4,
-                        'relationship5':relationship5
+                        'relationship5':relationship5,
+                        'user_analytcs': analytics
                         })
                     print(emergency_contact_response);
                     return render(request, 'frontend/user_page.html', {'message': emergency_contact_response['msg']})
