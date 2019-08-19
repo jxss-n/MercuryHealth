@@ -446,7 +446,14 @@
         }
 
         console.log(key);
+        var month = parseInt(key.substring(5,7)) - 1;
+        var day = parseInt(key.substring(8,10));
+        var year = parseInt(key.substring(0,4));
+        console.log(month);
+        console.log(day);
+        console.log(year);
         chart.data.push({"date": key, "value": userDataList[key].length, "timestamps": tStamp});
+        //chart.data.push({"date": new Date(year, month, day), "value": userDataList[key].length, "timestamps": tStamp});
 
         // Update activity log table
         for (var time in userDataList[key]) {
@@ -464,11 +471,14 @@
       //Object.keys(userDataList)[0];
 
       // Set input format for the dates
-      chart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
+      //chart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
 
       // Create axes
       var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
       var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+      dateAxis.renderer.grid.template.location = 0.5;
+      dateAxis.renderer.labels.template.location = 0.5;
+
 
       // Create series
       var series = chart.series.push(new am4charts.LineSeries());
