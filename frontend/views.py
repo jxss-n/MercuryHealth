@@ -102,6 +102,7 @@ def user_page(request):
         auth = auth.replace("'", '"')
         auth = json.loads(auth)
         email = auth["email"]
+        usersname = auth["usersname"]
 
     #TODO change the ipaddress to cookies
     #TODO auth = request.COOKIES.get('auth', 'somedefaultvalue') - if its default then do something else
@@ -136,23 +137,25 @@ def user_page(request):
             if user_data_response['status'] == 'Success' and user_analytics_response['status'] == 'Success':
                 analytics = user_analytics_response['userData']
                 print(analytics)
-                userAnalytics = analytics.split(' , ')
-                userDataList = {}
-                for i in userAnalytics:
-                    userDatas = i.split(' ')
-                    if userDatas[0] in userDataList:
-                        userDataList[userDatas[0]].append(userDatas[1])
-                    else:
-                        userDataList[userDatas[0]] = [userDatas[1]]
-                print(userDataList)
+                if analytics is not '':
+                    userAnalytics = analytics.split(' , ')
+                    userDataList = {}
+                    for i in userAnalytics:
+                        userDatas = i.split(' ')
+                        if userDatas[0] in userDataList:
+                            userDataList[userDatas[0]].append(userDatas[1])
+                        else:
+                            userDataList[userDatas[0]] = [userDatas[1]]
+                            print(userDataList)
                 content = user_data_response['emergency_contacts']
                 print(content)
                 if request.method == 'GET':
                     if content == "not set":
-                        return render(request, 'frontend/user_page.html', {'email': email, 'message': content, 'user_analytcs': analytics})
+                        return render(request, 'frontend/user_page.html', {'usersname': usersname, 'email': email, 'message': content, 'user_analytcs': analytics})
                     else:
                         #make the field here dynamic
                         return render(request, 'frontend/user_page.html', {'message': 'contact saved',
+                        'usersname': usersname,
                         'email': email,
                         'name': content['name'],
                         'name2': content['name2'],
@@ -285,7 +288,7 @@ def login(request):
         user_response = json.loads(user_response.content)
         if 'status' in user_response and user_response['status'] == 'Success':
             user_page = HttpResponseRedirect(reverse('user_page'))
-            token_data = {'token': user_response['id_token'], 'email': email, 'RefreshToken': user_response['RefreshToken'], 'AccessToken': user_response['AccessToken']}
+            token_data = {'token': user_response['id_token'], 'usersname':user_response['name'], 'email': email, 'RefreshToken': user_response['RefreshToken'], 'AccessToken': user_response['AccessToken']}
             try:
                 del request.session['errorMessage']
                 del request.session['cred']
