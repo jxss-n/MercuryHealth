@@ -216,7 +216,7 @@
         $(this).parents('#sidetabs').find('.sidetabs__link_active').removeClass('sidetabs__link_active').end().end().addClass('sidetabs__link_active');
       });
 
-      if ("{{name}}" != "not set") {
+      if ("{{name}}" != "") {
         $('.header2__content--emergencycontact').css('display', 'none');
         $('.emergency_list').css('opacity', '1');
         $('.emergency_list').css("visibility", "visible");
@@ -244,7 +244,7 @@
       */
 
       // Remove ability to add contact once 5 contacts have been added
-      if ("{{name}}" != "not set" && "{{name2}}" != "not set" && "{{name3}}" != "not set" && "{{name4}}" != "not set" && "{{name5}}" != "not set") {
+      if ("{{name}}" != "" && "{{name2}}" != "" && "{{name3}}" != "" && "{{name4}}" != "" && "{{name5}}" != "") {
         $('.addContact').css('display', 'none');
       }
 
@@ -283,14 +283,12 @@
 
     $(".addContact").click(function(){
       $('.header2__content--emergencycontact').css('display', 'none');
-      $('.header2__form').css('opacity', '1');
-      $('.header2__form').css("visibility", "visible");
-      $('.emergency_list').css('opacity', '0');
-      $('.emergency_list').css("visibility", "hidden");
+      $('.header2__form').css('display', 'block');
+      $('.emergency_list').css('display', 'none');
 
       // Toggle contact form based on which emergency contact has been filled out
       console.log("name 1 not set");
-      if ("{{name}}" == "not set") {
+      if ("{{name}}" == "") {
         console.log("name 1 not set");
         contact = 1;
         $("#contact1").css('display', "block");
@@ -300,7 +298,7 @@
         $('#contact5').css('display', 'none');
       }
 
-      else if ("{{name2}}" == "not set") {
+      else if ("{{name2}}" == "") {
         console.log("name 2 not set");
         contact = 2;
         $("#contact1").css('display', 'none');
@@ -310,7 +308,7 @@
         $('#contact5').css('display', 'none');
       }
 
-      else if ("{{name3}}" == "not set") {
+      else if ("{{name3}}" == "") {
         console.log("name 3 not set");
         contact = 3;
         $("#contact1").css('display', 'none');
@@ -320,7 +318,7 @@
         $('#contact5').css('display', 'none');
       }
 
-      else if ("{{name4}}" == "not set") {
+      else if ("{{name4}}" == "") {
         console.log("name 4 not set");
         contact = 4;
         $("#contact1").css('display', 'none');
@@ -330,7 +328,7 @@
         $('#contact5').css('display', 'none');
       }
 
-      else if ("{{name5}}" == "not set") {
+      else if ("{{name5}}" == "") {
         console.log("name 5 not set");
         contact = 5;
         $("#contact1").css('display', 'none');
@@ -343,18 +341,14 @@
 
     $(".submitContacts").click(function(){
         //$(".submitContacts").prop("type", "submit");
-        $(".header2__form").css('opacity', '0');
-        $('.header2__form').css("visibility", "hidden");
-        $('.emergency_list').css('opacity', '1');
-        $('.emergency_list').css("visibility", "visible");
+        $(".header2__form").css('display', 'none');
+        $('.emergency_list').css('display','block');
     });
 
     $(".cancelContacts").click(function(){
-      $('.header2__form').css('opacity', '0');
-      $('.header2__form').css("visibility", "hidden");
-      if ("{{name}}" != "not set") {
-        $('.emergency_list').css('opacity', '1');
-        $('.emergency_list').css("visibility", "visible");
+      $('.header2__form').css('display','none');
+      if ("{{name}}" != "") {
+        $('.emergency_list').css('display', 'block');
         $('.header2__content--emergencycontact').css('display', 'none');
         var hideContact = "#contact" + contact;
         console.log("hide contact" + hideContact);

@@ -131,8 +131,6 @@ body {
     color: #ffffff; }
   .header2__form {
     text-align: center;
-    opacity:0;
-    visibility: hidden;
     display:none;
     transition: all .5s;
     background-color:white;
@@ -621,8 +619,7 @@ body {
     color: #999; }
 
   .emergency_list {
-    opacity:0;
-    visibility:hidden;
+    display:none;
     color:#666666;
     font-size: 1.25rem;
   }
@@ -1124,10 +1121,6 @@ body {
     @media (max-width: 56.25em) {
       .book__form {
         width: 100%; } }
-
-#contact1 {
-  display:block;
-}
 
 /*//////////////////////////////////////////////////////////////////
 [ Table ]*/
