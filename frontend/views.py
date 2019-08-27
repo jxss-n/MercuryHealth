@@ -213,6 +213,7 @@ def user_page(request):
 
                     if 'status' in emergency_contact_response and emergency_contact_response['status'] == 'Success':
                         return render(request, 'frontend/user_page.html', {'message': 'contact saved',
+                        'usersname':usersname,
                         'email': email,
                         'name': name,
                         'name2': name2,
