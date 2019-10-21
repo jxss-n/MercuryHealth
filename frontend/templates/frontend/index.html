@@ -39,8 +39,8 @@
 {% if errorMessage != None and cred == 'login'%}
 
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#login";
-    window.location.href="http://" + "127.0.0.1:8000" + "/#login";
+    window.location.href="http://" + window.location.hostname + "/#login";
+    //window.location.href="http://" + "127.0.0.1:8000" + "/#login";
 
 //Another url redirect
 
@@ -49,8 +49,8 @@
 
 {% if errorMessage != None and cred == 'signup'%}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#signup";
-    window.location.href="http://" + "127.0.0.1:8000" + "/#signup";
+    window.location.href="http://" + window.location.hostname + "/#signup";
+    //window.location.href="http://" + "127.0.0.1:8000" + "/#signup";
 
 //Another url redirect
 
@@ -58,24 +58,24 @@
 {% endif %}
 {% if errorMessage == None %}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#";
-    window.location.href="http://" + "127.0.0.1:8000" + "/#";
+    window.location.href="http://" + window.location.hostname + "/#";
+    //window.location.href="http://" + "127.0.0.1:8000" + "/#";
     //Another url redirect
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'forgot-password'%}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#forgot-password";
-    window.location.href="http://" + "127.0.0.1:8000" + "/#forgot-password";
+    window.location.href="http://" + window.location.hostname + "/#forgot-password";
+    //window.location.href="http://" + "127.0.0.1:8000" + "/#forgot-password";
     //Another url redirect
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'reset_password'%}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#reset-password";
-    window.location.href="http://" + "127.0.0.1:8000" + "/#reset-password";
+    window.location.href="http://" + window.location.hostname + "/#reset-password";
+    //window.location.href="http://" + "127.0.0.1:8000" + "/#reset-password";
     //Another url redirect
 </script>
 {% endif %}
@@ -165,6 +165,7 @@
 
       </section>
 
+      <!-- OUR DEVICE -->
       <section>
         <div class="container" style="border: solid black thin; width: 87vw; margin-top: 3rem; margin-bottom: 3rem;">
           <div class="row">
@@ -228,12 +229,34 @@
         </div>
       </section>
 
+
+      <!-- AWARDS -->
+      <section>
+        <div class="container center-text">
+          <h2 class="heading-secondary margin-bottom-small" style="margin-top: 5rem;">
+            Awards
+          </h2>
+
+          <div class="row" style="text-align:center;">
+            <div class="col">
+              <p class="award_text"><b>1st place</b> at <i>US Microsoft Imagine Cup 2015</i></p>
+              <img src="{%static 'img/firstplace.png'%}" class="award_img" style="width:20% !important; margin-right:1.5rem;">
+              <img src="{%static 'img/imaginecup-logo.png'%}" class="award_img" style="width:50% !important;">
+            </div>
+            <div class="col">
+              <p class="award_text">Inducted into <i>The Basement’s</i> <b>incubator program</b></p>
+              <img src="{%static 'img/ucsdbasement.png'%}" class="award_img">
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- OUR TEAM -->
       <section>
         <div class="center-text margin-bottom-8">
-        <h2 class="heading-secondary margin-bottom-small margin-top-small">
-          Our Team
-        </h2>
+          <h2 class="heading-secondary margin-bottom-small" style="margin-top: 5rem;">
+            Our Team
+          </h2>
         </div>
         <div class="container">
           <div class="row team_row">
@@ -525,6 +548,7 @@
           </div>
       </div>
   </div>
+
   <div class="popup" id="signup">
       <div class="popup__box">
           <a href="#" class="popup__close">&times;</a>
