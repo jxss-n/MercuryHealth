@@ -102,6 +102,7 @@ def user_page(request):
         auth = auth.replace("'", '"')
         auth = json.loads(auth)
         email = auth["email"]
+        print("this is the auth: {}".format(auth))
         usersname = auth["usersname"]
 
     #TODO change the ipaddress to cookies
@@ -119,15 +120,15 @@ def user_page(request):
             #pass
         try:
             print("it is working 2")
-            print(auth['AccessToken'])
             user_data_response = requests.get("https://kayxrpz2ef.execute-api.us-west-2.amazonaws.com/production/data", params = {"AccessToken": auth['AccessToken']}, headers = {"Authorization": auth["token"]})
             print(user_data_response)
         except Exception as e:
             return render( request, 'frontend/user_page.html', {'message': ERROR_OBTAIN_DATA})
         try:
-            User_Analytics = requests.get("https://mwnpu1mot0.execute-api.us-west-2.amazonaws.com/Production/user-analytics", params = {"AccessToken": auth['AccessToken']}, headers = {"Authorization": auth["token"]})
+            User_Analytics = requests.get("https://mwnpu1mot0.execute-api.us-west-2.amazonaws.com/Production/user-analytics", params = {"AccessToken": auth['AccessToken'], "position":"situp"} , headers = {"Authorization": auth["token"]})
         except Exception as e:
             return render( request, 'frontend/user_page.html', {'message': ERROR_OBTAIN_DATA})
+        print(User_Analytics.content)
         user_data_response = json.loads(user_data_response.content)
         user_analytics_response = json.loads(User_Analytics.content)
         print(user_analytics_response)
@@ -137,7 +138,7 @@ def user_page(request):
             if user_data_response['status'] == 'Success' and user_analytics_response['status'] == 'Success':
                 analytics = user_analytics_response['userData']
                 print(analytics)
-                if analytics is not '':
+                if analytics is not '' and analytics != "situp" and analytics != "fall":
                     userAnalytics = analytics.split(' , ')
                     userDataList = {}
                     for i in userAnalytics:
@@ -289,6 +290,7 @@ def login(request):
         user_response = json.loads(user_response.content)
         if 'status' in user_response and user_response['status'] == 'Success':
             user_page = HttpResponseRedirect(reverse('user_page'))
+            print("name: {}".format(user_response['name']))
             token_data = {'token': user_response['id_token'], 'usersname':user_response['name'], 'email': email, 'RefreshToken': user_response['RefreshToken'], 'AccessToken': user_response['AccessToken']}
             try:
                 del request.session['errorMessage']
@@ -298,7 +300,8 @@ def login(request):
             user_page.set_cookie('auth', token_data)
             return user_page
         else:
-            request.session['errorMessage'] = user_response['error']
+            print(user_response)
+            request.session['errorMessage'] = "User Not Found"
             request.session['cred'] = 'login'
             return HttpResponseRedirect(reverse('index'))
     else:
@@ -324,7 +327,7 @@ def register(request):
         email = f.cleaned_data['email']
         password = f.cleaned_data['password']
         name = f.cleaned_data['name']
-        device_id = f.cleaned_data['device_id']
+        """device_id = f.cleaned_data['device_id']
         try:
             device_reponse = requests.get("https://3ona7cpntd.execute-api.us-west-2.amazonaws.com/prod/devdata", params = {"process": "device_exist", "DevID":device_id})
         except Exception as e:
@@ -335,39 +338,39 @@ def register(request):
         if 'status' in device_reponse and device_reponse['status'] == 'Success':
             print("working valid form")
             print(device_reponse)
-            #ip_address = device_reponse['IP']
+            #ip_address = device_reponse['IP']"""
         #TODO use a cookie to get the data instead of getters and setters
         #Checkout singleton
         #TODO check out a different ways to store cookie
-            '''user_page = HttpResponseRedirect(reverse('user_page'))
-            token_data = {'token': user_response['id_token'], 'email': email, 'RefreshToken': user_response['RefreshToken'], 'AccessToken': user_response['AccessToken']}
-            user_page.set_cookie('auth', token_data)
-            p.address = ip_address'''
+        '''user_page = HttpResponseRedirect(reverse('user_page'))
+        token_data = {'token': user_response['id_token'], 'email': email, 'RefreshToken': user_response['RefreshToken'], 'AccessToken': user_response['AccessToken']}
+        user_page.set_cookie('auth', token_data)
+        p.address = ip_address'''
             #request.session['ip_address'] = ip_address
         #TODO put this inside a try and catch block
         #TODO different variable names
-            try:
-                register_response=requests.post("https://bqseq2czwe.execute-api.us-west-2.amazonaws.com/prod/credential",json.dumps({"process": "register","email": email, "password":password , "name":name, "DevID":device_id}))
-                request.session['cred'] = 'signup'
-            except Exception as e:
-                request.session['errorMessage'] = e
-                request.session['cred'] = 'signup'
-                return HttpResponseRedirect(reverse('index'))
-            register_response = json.loads(register_response.content)
-            if 'status' in register_response and register_response['status'] == 'Success':
-                print("registered")
-                request.session['errorMessage'] = "verify your email"
-                return HttpResponseRedirect(reverse('index'))
-            elif 'status' in register_response and 'msg' in register_response and register_response['msg'] == ERROR_USEREXISTS:
-                request.session['errorMessage'] = ERROR_USEREXISTS + ' with the same email'
-                return HttpResponseRedirect(reverse('index'))
-            else:
-                request.session['errorMessage'] = ERROR_SIGNUP
-                return HttpResponseRedirect(reverse('index'))
-        else:
-            request.session['errorMessage'] = ERROR_DEVICE
+        try:
+            register_response=requests.post("https://bqseq2czwe.execute-api.us-west-2.amazonaws.com/prod/credential",json.dumps({"process": "register","email": email, "password":password , "name":name}))
+            request.session['cred'] = 'signup'
+        except Exception as e:
+            request.session['errorMessage'] = e
             request.session['cred'] = 'signup'
             return HttpResponseRedirect(reverse('index'))
+        register_response = json.loads(register_response.content)
+        if 'status' in register_response and register_response['status'] == 'Success':
+            print("registered")
+            request.session['errorMessage'] = "verify your email"
+            return HttpResponseRedirect(reverse('index'))
+        elif 'status' in register_response and 'msg' in register_response and register_response['msg'] == ERROR_USEREXISTS:
+            request.session['errorMessage'] = ERROR_USEREXISTS + ' with the same email'
+            return HttpResponseRedirect(reverse('index'))
+        else:
+            request.session['errorMessage'] = ERROR_SIGNUP
+            return HttpResponseRedirect(reverse('index'))
+    #"""    else:
+    #        request.session['errorMessage'] = ERROR_DEVICE
+    #        request.session['cred'] = 'signup'
+    #        return HttpResponseRedirect(reverse('index'))"""
     else:
         request.session['errorMessage'] = 'Input was not of correct form'
         request.session['cred'] = 'signup'
