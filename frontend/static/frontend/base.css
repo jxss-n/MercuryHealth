@@ -151,6 +151,10 @@ body {
       border-radius: 5px;
       }
 
+.subscribe-btn {
+  background-image: linear-gradient(rgba(48, 198, 250, 0.5), rgba(9, 70, 100, 0.8));
+}
+
 .headerline{
   width: 60%;
   margin: auto;
