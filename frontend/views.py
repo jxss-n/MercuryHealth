@@ -57,13 +57,8 @@ def index(request):
     except Exception as e:
         errorMessage = None
         cred = None
-    if errorMessage != None and cred == 'login':
-        print(errorMessage)
-        del request.session['errorMessage']
-        del request.session['cred']
-        print(cred)
-        return render(request, 'frontend/index.html', {'auth': auth, 'errorMessage': errorMessage, 'cred': cred})
-    elif errorMessage != None and cred == 'signup':
+    #errormessage -> may be causing infinite loop
+    if errorMessage != None:
         print(errorMessage)
         del request.session['errorMessage']
         del request.session['cred']
@@ -86,6 +81,7 @@ def user_page(request):
     except Exception as e:
         errorMessage = None
         cred = None
+    #make this more concise
     if errorMessage != None and cred == 'forgot-password':
         print(errorMessage)
         del request.session['errorMessage']
@@ -301,7 +297,7 @@ def login(request):
             return user_page
         else:
             print(user_response)
-            request.session['errorMessage'] = "User Not Found"
+            request.session['errorMessage'] = user_response['msg']
             request.session['cred'] = 'login'
             return HttpResponseRedirect(reverse('index'))
     else:
@@ -396,24 +392,24 @@ def logout(request):
 
 def forgot_password(request):
     auth = request.COOKIES.get('auth')
+    request.session['cred'] = "forgot-password"
     if request.method == 'GET':
         request.session['errorMessage'] = ' '
-        request.session['cred'] = "forgot-password"
         return HttpResponseRedirect(reverse('index'))
     f = forgotPasswordForm(request.POST)
     if f.is_valid():
         email = f.cleaned_data['email']
+        print("inside the forgot password")
         print(email)
         #TODO try and catch
         try:
             forgot_password_response=requests.post("https://bqseq2czwe.execute-api.us-west-2.amazonaws.com/prod/credential",json.dumps({"process": "forgot_password", "email":email}))
-            request.session['cred'] = "forgot-password"
         except Exception as e:
             request.session['errorMessage'] = ERROR_SIGNUP
-            request.session['cred'] = "forgot-password"
             return HttpResponseRedirect(reverse('index'))
         forgot_password_response = json.loads(forgot_password_response.content)
         if 'status' in forgot_password_response and forgot_password_response['status'] == 'Success':
+            print("success in getting the right response")
             request.session['errorMessage'] = "check your email for the confirmation code"
             request.session['cred'] = "reset_password"
             return HttpResponseRedirect(reverse('index'))
@@ -422,7 +418,6 @@ def forgot_password(request):
             return HttpResponseRedirect(reverse('index'))
     else:
         request.session['errorMessage'] = "Make sure the email is correct"
-        request.session['cred'] = "forgot-password"
         return HttpResponseRedirect(reverse('index'))
 
 def reset_password(request):

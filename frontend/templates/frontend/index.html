@@ -34,6 +34,7 @@
   </header>
 {% endblock %}
 
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us5.list-manage.com","uuid":"0229c56d721f5c18955cdbe93","lid":"59eeec2683","uniqueMethods":true}) })</script>
 
 {% block content%}
 {% if errorMessage != None and cred == 'login'%}
@@ -56,13 +57,6 @@
 
 </script>
 {% endif %}
-{% if errorMessage == None %}
-<script>
-    //window.location.href="http://" + window.location.hostname + "/#";
-    window.location.href="http://" + "127.0.0.1:8000" + "/#";
-    //Another url redirect
-</script>
-{% endif %}
 
 {% if errorMessage != None and cred == 'forgot-password'%}
 <script>
@@ -79,6 +73,15 @@
     //Another url redirect
 </script>
 {% endif %}
+
+{% if errorMessage == None %}
+<script>
+    //window.location.href="http://" + window.location.hostname + "/#";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#";
+    //Another url redirect
+</script>
+{% endif %}
+
 
 
   <main>
@@ -441,6 +444,7 @@
                  </div>
              </form>
              </div>
+
  <!--End mc_embed_signup-->
       </div>
       <div class="row">
@@ -482,7 +486,7 @@
                     <label for="id_password" class="form__label">Password</label>
                   </div>
                   <div class="form__group form__forgot__group">
-                      <a href="#" class="form__forPassword"> forgot my password</a>
+                      <a href="#forgot-password" class="form__forPassword"> forgot my password</a>
                   </div>
                   <div class="form__group">
                       <input type="submit" class="btn--input btn btn--green" value="login"/>
