@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^verity/$', verify, name='verify'),
     url(r'^forgot_password/$', forgot_password, name='forgot_password'),
     url(r'^reset_password/$', reset_password, name='reset_password'),
+    #url(r'^faq/$', faq, name='faq'),
     path('admin/', admin.site.urls),
 
 ]

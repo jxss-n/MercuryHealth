@@ -10,6 +10,7 @@
               {% if auth%}
               <span class="nav__login"><a href="/user_page" class="nav__login--link nav__link">my page</a></span>
               {% else %}
+              <span class="nav__faq"><a href="faq.html" class="nav__faq--link nav__link">faq</a></span>
               <span class="nav__contact"><a href="#footer" class="nav__contact--link nav__link">contact us</a></span>
               <span class="nav__signup"><a href="#signup" class="nav__signup--link nav__link">signup</a></span>
               <span class="nav__login"><a href="#login" class="nav__login--link nav__link">login</a></span>
@@ -49,50 +50,48 @@
 
 
 {% block content%}
+
 {% if errorMessage != None and cred == 'login'%}
-
 <script>
-    window.location.href="http://" + window.location.hostname + "/#login";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#login";
-
-//Another url redirect
-
+    //window.location.href="http://" + window.location.hostname + "/#login";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#login";
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'signup'%}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#signup";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#signup";
-
-//Another url redirect
-
+    //window.location.href="http://" + window.location.hostname + "/#signup";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#signup";
 </script>
 {% endif %}
+
+{% if errorMessage != None and cred == 'faq'%}
+<script>
+    //window.location.href="http://" + window.location.hostname + "/#login";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#faq";
+</script>
+{% endif %}
+
 {% if errorMessage == None %}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#";
-    //Another url redirect
+    //window.location.href="http://" + window.location.hostname + "/#";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#";
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'forgot-password'%}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#forgot-password";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#forgot-password";
-    //Another url redirect
+    //window.location.href="http://" + window.location.hostname + "/#forgot-password";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#forgot-password";
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'reset_password'%}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#reset-password";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#reset-password";
-    //Another url redirect
+    //window.location.href="http://" + window.location.hostname + "/#reset-password";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#reset-password";
 </script>
 {% endif %}
-
 
   <main>
 
@@ -115,8 +114,6 @@
           </div>
         </div>
       </div>
-
-
 
       <!-- OUR DEVICE -->
       <section id="tours">
