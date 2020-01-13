@@ -48,6 +48,11 @@ class IP(object):
         del self._address
 ip = IP()
 # Create your views here.
+def faq(request):
+    print("I am inside faq")
+    auth = request.COOKIES.get('auth')
+    return render(request, 'frontend/faq.html')
+
 def index(request):
     auth = request.COOKIES.get('auth')
     try:
