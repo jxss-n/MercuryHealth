@@ -17,7 +17,7 @@
 
       <a id="activitylog" href="#" class="sidetabs__link"><i class="fas fa-chart-line"></i>&nbsp&nbspActivity Log</a>
 
-      <a id="emergency_contact" href="#" class="sidetabs__link"><i class="far fa-address-book"></i>&nbsp&nbspEmergency Contacts</a>
+      <!--<a id="emergency_contact" href="#" class="sidetabs__link"><i class="far fa-address-book"></i>&nbsp&nbspEmergency Contacts</a>-->
 
       <!--<a id="settings" href="#settings" class="sidetabs__link"><i class="fas fa-cog"></i>&nbsp&nbspSettings</a>-->
 
@@ -34,7 +34,7 @@
       <div class="navbar-nav">
         <a class="nav-item nav-link" href="#">Dashboard</a>
         <a class="nav-item nav-link" href="#">Activity Log</a>
-        <a class="nav-item nav-link" href="#">Emergency Contacts</a>
+        <!--<a class="nav-item nav-link" href="#">Emergency Contacts</a>-->
         <!--<a class="nav-item nav-link" href="#">Settings</a>-->
         <a class="nav-item nav-link" href="/logout">Logout</a>
       </div>
@@ -355,6 +355,11 @@
       $('.limiter').css('display', 'block');
 
       document.getElementById("activity_title").innerHTML = "ACTIVITY LOG";
+    });
+
+    $(".activity_link").click(function() {
+      $('#sidetabs').find('.sidetabs__link_active').removeClass('sidetabs__link_active');
+      $("#activitylog").addClass("sidetabs__link_active");
     });
 
     // Emergency Contact Sidetab
