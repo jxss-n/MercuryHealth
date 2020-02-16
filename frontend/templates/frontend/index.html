@@ -10,7 +10,7 @@
               {% if auth%}
               <span class="nav__login"><a href="/user_page" class="nav__login--link nav__link">my page</a></span>
               {% else %}
-              <span class="nav__faq"><a href="/faq" class="nav__faq--link nav__link">faq</a></span>
+              <!--<span class="nav__faq"><a href="/faq" class="nav__faq--link nav__link">faq</a></span>-->
               <span class="nav__contact"><a href="#footer" class="nav__contact--link nav__link">contact us</a></span>
               <span class="nav__signup"><a href="#signup" class="nav__signup--link nav__link">signup</a></span>
               <span class="nav__login"><a href="#login" class="nav__login--link nav__link">login</a></span>
@@ -53,43 +53,36 @@
 
 {% if errorMessage != None and cred == 'login'%}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#login";
-    window.location.href="http://" + "127.0.0.1:8000" + "/#login";
+    window.location.href="http://" + window.location.hostname + "/#login";
+    //window.location.href="http://" + "127.0.0.1:8000" + "/#login";
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'signup'%}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#signup";
-    window.location.href="http://" + "127.0.0.1:8000" + "/#signup";
+    window.location.href="http://" + window.location.hostname + "/#signup";
+    //window.location.href="http://" + "127.0.0.1:8000" + "/#signup";
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'faq'%}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#login";
-    window.location.href="http://" + "127.0.0.1:8000" + "/#faq";
-</script>
-{% endif %}
-
-{% if errorMessage == None %}
-<script>
-    //window.location.href="http://" + window.location.hostname + "/#";
-    window.location.href="http://" + "127.0.0.1:8000" + "/#";
+    window.location.href="http://" + window.location.hostname + "/#faq";
+    //window.location.href="http://" + "127.0.0.1:8000" + "/#faq";
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'forgot-password'%}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#forgot-password";
-    window.location.href="http://" + "127.0.0.1:8000" + "/#forgot-password";
+    window.location.href="http://" + window.location.hostname + "/#forgot-password";
+    //window.location.href="http://" + "127.0.0.1:8000" + "/#forgot-password";
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'reset_password'%}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#reset-password";
-    window.location.href="http://" + "127.0.0.1:8000" + "/#reset-password";
+    window.location.href="http://" + window.location.hostname + "/#reset-password";
+    //window.location.href="http://" + "127.0.0.1:8000" + "/#reset-password";
 </script>
 {% endif %}
 
@@ -132,8 +125,8 @@
             <div class="col-sm-4 vertical-align" style="margin-left:15px">
               <div>
                 <h1 class="header-3">Keep your loved ones safe.</h1>
-                <p class="para-about" style="color:white;">Mercury Home consists of a small, unintrusive optical sensor
-                  that can detect elderly falls and other human actions in real time. Emergency contacts or services
+                <p class="para-about" style="color:white;">Mercury Home consists of a small, unintrusive sensor
+                  that can detect emergency situations. Emergency contacts or services
                   will be contacted instantly if anything is wrong.
                 </p>
               </div>
@@ -149,7 +142,7 @@
               <div>
                 <h1 class="header-3" style="color: #265e96 !important;">Encourage independence.</h1>
                 <p class="para-about">Unlike current technologies which use wearable technology (like the Apple Watch™ and
-                  Life Alert) to analyze a person’s actions, Mercury Home easily installs in any desired room and monitors
+                  Life Alert) to invoke emergency responses, Mercury Home easily installs in any desired room and senses
                   entirely from a distance.
                 </p>
               </div>
@@ -163,9 +156,8 @@
             <div class="col-sm-4 vertical-align" style="margin-left:15px">
               <div>
                 <h1 class="header-3">Personalize care.</h1>
-                <p class="para-about" style="color:white;">Optical sensor data is sent to our servers, which anonymously analyze the
-                  data to look for patterns in a person's movement. Anything important we notice is saved for you to view via our
-                  online patient portal.
+                <p class="para-about" style="color:white;">Our device analyzes sensor data, and anything important we notice can be viewed via our
+                  online user portal.
                 </p>
               </div>
             </div>
@@ -177,7 +169,7 @@
 
       </section>
 
-      <!-- OUR DEVICE -->
+      <!-- OUR DEVICE
       <section>
         <div class="container" style="border: solid black thin; width: 87vw; margin-top: 3rem; margin-bottom: 3rem;">
           <div class="row">
@@ -191,7 +183,7 @@
                 Our Device
               </h2>
               <p class="para-about">
-                <i class="fas fa-wifi"></i><b>  Wifi Streaming</b><br>
+                <i class="fas fa-wifi"></i><b>Wifi Streaming</b><br>
                   Wifi is used to stream optical sensor data captured from your home to our secure servers.<br><br>
                 <i class="fas fa-network-wired"></i><b> Deep Learning Visual Recognition Models</b><br>
                  The servers apply custom, proprietary Deep Learning Visual Recognition Models to analyze optical sensor
@@ -208,7 +200,7 @@
           </div>
         </div>
       </section>
-
+      -->
       <!-- HOW IT WORKS -->
       <section class="features margin-top-small">
         <div class="center-text margin-bottom-8">
@@ -222,15 +214,15 @@
                   <img src="../../static/img/install.png" alt="" class="feature-box" alt="installing mercury device">
                 <p class="feature-box__text"> <b>INSTALL</b> <br> Our team will install Mercury Home in a desired room.</p>
             </div>
-
+<!--
             <div class="col">
                   <img src="../../static/img/register.png" alt="" class="feature-box" alt="register device">
                 <p class="feature-box__text"><b>REGISTER</b> <br> Create a login and add emergency contact details to receive text notifications when events are detected. </p>
             </div>
-
+-->
             <div class="col">
                 <img src="../../static/img/monitor2.png" alt="" class="feature-box" alt="capture data">
-                <p class="feature-box__text"><b>CAPTURE + IDENTIFY</b> <br> Optical sensor data captured by the device are encrypted and anonymized, sent to our cloud to analyze for specific patterns in movement.</p>
+                <p class="feature-box__text"><b>CAPTURE + ANALYZE</b> <br> Encrypted sensor data captured by the device are anonymously analyzed and emergency situation information is securely stored as client history.</p>
             </div>
 
             <div class="col">
@@ -256,7 +248,7 @@
               <img src="{%static 'img/Imaginecup-logo.png'%}" class="award_img" style="width:50% !important;" alt="imagine cup">
             </div>
             <div class="col">
-              <p class="award_text">Inducted into <i>The Basement’s</i> <b>incubator program</b></p>
+              <p class="award_text">Inducted into <i>The Basement’s</i> <b>Incubator Program</b></p>
               <img src="{%static 'img/ucsdbasement.png'%}" class="award_img" alt="ucsd basement">
             </div>
             <div class="col">
@@ -433,7 +425,45 @@
                 </div>
               </div>
           </div>
-
+          <div class="row team_row">
+            <div class="col-sm-3">
+              <div class="card">
+                <div class="card__side card__side--front">
+                  <figure class="story__shape margin-bottom-small">
+                    <img src="../../static/img/MH_pic.jpg"class="story__image" style="transform: translateX(-0.4rem) scale(1.4);" alt="meyhaa buvanesh">
+                  </figure>
+                  <p style="margin-bottom:0;"><b>MEYHAA BUVANESH</b></p>
+                  <p style="font-size:1.5rem;"><i>Research Analyst</i></p>
+                </div>
+                <div class="card__side card__side--back card__side--back--1">
+                  <div class="card__back story__text">
+                    <p>Fourth year Cognitive Science (Machine Learning and Neural Computation) student at UC San Diego.
+                      She combines her technical experience with her passion for public health to work on identifying shortcomings
+                      within the intersection of health and technology, aiming to bridge the gap between the two fields by helping
+                      companies develop patient-centric technology.
+                     </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="card">
+                <div class="card__side card__side--front">
+                  <figure class="story__shape margin-bottom-small">
+                    <img src="" class="story__image" style="transform: translateX(-0.4rem) scale(1.4);" alt="alex rivera">
+                  </figure>
+                  <p style="margin-bottom:0;"><b>ALEX RIVERA</b></p>
+                  <p style="font-size:1.5rem;"><i>Machine Learning Engineer</i></p>
+                </div>
+                <div class="card__side card__side--back card__side--back--1">
+                  <div class="card__back story__text">
+                    <p>
+                     </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </section>
@@ -448,14 +478,14 @@
 
       <div class="col-4" style="display:inline-block;">
         <p><strong>MERCURY HEALTH</strong></p>
-        <a href="/faq" class="footer__link">faq</a>
+        <!--<a href="/faq" class="footer__link">faq</a>-->
         <a href="#signup" class="footer__link">signup</a>
         <a href="#login" class="footer__link">login</a>
       </div>
 
       <div class="col-2">
         <p><strong>CONTACT US</strong></p>
-        <p>Email: <a id="email" href="mailto:Admin@MercuryHealth.us">Admin@MercuryHealth.us</a></p>
+        <p>Email: <a id="email" href="mailto:contact@mercuryhealth.us">contact@mercuryhealth.us</a></p>
         <p>Phone Number: (858) 500 - 6186</p>
         <p>Location: 9500 Gilman Dr. La Jolla, CA</p>
       </div>
