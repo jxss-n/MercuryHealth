@@ -50,6 +50,12 @@
 
 
 {% block content%}
+{% if errorMessage == None %}
+<script>
+    window.location.href="http://" + window.location.hostname + "/#";
+    //window.location.href="http://" + "127.0.0.1:8000" + "/#";    //Another url redirect
+</script>
+{% endif %}
 
 {% if errorMessage != None and cred == 'login'%}
 <script>
