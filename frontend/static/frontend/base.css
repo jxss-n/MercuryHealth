@@ -151,6 +151,10 @@ body {
       border-radius: 5px;
       }
 
+.subscribe-btn {
+  background-image: linear-gradient(rgba(48, 198, 250, 0.5), rgba(9, 70, 100, 0.8));
+}
+
 .headerline{
   width: 60%;
   margin: auto;
@@ -277,6 +281,47 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
     position: absolute;
     z-index: -1; }
 
+.faq {
+  height: 115vh;
+  /*-webkit-clip-path: polygon(0 0, 100% 0, 100% 65%, 50% 100%, 0 65%);
+  clip-path: polygon(0 0, 100% 0, 100% 65%, 50% 100%, 0 65%);*/
+  clip-path: polygon(100% 0, 100% 67%, 50% 50%, 0 67%, 0 0);
+  position: relative;
+  z-index: -1;
+}
+
+.faq::after {
+  content: "";
+  background-image: linear-gradient(to right bottom, rgba(48, 198, 250, 0.4), rgba(38, 94, 150, 0.2)), url(../img/water2.jpg);
+  /*filter:saturate(50%);*/
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1; }
+
+.faq_questions {
+  width: 75vw;
+  padding: 2rem;
+  margin: auto;
+  margin-top: -55rem;
+  background-color: white;
+  box-shadow: 5px 10px 18px #888888;
+/*
+  width: 75vw;
+  padding: 2rem;
+  margin: auto;
+  background-color: white;
+  box-shadow: 5px 10px 18px #888888;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);*/
+}
 .header2 {
   height: 120vh;
   z-index: 100;
@@ -813,8 +858,7 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
   font-size: 1.4rem;
   background-color: #333;
   padding: 2rem 0;
-  color: #f7f7f7;
-  text-align: center; }
+  color: #f7f7f7; }
   .footer__logo--box {
     text-align: center;
     padding-bottom: 8rem; }
@@ -839,12 +883,12 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
     .footer__item:not(:last-child) {
       margin-right: 1.5rem; }
   .footer__link:link, .footer__link:visited {
-    background-color: #333;
-    color: #f7f7f7;
+    color: white;
     text-decoration: none;
     text-transform: uppercase;
     display: inline-block;
-    transition: all .2s; }
+    transition: all .2s;
+    padding-right: 1rem;}
   .footer__link:hover, .footer__link:active {
     color: #7ebcd8;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
