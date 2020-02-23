@@ -102,7 +102,7 @@ def user_page(request):
                 print("inside the success")
                 analytics = user_analytics_response['userData']
                 print(analytics)
-                if analytics is not '' and analytics != "situp" and analytics != "fall":
+                if analytics is not 'not set' and analytics != "situp" and analytics != "fall":
                     userAnalytics = analytics.split(' , ')
                     userDataList = {}
                     for i in userAnalytics:
@@ -120,6 +120,10 @@ def user_page(request):
                         return render(request, 'frontend/user_page.html', {'usersname': usersname, 'email': email, 'message': content, 'user_analytcs': analytics})
                     else:
                         #make the field here dynamic
+                        """for key, value in content.items():
+                            if value == "not set":
+                                content[key] = 'not set'
+"""
                         return render(request, 'frontend/user_page.html', {'message': 'contact saved',
                         'usersname': usersname,
                         'email': email,
@@ -145,7 +149,8 @@ def user_page(request):
                 print(f)
                 print("I contactform")
                 #if new emergency contact is formed go here
-                if f.is_valid():
+                if f.is_valid() and request.method != 'GET':
+                    print("form is valid")
                     name = f.cleaned_data['Name'] or 'not set'
                     number = f.cleaned_data['Number'] or 'not set'
                     relationship = f.cleaned_data['Relationship'] or 'not set'
@@ -200,7 +205,7 @@ def user_page(request):
                         'user_analytcs': analytics
                         })
                     print(emergency_contact_response);
-                    return render(request, 'frontend/user_page.html', {'message': emergency_contact_response['msg']})
+                    return render(request, 'frontend/user_page.html', {'message': emergency_contact_response['errorMessage']})
                 else:
                     return render(request, 'frontend/user_page.html', {'message': ERROR_FILL_OUT})
         else: #gets a new token using the refreshToken
@@ -268,7 +273,7 @@ def login(request):
             user_page.set_cookie('auth', token_data)
             return user_page
         else:
-            print(user_response)
+            print("this is user_response: {}".format(user_response))
             request.session['errorMessage'] = user_response['msg']
             return HttpResponseRedirect(reverse('index'))
     else:
@@ -293,6 +298,10 @@ def register(request):
         email = f.cleaned_data['email']
         password = f.cleaned_data['password']
         name = f.cleaned_data['name']
+        confirm_password = f.cleaned_data['confirm_password']
+        if password != confirm_password:
+            request.session['errorMessage'] = "passwords did not match"
+            return HttpResponseRedirect(reverse('index'))
         #code for adding device ID
         """device_id = f.cleaned_data['device_id']
         try:
@@ -378,7 +387,7 @@ def reset_password(request):
     auth = request.COOKIES.get('auth')
     request.session['cred'] = "reset_password"
     if request.method == 'GET':
-        request.session['errorMessage'] = ''
+        request.session['errorMessage'] = 'not set'
         return HttpResponseRedirect(reverse('index'))
     f = resetPasswordForm(request.POST)
     if f.is_valid():

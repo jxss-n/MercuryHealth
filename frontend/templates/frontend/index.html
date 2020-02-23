@@ -30,7 +30,8 @@
       <!-- Begin Mailchimp Signup Form -->
       <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
       <div id="mc_embed_signup">
-        <form action="https://gmail.us5.list-manage.com/subscribe/post?u=0229c56d721f5c18955cdbe93&amp;id=59eeec2683" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+         <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
+        <form action="https://gmail.us5.list-manage.com/subscribe/post?u=0229c56d721f5c18955cdbe93&amp;id=59eeec2683" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="hiddenFrame" novalidate>
            <div id="mc_embed_signup_scroll">
               <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
               <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
@@ -52,8 +53,8 @@
 {% if errorMessage != None and cred == 'login'%}
 
 <script>
-    window.location.href="http://" + window.location.hostname + "/#login";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#login";
+    //window.location.href="http://" + window.location.hostname + "/#login";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#login";
 
 //Another url redirect
 
@@ -62,8 +63,8 @@
 
 {% if errorMessage != None and cred == 'signup'%}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#signup";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#signup";
+    //window.location.href="http://" + window.location.hostname + "/#signup";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#signup";
 
 //Another url redirect
 
@@ -71,24 +72,24 @@
 {% endif %}
 {% if errorMessage == None %}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#";
+    //window.location.href="http://" + window.location.hostname + "/#";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#";
     //Another url redirect
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'forgot-password'%}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#forgot-password";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#forgot-password";
+    //window.location.href="http://" + window.location.hostname + "/#forgot-password";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#forgot-password";
     //Another url redirect
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'reset_password'%}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#reset-password";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#reset-password";
+    //window.location.href="http://" + window.location.hostname + "/#reset-password";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#reset-password";
     //Another url redirect
 </script>
 {% endif %}
@@ -468,7 +469,7 @@
                 <div class="form__group form__text">
                 {% if errorMessage != None and cred == 'login'%}
 
-                {{ errorMessage }}
+                <font color="red">{{ errorMessage }}</font>
                 {% endif %}
 
                 </div>
@@ -482,7 +483,7 @@
                     <label for="id_password" class="form__label">Password</label>
                   </div>
                   <div class="form__group form__forgot__group">
-                      <a href="#" class="form__forPassword"> forgot my password</a>
+                      <a href="#forgot-password" class="form__forPassword"> forgot my password</a>
                   </div>
                   <div class="form__group">
                       <input type="submit" class="btn--input btn btn--green" value="login"/>
@@ -508,7 +509,7 @@
                     <div class="form__group form__text">
                         {% if errorMessage != None and cred == 'forgot-password'%}
 
-                        {{ errorMessage }}
+                        <font color="red">{{ errorMessage }}</font>
                         {% endif %}
                     </div>
                   <div class="form__group">
@@ -540,7 +541,7 @@
                     <div class="form__group form__text">
                         {% if errorMessage != None and cred == 'reset_password'%}
 
-                        {{ errorMessage }}
+                        <font color="red">{{ errorMessage }}</font>
                         {% endif %}
                     </div>
                   <div class="form__group">
@@ -579,7 +580,7 @@
                 <div class="form__group form__text">
                     {% if errorMessage != None and cred == 'signup'%}
 
-                    {{ errorMessage }}
+                    <font color="red">{{ errorMessage }}</font>
                     {% endif %}
                 </div>
 
@@ -592,12 +593,12 @@
                     <label for="email1" class="form__label">Email</label>
                   </div>
                   <div class="form__group">
-                    <input type="password" name="password" class="form__input" placeholder="Password" id="Password" required>
+                    <input type="password" name="password" class="form__input" placeholder="Password (at least 8 characters, 1 capital and 1 special letter)" id="Password" required>
                     <label for="Password" class="form__label">Password</label>
                   </div>
                   <div class="form__group">
-                    <input type="password" name="confirmpassword" class="form__input" placeholder="Confirm Password" id="ConfirmPassword" required>
-                    <label for="Password" class="form__label">Confirm Password</label>
+                    <input type="password" name="confirm_password" class="form__input" placeholder="Confirm Password" id="ConfirmPassword" required>
+                    <label for="confirm_password" class="form__label">Confirm Password</label>
                   </div>
 
                   <div class="form__group">
