@@ -1241,11 +1241,30 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
   }
 }
 
-
 .award_img {
   width:50%;
 }
 
 .award_text {
   font-size:1.5rem;
+}
+
+.circular_img {
+  border-radius: 50%;
+  width: 50%;
+  margin: auto;
+  margin-bottom: 1rem !important;
+  margin-top:-4rem;
+  -webkit-box-shadow: 0px 10px 23px -5px #B7B7B7;
+  box-shadow: 0px 10px 23px -5px #B7B7B7;
+}
+
+.col-sm-3 {
+  margin-bottom: 8rem;
+}
+
+.card {
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 10px 23px -5px #e6e6e6;
+  box-shadow: 0px 10px 23px -5px #e6e6e6;
 }
