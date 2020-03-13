@@ -74,7 +74,6 @@ def user_page(request):
     if auth:
         auth = auth.replace("'", '"')
         auth = json.loads(auth)
-        email = auth["email"]
         print("this is the auth: {}".format(auth))
         usersname = auth["usersname"]
         try:
@@ -102,7 +101,7 @@ def user_page(request):
                 print("inside the success")
                 analytics = user_analytics_response['userData']
                 print(analytics)
-                if analytics is not 'not set' and analytics != "situp" and analytics != "fall":
+                if analytics and analytics is not 'not set' and analytics != "situp" and analytics != "fall":
                     userAnalytics = analytics.split(' , ')
                     userDataList = {}
                     for i in userAnalytics:
@@ -117,7 +116,7 @@ def user_page(request):
                 if request.method == 'GET':
                     #check if the emergency datas are set from the user or not
                     if content == "not set":
-                        return render(request, 'frontend/user_page.html', {'usersname': usersname, 'email': email, 'message': content, 'user_analytcs': analytics})
+                        return render(request, 'frontend/user_page.html', {'usersname': usersname, 'message': content, 'user_analytcs': analytics})
                     else:
                         #make the field here dynamic
                         """for key, value in content.items():
@@ -126,7 +125,6 @@ def user_page(request):
 """
                         return render(request, 'frontend/user_page.html', {'message': 'contact saved',
                         'usersname': usersname,
-                        'email': email,
                         'name': content['name'],
                         'name2': content['name2'],
                         'name3': content['name3'],
@@ -186,7 +184,6 @@ def user_page(request):
                     if 'status' in emergency_contact_response and emergency_contact_response['status'] == 'Success':
                         return render(request, 'frontend/user_page.html', {'message': 'contact saved',
                         'usersname':usersname,
-                        'email': email,
                         'name': name,
                         'name2': name2,
                         'name3': name3,
@@ -224,7 +221,7 @@ def user_page(request):
             refresh_token_response = json.loads(refresh_token_response.content)
             if 'status' in refresh_token_response and refresh_token_response['status'] == 'Success':
                 next = HttpResponseRedirect(reverse('user_page'))
-                token_data = {"token": refresh_token_response['id_token'], "email": auth['email'], 'RefreshToken': auth["RefreshToken"], 'AccessToken': refresh_token_response['AccessToken']}
+                token_data = {"token": refresh_token_response['id_token'], 'RefreshToken': auth["RefreshToken"], 'AccessToken': refresh_token_response['AccessToken']}
                 next.set_cookie('auth', token_data)
                 return next
             else:
@@ -253,18 +250,18 @@ def login(request):
         return HttpResponseRedirect(reverse('index'))
     f = LoginForm(request.POST)
     if f.is_valid():
-        email = f.cleaned_data['email']
+        username = f.cleaned_data['username']
         password = f.cleaned_data['password']
         try:
-            user_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential", json.dumps({ "process": 'authenticate', "email": email,"password": password}))
+            user_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential", json.dumps({ "process": 'authenticate', "username": username,"password": password}))
         except Exception as e:
             request.session['errorMessage'] = e
             return HttpResponseRedirect(reverse('index'))
         user_response = json.loads(user_response.content)
         if 'status' in user_response and user_response['status'] == 'Success':
             user_page = HttpResponseRedirect(reverse('user_page'))
-            print("name: {}".format(user_response['name']))
-            token_data = {'token': user_response['id_token'], 'usersname':user_response['name'], 'email': email, 'RefreshToken': user_response['RefreshToken'], 'AccessToken': user_response['AccessToken']}
+            print("name: {}".format(user_response['username']))
+            token_data = {'token': user_response['id_token'], 'usersname':user_response['username'], 'RefreshToken': user_response['RefreshToken'], 'AccessToken': user_response['AccessToken']}
             try:
                 del request.session['errorMessage']
                 del request.session['cred']
@@ -274,7 +271,12 @@ def login(request):
             return user_page
         else:
             print("this is user_response: {}".format(user_response))
-            request.session['errorMessage'] = user_response['msg']
+            if 'User does not exist' in user_response['errorMessage']:
+                request.session['errorMessage'] = 'User does not exist'
+            elif 'Incorrect username or password' in user_response['errorMessage']:
+                request.session['errorMessage'] = 'Incorrect username or password'
+            else:
+                request.session['errorMessage'] = user_response['errorMessage']
             return HttpResponseRedirect(reverse('index'))
     else:
         request.session['errorMessage'] = 'email or Password is wrong'
@@ -297,7 +299,7 @@ def register(request):
         print("I am here in the valid form")
         email = f.cleaned_data['email']
         password = f.cleaned_data['password']
-        name = f.cleaned_data['name']
+        username = f.cleaned_data['username']
         confirm_password = f.cleaned_data['confirm_password']
         if password != confirm_password:
             request.session['errorMessage'] = "passwords did not match"
@@ -316,7 +318,7 @@ def register(request):
             print(device_reponse)
             #ip_address = device_reponse['IP']"""
         try:
-            register_response=requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential",json.dumps({"process": "register","email": email, "password":password , "name":name}))
+            register_response=requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential",json.dumps({"process": "register","email": email, "password":password , "username":username}))
         except Exception as e:
             request.session['errorMessage'] = e
             return HttpResponseRedirect(reverse('index'))
@@ -346,9 +348,13 @@ def logout(request):
         login_page.delete_cookie("auth")
         auth = auth.replace("'", '"')
         auth = json.loads(auth)
-        email = auth["email"]
+        print(auth)
         try:
-            delete = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential",json.dumps({ "process":'logout',"email":email}))
+            username = auth["username"]
+        except:
+            return login_page
+        try:
+            delete = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential",json.dumps({ "process":'logout',"username":username}))
         except Exception as e:
             print(e)
         return login_page
