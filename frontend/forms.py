@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(required=True)
+    username = forms.CharField(required=True)
     password = forms.CharField(required=True, widget=forms.PasswordInput)
 
 
@@ -12,7 +12,7 @@ class RegisterForm(forms.Form):
     password = forms.CharField(required=True, widget=forms.PasswordInput)
     confirm_password = forms.CharField(required=True, widget=forms.PasswordInput)
     email = forms.EmailField(required=True)
-    name = forms.CharField(required=True)
+    username = forms.CharField(required=True)
     #device_id = forms.CharField(required=True)
 
 
