@@ -103,8 +103,9 @@ def user_page(request):
                 print(analytics)
                 if analytics and analytics is not 'not set' and analytics != "situp" and analytics != "fall":
                     userAnalytics = analytics.split(' , ')
+                    print(userAnalytics[1:])
                     userDataList = {}
-                    for i in userAnalytics:
+                    for i in userAnalytics[1:]:
                         userDatas = i.split(' ')
                         if userDatas[0] in userDataList:
                             userDataList[userDatas[0]].append(userDatas[1])
@@ -236,7 +237,6 @@ def user_page(request):
                 return fail_page
     else:
         return HttpResponseRedirect(reverse('index'))
-
 
 def login(request):
     auth = request.COOKIES.get('auth')
