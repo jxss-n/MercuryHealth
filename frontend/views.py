@@ -53,6 +53,11 @@ def verify(request):
     auth = request.COOKIES.get('auth')
     return render(request, 'frontend/verify.html')
 
+#verification page
+def faq(request):
+    auth = request.COOKIES.get('auth')
+    return render(request, 'frontend/faq.html')
+
 #Routing to the userpage
 def user_page(request):
     #use the comma to set a default auth variable
