@@ -53,43 +53,43 @@
 {% block content%}
 {% if errorMessage == None %}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#";
-    window.location.href="http://" + "127.0.0.1:8080" + "/#";    //Another url redirect
+    window.location.href="http://" + window.location.hostname + "/#";
+    //window.location.href="http://" + "127.0.0.1:8080" + "/#";    //Another url redirect
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'login'%}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#login";
-    window.location.href="http://" + "127.0.0.1:8080" + "/#login";
+    window.location.href="http://" + window.location.hostname + "/#login";
+    //window.location.href="http://" + "127.0.0.1:8080" + "/#login";
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'signup'%}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#signup";
-    window.location.href="http://" + "127.0.0.1:8080" + "/#signup";
+    window.location.href="http://" + window.location.hostname + "/#signup";
+    //window.location.href="http://" + "127.0.0.1:8080" + "/#signup";
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'faq'%}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#faq";
-    window.location.href="http://" + "127.0.0.1:8080" + "/#faq";
+    window.location.href="http://" + window.location.hostname + "/#faq";
+    //window.location.href="http://" + "127.0.0.1:8080" + "/#faq";
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'forgot-password'%}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#forgot-password";
-    window.location.href="http://" + "127.0.0.1:8080" + "/#forgot-password";
+    window.location.href="http://" + window.location.hostname + "/#forgot-password";
+    //window.location.href="http://" + "127.0.0.1:8080" + "/#forgot-password";
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'reset_password'%}
 <script>
-    //window.location.href="http://" + window.location.hostname + "/#reset-password";
-    window.location.href="http://" + "127.0.0.1:8080" + "/#reset-password";
+    window.location.href="http://" + window.location.hostname + "/#reset-password";
+    //window.location.href="http://" + "127.0.0.1:8080" + "/#reset-password";
 </script>
 {% endif %}
 
@@ -687,18 +687,11 @@
                 <form action="/forgot_password/" class="form" method="post">
                     {% csrf_token %}
                     <div class="form__group form__text">
-                        {% if errorMessage != None and cred == 'forgot-password'%}
-
-                        <font color="red">{{ errorMessage }}</font>
-                        {% endif %}
+                        <font color="red">Please email <strong>contact@mercuryhealth.us</strong> to change your password</font>
                     </div>
-                  <div class="form__group">
-                    <input type="email" name="email" class="form__input" placeholder="your email" id="email2" required>
-                    <label for="email2" class="form__label">email</label>
-                  </div>
-                  <div class="form__group">
+                  <!--<div class="form__group">
                       <input type="submit" class="btn--input btn btn--green" value="Submit" />
-                  </div>
+                  </div>-->
               </form>
             </div>
           </div>
@@ -724,10 +717,10 @@
                         <font color="red">{{ errorMessage }}</font>
                         {% endif %}
                     </div>
-                  <div class="form__group">
+                  <!--<div class="form__group">
                     <input type="email" name="email" class="form__input" placeholder="your email" id="email3" required>
                     <label for="email3" class="form__label">Email</label>
-                  </div>
+                </div>
                   <div class="form__group">
                     <input type="text" name="confirmationCode" class="form__input" placeholder="confirmation code" id="concode" required>
                     <label for="concode" class="form__label">Confirmation Code</label>
@@ -738,7 +731,7 @@
                   </div>
                   <div class="form__group">
                       <input type="submit" class="btn--input btn btn--green" value="Submit" />
-                  </div>
+                  </div>-->
               </form>
             </div>
           </div>
@@ -767,10 +760,6 @@
                   <div class="form__group">
                     <input type="text" name="username" class="form__input" placeholder="Username"" id="username" required>
                     <label for="username" class="form__label">Username</label>
-                  </div>
-                  <div class="form__group">
-                    <input type="email" name="email" class="form__input" placeholder="Email" id="email1" required>
-                    <label for="email1" class="form__label">Email</label>
                   </div>
                   <div class="form__group">
                     <input type="password" name="password" class="form__input" placeholder="Password (at least 8 characters, 1 capital and 1 special letter)" id="Password" required>

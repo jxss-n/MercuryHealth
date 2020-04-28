@@ -11,7 +11,7 @@ class LoginForm(forms.Form):
 class RegisterForm(forms.Form):
     password = forms.CharField(required=True, widget=forms.PasswordInput)
     confirm_password = forms.CharField(required=True, widget=forms.PasswordInput)
-    email = forms.EmailField(required=True)
+    #email = forms.EmailField(required=True)
     username = forms.CharField(required=True)
     #device_id = forms.CharField(required=True)
 
@@ -21,7 +21,7 @@ class forgotPasswordForm(forms.Form):
 
 class resetPasswordForm(forms.Form):
     confirmationCode = forms.CharField(required=True)
-    email = forms.EmailField(required=True)
+    #email = forms.EmailField(required=True)
     newPassword = forms.CharField(required=True, widget=forms.PasswordInput)
 
 class emergencyContactForm(forms.Form):

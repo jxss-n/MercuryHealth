@@ -25,7 +25,7 @@ ERROR_FILL_OUT = "Please fill out all fields"
 ERROR_OBTAIN_DATA = "Coudln't obtain your data. Please contact"
 ERROR_OBTAIN_EMERGENCY_SEND = "Coudln't send the emergency data"
 ERROR_TOKEN_SEND = "Coudn't send tokens please contact us"
-ERROR_SIGNUP = "Invalid email or Password"
+ERROR_SIGNUP = "Invalid Username or Password"
 ERROR_DEVICE = "DeviceID not found"
 ERROR_USEREXISTS = "user already exists"
 
@@ -53,11 +53,6 @@ def verify(request):
     auth = request.COOKIES.get('auth')
     return render(request, 'frontend/verify.html')
 
-#verification page
-def faq(request):
-    auth = request.COOKIES.get('auth')
-    return render(request, 'frontend/faq.html')
-
 #Routing to the userpage
 def user_page(request):
     #use the comma to set a default auth variable
@@ -84,13 +79,13 @@ def user_page(request):
         try:
             print("it is working 2")
             #obtainning back the user emergency contact infos
-            user_data_response = requests.get("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user-data", params = {"AccessToken": auth['AccessToken']}, headers = {"Authorization": auth["token"]})
+            user_data_response = requests.get("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user/data", params = {"AccessToken": auth['AccessToken']}, headers = {"Authorization": auth["token"]})
             print(user_data_response)
         except Exception as e:
             return render( request, 'frontend/user_page.html', {'message': ERROR_OBTAIN_DATA})
         try:
             #obtainning back the graph/situps/sitdown etc data
-            User_Analytics = requests.get("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/device-user-data", params = {"AccessToken": auth['AccessToken'], "position":"situp"} , headers = {"Authorization": auth["token"]})
+            User_Analytics = requests.get("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/device/analytics", params = {"AccessToken": auth['AccessToken'], "position":"situp"} , headers = {"Authorization": auth["token"]})
         except Exception as e:
             return render( request, 'frontend/user_page.html', {'message': ERROR_OBTAIN_DATA})
         print(User_Analytics.content)
@@ -107,16 +102,18 @@ def user_page(request):
                 analytics = user_analytics_response['userData']
                 print(analytics)
                 if analytics and analytics is not 'not set' and analytics != "situp" and analytics != "fall":
-                    userAnalytics = analytics.split(' , ')
-                    print(userAnalytics[1:])
+                    userAnalytics = analytics
+                    print(userAnalytics)
                     userDataList = {}
-                    for i in userAnalytics[1:]:
+                    for i in userAnalytics:
                         userDatas = i.split(' ')
                         if userDatas[0] in userDataList:
                             userDataList[userDatas[0]].append(userDatas[1])
                         else:
                             userDataList[userDatas[0]] = [userDatas[1]]
                             print(userDataList)
+                analytics = ' , '.join(analytics)
+                print(analytics)
                 content = user_data_response['emergency_contacts']
                 print(content)
                 if request.method == 'GET':
@@ -131,21 +128,21 @@ def user_page(request):
 """
                         return render(request, 'frontend/user_page.html', {'message': 'contact saved',
                         'usersname': usersname,
-                        'name': content['name'],
-                        'name2': content['name2'],
-                        'name3': content['name3'],
-                        'name4': content['name4'],
-                        'name5': content['name5'],
-                        'number': content['number'],
-                        'number2': content['number2'],
-                        'number3': content['number3'],
-                        'number4': content['number4'],
-                        'number5': content['number5'],
-                        'relationship':content['relationship'],
-                        'relationship2':content['relationship2'],
-                        'relationship3':content['relationship3'],
-                        'relationship4':content['relationship4'],
-                        'relationship5':content['relationship5'],
+                        'name': content['contact1']['name'],
+                        'name2': content['contact2']['name'],
+                        'name3': content['contact3']['name'],
+                        'name4': content['contact4']['name'],
+                        'name5': content['contact5']['name'],
+                        'number': content['contact1']['number'],
+                        'number2': content['contact2']['number'],
+                        'number3': content['contact3']['number'],
+                        'number4': content['contact4']['number'],
+                        'number5': content['contact5']['number'],
+                        'relationship':content['contact1']['relationship'],
+                        'relationship2':content['contact2']['relationship'],
+                        'relationship3':content['contact3']['relationship'],
+                        'relationship4':content['contact4']['relationship'],
+                        'relationship5':content['contact5']['relationship'],
                         'user_analytcs': analytics
                         })
                 f = emergencyContactForm(request.POST)
@@ -178,9 +175,14 @@ def user_page(request):
                     relationship5 = f.cleaned_data['Relationship5'] or 'not set'
 
                     try:
-                        emergency_contact_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user-data", json.dumps({ "httpMethod": 'POST', "AccessToken": auth['AccessToken'], "emergencyContacts": {"name":name, "name2":name2, "name3":name3,"name4":name4, "name5":name5,
-                         "number":number, "number2":number2, "number3":number3,"number4":number4, "number5":number5,
-                         "relationship":relationship, "relationship2":relationship2, "relationship3":relationship3, "relationship4":relationship4, "relationship5":relationship5}}), headers = {"Authorization": auth["token"]})
+                        emergency_json = { "httpMethod": 'POST',
+                        "AccessToken": auth['AccessToken'],
+                        "emergencyContacts": {"contact1":{"name":name, "number":number, "relationship":relationship},
+                        "contact2":{"name":name2, "number":number2, "relationship":relationship2},
+                        "contact3":{"name":name3, "number":number3, "relationship":relationship3},
+                        "contact4":{"name":name4, "number":number4, "relationship":relationship4},
+                        "contact5":{"name":name5, "number":number5, "relationship":relationship5}}}
+                        emergency_contact_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user/data", json.dumps(emergency_json), headers = {"Authorization": auth["token"]})
                     except Exception as e:
                         print(e)
                         return render( request, 'frontend/user_page.html', {'message': ERROR_OBTAIN_EMERGENCY_SEND})
@@ -213,14 +215,14 @@ def user_page(request):
                     return render(request, 'frontend/user_page.html', {'message': ERROR_FILL_OUT})
         else: #gets a new token using the refreshToken
             try:
-                refresh_token_response = requests.get("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential",  params = { "process": 'get_new_token', "RefreshToken": auth["RefreshToken"]})
+                refresh_token_response = requests.get("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user/credential",  params = { "process": 'get_new_token', "RefreshToken": auth["RefreshToken"]})
             except Exception as e:
                 print("shouldn't be here")
                 #failed to obtain the refreshtoken -> go back to login
                 fail_page = HttpResponseRedirect(reverse('login'))
                 fail_page.delete_cookie("auth")
                 try:
-                    delete = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential",json.dumps({ "process":'logout',"email":auth["email"]}))
+                    delete = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user/credential",json.dumps({ "process":'logout',"username":auth["usersname"]}))
                 except Exception as e:
                     print(e)
                 return fail_page
@@ -236,7 +238,7 @@ def user_page(request):
                 fail_page = HttpResponseRedirect(reverse('login'))
                 fail_page.delete_cookie("auth")
                 try:
-                    delete = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential",json.dumps({ "process":'logout',"email":auth["email"]}))
+                    delete = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user/credential",json.dumps({ "process":'logout',"username":auth["usersname"]}))
                 except Exception as e:
                     print(e)
                 return fail_page
@@ -258,7 +260,7 @@ def login(request):
         username = f.cleaned_data['username']
         password = f.cleaned_data['password']
         try:
-            user_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential", json.dumps({ "process": 'authenticate', "username": username,"password": password}))
+            user_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user/credential", json.dumps({ "process": 'authenticate', "username": username,"password": password}))
         except Exception as e:
             request.session['errorMessage'] = e
             return HttpResponseRedirect(reverse('index'))
@@ -284,7 +286,7 @@ def login(request):
                 request.session['errorMessage'] = user_response['errorMessage']
             return HttpResponseRedirect(reverse('index'))
     else:
-        request.session['errorMessage'] = 'email or Password is wrong'
+        request.session['errorMessage'] = 'Username or Password is wrong'
         return HttpResponseRedirect(reverse('index'))
 
 
@@ -302,7 +304,7 @@ def register(request):
     f = RegisterForm(request.POST)
     if f.is_valid():
         print("I am here in the valid form")
-        email = f.cleaned_data['email']
+        #email = f.cleaned_data['email']
         password = f.cleaned_data['password']
         username = f.cleaned_data['username']
         confirm_password = f.cleaned_data['confirm_password']
@@ -323,16 +325,16 @@ def register(request):
             print(device_reponse)
             #ip_address = device_reponse['IP']"""
         try:
-            register_response=requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential",json.dumps({"process": "register","email": email, "password":password , "username":username}))
+            register_response=requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user/credential",json.dumps({"process": "register", "password":password , "username":username}))
         except Exception as e:
             request.session['errorMessage'] = e
             return HttpResponseRedirect(reverse('index'))
         register_response = json.loads(register_response.content)
         if 'status' in register_response and register_response['status'] == 'Success':
             print("registered")
-            request.session['errorMessage'] = "verify your email"
+            request.session['errorMessage'] = "Please wait couple days for your account be to approved"
         elif 'status' in register_response and 'msg' in register_response and register_response['msg'] == ERROR_USEREXISTS:
-            request.session['errorMessage'] = ERROR_USEREXISTS + ' with the same email'
+            request.session['errorMessage'] = ERROR_USEREXISTS + ' with the same username'
         else:
             request.session['errorMessage'] = ERROR_SIGNUP
 
@@ -359,7 +361,7 @@ def logout(request):
         except:
             return login_page
         try:
-            delete = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential",json.dumps({ "process":'logout',"username":username}))
+            delete = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user/credential",json.dumps({ "process":'logout',"username":username}))
         except Exception as e:
             print(e)
         return login_page
@@ -372,14 +374,15 @@ def forgot_password(request):
     if request.method == 'GET':
         request.session['errorMessage'] = ' '
         return HttpResponseRedirect(reverse('index'))
-    f = forgotPasswordForm(request.POST)
+    request.session['errorMessage'] = "Please contact contact@mercuryhealth.us to change your password"
+    """f = forgotPasswordForm(request.POST)
     if f.is_valid():
-        email = f.cleaned_data['email']
+        #email = f.cleaned_data['email']
         print("inside the forgot password")
         print(email)
         #TODO try and catch
         try:
-            forgot_password_response=requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential",json.dumps({"process": "forgot_password", "email":email}))
+            forgot_password_response=requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user/credential",json.dumps({"process": "forgot_password", "email":email}))
         except Exception as e:
             request.session['errorMessage'] = ERROR_SIGNUP
             return HttpResponseRedirect(reverse('index'))
@@ -392,6 +395,7 @@ def forgot_password(request):
             request.session['errorMessage'] = ERROR_SIGNUP
     else:
         request.session['errorMessage'] = "Make sure the email is correct"
+    """
     return HttpResponseRedirect(reverse('index'))
 
 def reset_password(request):
@@ -400,13 +404,14 @@ def reset_password(request):
     if request.method == 'GET':
         request.session['errorMessage'] = 'not set'
         return HttpResponseRedirect(reverse('index'))
-    f = resetPasswordForm(request.POST)
+    request.session['errorMessage'] = "Please contact contact@mercuryhealth.us to change your password"
+    """f = resetPasswordForm(request.POST)
     if f.is_valid():
         email = f.cleaned_data['email']
         confirmationCode = f.cleaned_data['confirmationCode']
         newPassword = f.cleaned_data['newPassword']
         try:
-            reset_password_response=requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/credential",json.dumps({"process": "confirm_forgot_password", "confirmationCode":confirmationCode, "newPassword": newPassword, "email":email}))
+            reset_password_response=requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user/credential",json.dumps({"process": "confirm_forgot_password", "confirmationCode":confirmationCode, "newPassword": newPassword, "email":email}))
         except Exception as e:
             request.session['errorMessage'] = ERROR_SIGNUP
             return HttpResponseRedirect(reverse('index'))
@@ -417,5 +422,5 @@ def reset_password(request):
             print("i have failed")
             request.session['errorMessage'] = ERROR_SIGNUP
     else:
-        request.session['errorMessage'] = ERROR_FILL_OUT
+        request.session['errorMessage'] = ERROR_FILL_OUT"""
     return HttpResponseRedirect(reverse('index'))
