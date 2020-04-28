@@ -429,7 +429,7 @@
       var i;
 
       // Reformat data from database and store in userDataList
-      var userAnalytics = "{{user_analytcs}}".split(' , ');
+      var userAnalytics = "{{user_analytcs}}".split(' , ').slice(1);
       var userDataList = new Object();
       for (i in userAnalytics){
         userDatas = userAnalytics[i].split(' ');
