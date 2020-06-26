@@ -61,8 +61,9 @@ def beta(request):
     auth = request.COOKIES.get('auth')
     if request.method == "GET":
         return render(request, 'frontend/beta.html', {'auth': auth, 'errorMessage': None})
-    if request.COOKIES.get('register_count') != '':
-        count = request.COOKIES.get('register_count')
+    if request.COOKIES.get('beta_count') != None:
+        print(request.COOKIES.get('beta_count'))
+        count = int(request.COOKIES.get('beta_count'))
         if count == 5:
             return render(request, 'frontend/beta.html', {'auth': auth, 'errorMessage': 'You have registered too many times!'})
     f = BetaForm(request.POST)
@@ -74,12 +75,11 @@ def beta(request):
         short_answer1 = f.cleaned_data['short_answer1']
         short_answer2 = f.cleaned_data['short_answer2']
         short_answer3 = f.cleaned_data['short_answer3']
-        print("1")
-        print(first_name, last_name, email, phone_number, short_answer1)
+        bd= { "process": 'register_beta_tester', "first_name": first_name,"last_name": last_name, "email": email, "phone_number": phone_number, "short_answer1": short_answer1, "short_answer2": short_answer2, "short_answer3": short_answer3} 
+        bd = json.dumps(dict(bd))
         try:
-            beta_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/register-beta", json.dumps(dict({ "process": 'register_beta_tester', "first_name": first_name,"last_name": last_name, "email": email, "phone_number": phone_number, "short_answer1": short_answer1, "short_answer2": short_answer2, "short_answer3": short_answer3})), headers = {"Authorization": auth["token"]})
-
-            print(beta_response)
+            beta_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/register-beta",   bd)  
+            print(beta_response.content)
         except Exception as e:
             print(e)
             request.session['errorMessage'] = e
@@ -87,12 +87,13 @@ def beta(request):
         beta_response = json.loads(beta_response.content)
         if 'status' in beta_response and beta_response['status'] == 'Success':
             beta = HttpResponseRedirect(reverse('beta'))
-            if request.COOKIES.get('register_count') != '':
-                count = request.COOKIES.get('register_count')
-                beta_data = {'register_count': count + 1}
+            if request.COOKIES.get('beta_count') != None:
+                print(request.COOKIES.get('beta_count'))
+                count = int(request.COOKIES.get('beta_count'))
+                beta_data = str(count+1)
             else:
-                beta_data = {'register_count': 1}
-            beta.set_cookie('auth', beta_data)
+                beta_data = "1"
+            beta.set_cookie('beta_count', beta_data)
             return beta
     return HttpResponseRedirect(reverse('beta'))
 
