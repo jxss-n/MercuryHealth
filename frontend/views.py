@@ -53,6 +53,49 @@ def verify(request):
     auth = request.COOKIES.get('auth')
     return render(request, 'frontend/verify.html')
 
+def faq(request):
+    auth = request.COOKIES.get('auth')
+    return render(request, 'frontend/faq.html', {'auth': auth, 'errorMessage': None})
+
+def beta(request):
+    auth = request.COOKIES.get('auth')
+    if request.method == "GET":
+        return render(request, 'frontend/beta.html', {'auth': auth, 'errorMessage': None})
+    if request.COOKIES.get('register_count') != '':
+        count = request.COOKIES.get('register_count')
+        if count == 5:
+            return render(request, 'frontend/beta.html', {'auth': auth, 'errorMessage': 'You have registered too many times!'})
+    f = BetaForm(request.POST)
+    if f.is_valid():
+        first_name = f.cleaned_data['first_name']
+        last_name = f.cleaned_data['last_name']
+        email = f.cleaned_data['email']
+        phone_number = f.cleaned_data['phone_number']
+        short_answer1 = f.cleaned_data['short_answer1']
+        short_answer2 = f.cleaned_data['short_answer2']
+        short_answer3 = f.cleaned_data['short_answer3']
+        print("1")
+        print(first_name, last_name, email, phone_number, short_answer1)
+        try:
+            beta_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/register-beta", json.dumps(dict({ "process": 'register_beta_tester', "first_name": first_name,"last_name": last_name, "email": email, "phone_number": phone_number, "short_answer1": short_answer1, "short_answer2": short_answer2, "short_answer3": short_answer3})), headers = {"Authorization": auth["token"]})
+
+            print(beta_response)
+        except Exception as e:
+            print(e)
+            request.session['errorMessage'] = e
+            return HttpResponseRedirect(reverse('beta'))
+        beta_response = json.loads(beta_response.content)
+        if 'status' in beta_response and beta_response['status'] == 'Success':
+            beta = HttpResponseRedirect(reverse('beta'))
+            if request.COOKIES.get('register_count') != '':
+                count = request.COOKIES.get('register_count')
+                beta_data = {'register_count': count + 1}
+            else:
+                beta_data = {'register_count': 1}
+            beta.set_cookie('auth', beta_data)
+            return beta
+    return HttpResponseRedirect(reverse('beta'))
+
 #Routing to the userpage
 def user_page(request):
     #use the comma to set a default auth variable

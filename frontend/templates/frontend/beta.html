@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+      <link rel="stylesheet" href="../../static/frontend/icon-font.css">
+      <link rel="stylesheet" href="../../static/frontend/base.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151443853-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-151443853-1');
+      </script>
+
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-P5MPMT8');</script>
+      <!-- End Google Tag Manager -->
+
+      <title>Beta Testing | Mercury Health</title>
+  </head>
+
+  <body>
+    <nav class="nav">
+        <div class="nav__tab" id="nav">
+            <div class="nav__logo"><a href="http://www.mercuryhealth.us/" class="nav__faq--link nav__link">Mercury Health</a></div>
+            <div class="nav__navigation">
+                <span class="nav__beta"><a href="http://www.mercuryhealth.us/beta/" class="nav__beta--link nav__link">beta</a></span>
+                <span class="nav__faq"><a href="http://www.mercuryhealth.us/faq/" class="nav__faq--link nav__link">faq</a></span>
+                <span class="nav__contact"><a href="http://www.mercuryhealth.us/#footer" class="nav__contact--link nav__link">contact us</a></span>
+                <span class="nav__signup"><a href="http://www.mercuryhealth.us/#signup" class="nav__signup--link nav__link">signup</a></span>
+                <span class="nav__login"><a href="http://www.mercuryhealth.us/#login" class="nav__login--link nav__link">login</a></span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="beta">
+      <div class="main-head" style="top:30% !important;">
+        <h1 class="main-head__content margin-bottom-small">
+            <span class="main-head__content--title">Beta Testing</span>
+        </h1>
+        <hr class="headerline">
+      </div>
+    </header>
+
+    <section class="questionnaire">
+      <form action="" method="post">
+        {% csrf_token %}
+        <h4>Question 1:</h4>
+        <input id="short_answer1" name="short_answer1" type="text" placeholder="Answer here">
+        <!--<input id="q1a" type="radio"><label for="q1a">Answer 1</label>
+        <input id="q1b" type="radio"><label for="q1b">Answer 1</label>
+        <input id="q1c" type="radio"><label for="q1c">Answer 1</label>
+        <input id="q1d" type="radio"><label for="q1d">Answer 1</label>-->
+        <h4>Question 2:</h4>
+        <input id="short_answer2" name="short_answer2" type="text" placeholder="Answer here">
+        <!--<input id="q2a" type="radio"><label for="q2a">Answer 1</label>
+        <input id="q2b" type="radio"><label for="q2b">Answer 1</label>
+        <input id="q2c" type="radio"><label for="q2c">Answer 1</label>
+        <input id="q2d" type="radio"><label for="q2d">Answer 1</label>-->
+        <h4>Question 3:</h4>
+        <input id="short_answer3" name="short_answer3" type="text" placeholder="Answer here">
+        <div class="joinbeta">
+          <h3>Join the beta for Mercury home.</h3>
+          <input id="first_name" name="first_name" type="text" placeholder="First Name">
+          <input id="last_name" name="last_name" type="text" placeholder="Last Name"><br>
+          <input id="phone_number" name="phone_number" type="text" placeholder="Phone Number">
+          <input id="email" name="email" type="email" placeholder="Email Address">
+          <input id="signupBeta" type="submit">
+        </div>
+      </form>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>

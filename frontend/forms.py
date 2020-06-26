@@ -3,6 +3,15 @@ import datetime
 from django.utils import timezone
 
 
+class BetaForm(forms.Form):
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    email = forms.CharField(required=True)
+    phone_number = forms.CharField(required=True)
+    short_answer1 = forms.CharField(required=True)
+    short_answer2 = forms.CharField(required=True)
+    short_answer3 = forms.CharField(required=True)
+
 class LoginForm(forms.Form):
     username = forms.CharField(required=True)
     password = forms.CharField(required=True, widget=forms.PasswordInput)
