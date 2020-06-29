@@ -364,7 +364,6 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
   clip-path: polygon(0 0, 100% 0, 100% 65%, 50% 100%, 0 65%);*/
   clip-path: polygon(100% 0, 100% 67%, 50% 50%, 0 67%, 0 0);
   position: relative;
-  z-index: -1;
 }
 
 .beta::after {
