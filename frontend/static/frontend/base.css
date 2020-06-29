@@ -270,12 +270,24 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
   height: 100%;
 }
 
+
+.active-text {
+  font-weight: bold;
+  color: #FFF !important;
+}
+
+.required {
+  font-size: 1.25rem;
+  color: red;
+}
+
 .sign-upbtn {
   background-color: #094664;
   padding: 1rem 7rem;
   border-radius: 5px;
   text-decoration: none;
   color: #FFF;
+  border: 1px solid #094664;
   font-size: 1.5rem;
   margin: 2rem 0;
   display: inline-block;
@@ -284,6 +296,26 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
 .sign-upbtn:hover {
   background-color: #FFF;
   color: #094664;
+  border: 1px solid #094664;
+  text-decoration: none;
+  transition: all 250ms ease;
+}
+
+.sign-upbtnr {
+  background-color: #FFF;
+  padding: 1rem 7rem;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #094664;
+  font-size: 1.5rem;
+  margin: 2rem 0;
+  border: 1px solid #FFF;
+  display: inline-block;
+}
+
+.sign-upbtnr:hover {
+  background-color: #094664;
+  color: #FFF;
   border: 1px solid #094664;
   text-decoration: none;
   transition: all 250ms ease;
@@ -337,7 +369,7 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
 
 .beta::after {
   content: "";
-  background-image: linear-gradient(to right bottom, rgba(48, 198, 250, 0.4), rgba(38, 94, 150, 0.2));
+  background-color: #8DB4C7;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -354,22 +386,101 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
   margin:auto;
   width: 80vw;
   padding: 2rem 5rem;
+  margin-top: 4rem;
+  margin-bottom: 7rem;
 }
 
-.joinbeta {
+.questionnaire h3 {
   text-align:center;
+  color: #094664;
+  font-size: 2.5rem;
+  display: block;
   margin:auto;
+  background-color: #E7F4FC;
+  padding: 1.5rem 15%;
+}
+.questionnaire h4 {
+  font-size: 2rem;
+  margin-top:3rem;
+}
+
+.questionnaire label {
+  font-size: 1.5rem;
+  padding-left: 1rem;
+  margin:0;
+}
+
+.questionnaire input[type="checkbox"] {
+  vertical-align: bottom;
+}
+
+.questionnaire input[name="short_answer5"] {
+  width: 95%;
+  font-size: 1.5rem;
+}
+
+.questionnaire input[type="checkbox"][name="short_answer2"] {
+  margin-bottom: 1.4rem;
+}
+
+.questionnaire div.q2row label, div.q2 label {
+  margin-bottom: 1rem;
+}
+
+.questionnaire input[type="text"][name="short_answer2"] {
+  width: 30vw;
+}
+
+#q1 div.col-md, div.q3, div.q4 {
+  display: flex;
+  align-items: center;
+}
+
+.questionnaire div.row, div.q2, div.q3, div.q5, .questionnaire input[name="short_answer4"]{
+  margin-left: 1rem;
+}
+
+.joinbeta h3 {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.joinbeta input[type="text"], .joinbeta input[type="email"] {
+  width: 25%;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.joinbeta input[type="submit"] {
+  background-color: #094664;
+  color: #FFF;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border:none;
+  display: block;
+  margin:auto;
+  border-radius: 5px;
+  border: solid #094664 1px;
+  margin-top: 2rem;
+  padding: 0.75rem 2rem;
+  transition: all 250ms ease;
+}
+
+.joinbeta input[type="submit"]:hover {
+  background-color: #FFF;
+  border: solid #094664 1px;
+  color: #094664;
+}
+
+.betaBlurb {
+  font-size: 2rem;
+  border-radius: 5px;
+  margin-top: -40vh;
+  padding: 2rem;
 }
 
 #shortAnswer {
   width: 100%;
-}
-
-#signupBeta {
-  background-color: #094664;
-  color: white;
-  font-weight: bold;
-  
 }
 
 .faq {
@@ -402,16 +513,6 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
   margin-top: -50vh;
   background-color: white;
   box-shadow: 5px 10px 18px #888888;
-/*
-  width: 75vw;
-  padding: 2rem;
-  margin: auto;
-  background-color: white;
-  box-shadow: 5px 10px 18px #888888;
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);*/
 }
 .header2 {
   height: 120vh;
