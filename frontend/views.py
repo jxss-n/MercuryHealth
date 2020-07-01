@@ -66,25 +66,17 @@ def beta(request):
         count = int(request.COOKIES.get('beta_count'))
         if count == 5:
             return render(request, 'frontend/beta.html', {'auth': auth, 'errorMessage': 'You have registered too many times!'})
-    f = BetaForm(request.POST)
     params = dict(request.POST)
     del params['csrfmiddlewaretoken']
     print(params)
-# if f.is_valid():
-#     first_name = f.cleaned_data['first_name']
-#     last_name = f.cleaned_data['last_name']
-#     email = f.cleaned_data['email']
-#     phone_number = f.cleaned_data['phone_number']
-#     q1 = f.cleaned_data['q1']
-#     q2 = f.cleaned_data['q2']
-#     q3 = f.cleaned_data['q3']
-#     #q4 = f.cleaned_data['q4']
-#     q5 = f.cleaned_data['q5']
-    #bd= { "process": 'register_beta_tester', "first_name": first_name,"last_name": last_name, "email": email, "phone_number": phone_number, 'q1':q1, 'q2':q2, 'q3':q3,  'q5':q5}
+    params['process'] = 'register_beta_tester'
+    for key in params.keys():
+        params[key] = str(params[key])
     try:
         beta_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/register-beta",   json.dumps(dict(params)))  
         print(beta_response.content)
     except Exception as e:
+        print('ERROR')
         print(e)
         request.session['errorMessage'] = e
         return HttpResponseRedirect(reverse('beta'))
