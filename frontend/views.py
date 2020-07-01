@@ -67,34 +67,38 @@ def beta(request):
         if count == 5:
             return render(request, 'frontend/beta.html', {'auth': auth, 'errorMessage': 'You have registered too many times!'})
     f = BetaForm(request.POST)
-    if f.is_valid():
-        first_name = f.cleaned_data['first_name']
-        last_name = f.cleaned_data['last_name']
-        email = f.cleaned_data['email']
-        phone_number = f.cleaned_data['phone_number']
-        short_answer1 = f.cleaned_data['short_answer1']
-        short_answer2 = f.cleaned_data['short_answer2']
-        short_answer3 = f.cleaned_data['short_answer3']
-        bd= { "process": 'register_beta_tester', "first_name": first_name,"last_name": last_name, "email": email, "phone_number": phone_number, "short_answer1": short_answer1, "short_answer2": short_answer2, "short_answer3": short_answer3} 
-        bd = json.dumps(dict(bd))
-        try:
-            beta_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/register-beta",   bd)  
-            print(beta_response.content)
-        except Exception as e:
-            print(e)
-            request.session['errorMessage'] = e
-            return HttpResponseRedirect(reverse('beta'))
-        beta_response = json.loads(beta_response.content)
-        if 'status' in beta_response and beta_response['status'] == 'Success':
-            beta = HttpResponseRedirect(reverse('beta'))
-            if request.COOKIES.get('beta_count') != None:
-                print(request.COOKIES.get('beta_count'))
-                count = int(request.COOKIES.get('beta_count'))
-                beta_data = str(count+1)
-            else:
-                beta_data = "1"
-            beta.set_cookie('beta_count', beta_data)
-            return beta
+    params = dict(request.POST)
+    del params['csrfmiddlewaretoken']
+    print(params)
+# if f.is_valid():
+#     first_name = f.cleaned_data['first_name']
+#     last_name = f.cleaned_data['last_name']
+#     email = f.cleaned_data['email']
+#     phone_number = f.cleaned_data['phone_number']
+#     q1 = f.cleaned_data['q1']
+#     q2 = f.cleaned_data['q2']
+#     q3 = f.cleaned_data['q3']
+#     #q4 = f.cleaned_data['q4']
+#     q5 = f.cleaned_data['q5']
+    #bd= { "process": 'register_beta_tester', "first_name": first_name,"last_name": last_name, "email": email, "phone_number": phone_number, 'q1':q1, 'q2':q2, 'q3':q3,  'q5':q5}
+    try:
+        beta_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/register-beta",   json.dumps(dict(params)))  
+        print(beta_response.content)
+    except Exception as e:
+        print(e)
+        request.session['errorMessage'] = e
+        return HttpResponseRedirect(reverse('beta'))
+    beta_response = json.loads(beta_response.content)
+    if 'status' in beta_response and beta_response['status'] == 'Success':
+        beta = HttpResponseRedirect(reverse('beta'))
+        if request.COOKIES.get('beta_count') != None:
+            print(request.COOKIES.get('beta_count'))
+            count = int(request.COOKIES.get('beta_count'))
+            beta_data = str(count+1)
+        else:
+            beta_data = "1"
+        beta.set_cookie('beta_count', beta_data)
+        return beta
     return HttpResponseRedirect(reverse('beta'))
 
 #Routing to the userpage
