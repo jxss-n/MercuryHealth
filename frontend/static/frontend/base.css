@@ -413,12 +413,12 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
   vertical-align: bottom;
 }
 
-.questionnaire input[name="short_answer5"] {
+.questionnaire input[name="q5"] {
   width: 95%;
   font-size: 1.5rem;
 }
 
-.questionnaire input[type="checkbox"][name="short_answer2"] {
+.questionnaire div.q2row input[type="checkbox"], .questionnaire div.q2 input[type="checkbox"] {
   margin-bottom: 1.4rem;
 }
 
@@ -426,7 +426,7 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
   margin-bottom: 1rem;
 }
 
-.questionnaire input[type="text"][name="short_answer2"] {
+.questionnaire input[type="text"][name="q2"] {
   width: 30vw;
 }
 
@@ -435,7 +435,7 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
   align-items: center;
 }
 
-.questionnaire div.row, div.q2, div.q3, div.q5, .questionnaire input[name="short_answer4"]{
+.questionnaire div.row, div.q2, div.q3, div.q5, .questionnaire input[name="q4"]{
   margin-left: 1rem;
 }
 
