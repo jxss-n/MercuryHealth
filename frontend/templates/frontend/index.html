@@ -30,24 +30,6 @@
       <h1 class="main-head__content--subtitle margin-top-small">Introducing <i>Mercury Home.</i></h1>
       <h2 class="main-head__content--caption margin-bottom-small">A hands-free medical alert system installed at home to detect and respond to emergency situations.</h2>
       <a class="sign-upbtnr" href="/beta">SIGN UP TO TRY OUR DEVICE FOR FREE</a>
-
-      <!-- Begin Mailchimp Signup Form
-      <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
-      <div id="mc_embed_signup">
-         <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
-        <form action="https://gmail.us5.list-manage.com/subscribe/post?u=0229c56d721f5c18955cdbe93&amp;id=59eeec2683" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="hiddenFrame" novalidate>
-           <div id="mc_embed_signup_scroll">
-              <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-              <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups
-              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_0229c56d721f5c18955cdbe93_59eeec2683" tabindex="-1" value=""></div>
-              <div style="margin-top: 1rem;"><input type="submit" value="STAY UPDATED!" name="subscribe" id="mc-embedded-subscribe" class="button subscribe-btn" style="width:350px;"></div>
-           </div>
-        </form>
-      </div>
-      <!--End mc_embed_signup-->
-      <!--<button type="button" class="btn-primary video-btn zoom" data-toggle="modal" data-target="#myModal">
-        WATCH VIDEO
-      </button>-->
     </div>
   </header>
 {% endblock %}
@@ -77,47 +59,26 @@
 
 {% if errorMessage != None and cred == 'faq'%}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#faq";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#faq";
+    //window.location.href="http://" + window.location.hostname + "/#faq";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#faq";
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'forgot-password'%}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#forgot-password";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#forgot-password";
+    //window.location.href="http://" + window.location.hostname + "/#forgot-password";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#forgot-password";
 </script>
 {% endif %}
 
 {% if errorMessage != None and cred == 'reset_password'%}
 <script>
-    window.location.href="http://" + window.location.hostname + "/#reset-password";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#reset-password";
+    //window.location.href="http://" + window.location.hostname + "/#reset-password";
+    window.location.href="http://" + "127.0.0.1:8000" + "/#reset-password";
 </script>
 {% endif %}
 
   <main>
-
-      <!-- VIDEO MODAL -->
-      <div class="modal fade centered-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="width: 100vw;">
-        <div class="modal-dialog modal-lg .modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <div style="display:table-cell; vertical-align:middle; width:100vw; height: 50vh;">
-                <h1 style="text-align:center;">Coming Soon</h1>
-              </div>
-              <!-- 16:9 aspect ratio
-              <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/4_7bPNQxp1o" id="video" allowscriptaccess="always" ></iframe>
-              </div>-->
-            </div>
-          </div>
-        </div>
-      </div>
-
       <section class="invertBackground">
         <h2 class="heading-secondary margin-bottom-small margin-top-small">
           What We Do
@@ -126,7 +87,7 @@
           <iframe width="560" height="315" src="https://www.youtube.com/embed/AAZc5gjYW-E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <h3>Interested in learning more or staying connected?</h3>
-        <!--<p style="font-size: 1.25rem; margin-bottom: 2rem;">Stay in the loop with email updates about our product, launches, and future beta testing.</p>-->
+        <!--<p style="font-size: 1.25rem; margin-bottom: 2rem;">Join the community of families and carers working together with Mercury Health to provide the best care for loved ones, while maintaining a peace of mind. </p>-->
         <a class="sign-upbtn" href="/beta">SIGN UP FOR OUR FREE BETA TEST</a>
       </section>
 
@@ -155,7 +116,6 @@
           </div>
 
           <div class="row flex-sm-row-reverse" style="background-color: #E7F4FC">
-
             <div class="col-sm-4 vertical-align">
               <div>
                 <h1 class="header-3" style="color: #265e96 !important;">Encourage independence.</h1>
@@ -184,41 +144,8 @@
             </div>
           </div>
         </div>
-
       </section>
 
-      <!-- OUR DEVICE
-      <section>
-        <div class="container" style="border: solid black thin; width: 87vw; margin-top: 3rem; margin-bottom: 3rem;">
-          <div class="row">
-            <div class="col" style="margin:auto; text-align:center;">
-              <a href="#myModal" role="button" data-toggle="modal" aria-label="View Video">
-                <img class="zoom" src="../../static/img/device.png" width="300vw" alt="mercury device">
-              </a>
-            </div>
-            <div class="col" style="padding-bottom: 3rem;">
-              <h2 class="heading-secondary margin-bottom-small margin-top-small">
-                Our Device
-              </h2>
-              <p class="para-about">
-                <i class="fas fa-wifi"></i><b>Wifi Streaming</b><br>
-                  Wifi is used to stream optical sensor data captured from your home to our secure servers.<br><br>
-                <i class="fas fa-network-wired"></i><b> Deep Learning Visual Recognition Models</b><br>
-                 The servers apply custom, proprietary Deep Learning Visual Recognition Models to analyze optical sensor
-                 data received. These algorithms look for specific person movements, similar to a person monitoring
-                 a surveillance camera.<br><br>
-                <i class="fas fa-exclamation-circle"></i><b>  Incident Detection</b><br>
-                 If our algorithms detect an incident, servers instantly text all registered
-                 emergency contacts and ensure help is on the way.<br><br>
-                <i class="fas fa-address-card"></i><b>  Activity Logging</b><br>
-                 Meanwhile your personal online profile is updated
-                 with the incident, so we can track long term patterns and help prevent future occurrences.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      -->
       <!-- HOW IT WORKS -->
       <section class="features margin-top-small">
         <div class="center-text margin-bottom-8">
@@ -246,14 +173,10 @@
         </div>
       </section>
 
-
       <!-- AWARDS -->
       <section style="margin-bottom: 6rem;">
         <div class="container center-text">
-          <h2 class="heading-secondary margin-bottom-small" style="margin-top: 5rem;">
-            Awards & Recognition
-          </h2>
-
+          <h2 class="heading-secondary margin-bottom-small" style="margin-top: 5rem;">Awards & Recognition</h2>
           <div class="row" style="text-align:center;">
             <div class="col">
               <p class="award_text"><b>1st place</b> at <i>US Microsoft Imagine Cup 2015</i></p>
@@ -274,9 +197,7 @@
 
       <section style="background-color: #E7F4FC;">
         <div class="center-text margin-bottom-8">
-          <h2 class="heading-secondary margin-bottom-small" style="margin-top: 5rem; margin-bottom: 5rem !important;">
-            Our Team
-          </h2>
+          <h2 class="heading-secondary margin-bottom-small" style="margin-top: 5rem; margin-bottom: 5rem !important;">Our Team</h2>
         </div>
         <div class="container">
           <div class="row">
@@ -399,7 +320,6 @@
   </main>
 
   <footer class="footer" id="footer" name="footer">
-      <!--End mc_embed_signup-->
     <div class="row">
       <div class="col-2" style="text-align:center;">
         <p></p>
@@ -407,7 +327,8 @@
 
       <div class="col-4" style="display:inline-block;">
         <p><strong>MERCURY HEALTH</strong></p>
-        <!--<a href="/faq" class="footer__link">faq</a>-->
+        <a href="/beta" class="footer__link">beta</a>
+        <a href="/faq" class="footer__link">faq</a>
         <a href="#signup" class="footer__link">signup</a>
         <a href="#login" class="footer__link">login</a>
       </div>
@@ -435,25 +356,19 @@
           <div class="book">
             <div class="book__form">
                 <div class="margin-bottom-medium form">
-                  <h2 class="heading-secondary">
-                    Login
-                  </h2>
+                  <h2 class="heading-secondary">Login</h2>
                 </div>
                 <form action="/login/" class="form" method="post">
-
-                {% csrf_token %}
-                <div class="form__group form__text">
-                {% if errorMessage != None and cred == 'login'%}
-
-                <font color="red">{{ errorMessage }}</font>
-                {% endif %}
-
-                </div>
-
-                <div class="form__group">
-                  <input type="text" name="username" class="form__input" placeholder="Username" id="username" required>
-                  <label for="username" class="form__label">Username</label>
-              </div>
+                  {% csrf_token %}
+                  <div class="form__group form__text">
+                    {% if errorMessage != None and cred == 'login'%}
+                      <font color="red">{{ errorMessage }}</font>
+                    {% endif %}
+                  </div>
+                  <div class="form__group">
+                    <input type="text" name="username" class="form__input" placeholder="Username" id="username" required>
+                    <label for="username" class="form__label">Username</label>
+                  </div>
                   <div class="form__group">
                     <input type="password" name = "password" class="form__input" placeholder="password" id="id_password" required>
                     <label for="id_password" class="form__label">Password</label>
@@ -476,18 +391,13 @@
           <div class="book">
             <div class="book__form">
                 <div class="margin-bottom-medium form">
-                  <h2 class="heading-secondary">
-                    Forgot Password
-                  </h2>
+                  <h2 class="heading-secondary">Forgot Password</h2>
                 </div>
                 <form action="/forgot_password/" class="form" method="post">
                     {% csrf_token %}
                     <div class="form__group form__text">
                         <font color="red">Please email <strong>contact@mercuryhealth.us</strong> to change your password</font>
                     </div>
-                  <!--<div class="form__group">
-                      <input type="submit" class="btn--input btn btn--green" value="Submit" />
-                  </div>-->
               </form>
             </div>
           </div>
@@ -500,9 +410,7 @@
           <div class="book">
             <div class="book__form">
                 <div class="margin-bottom-medium form">
-                  <h2 class="heading-secondary">
-                      reset-password
-                  </h2>
+                  <h2 class="heading-secondary">reset-password</h2>
                 </div>
 
                 <form action="/reset_password/" class="form" method="post">
@@ -540,9 +448,7 @@
           <div class="book">
             <div class="book__form">
                 <div class="margin-bottom-medium form">
-                  <h2 class="heading-secondary">
-                    signup
-                  </h2>
+                  <h2 class="heading-secondary">signup</h2>
                 </div>
                 <form action="/register/" class="form" method="post">
                 {% csrf_token %}
