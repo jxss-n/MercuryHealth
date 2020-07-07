@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <meta charset="UTF-8">
+      <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
       <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
@@ -45,7 +45,7 @@
     </nav>
 
     <header class="beta">
-      <div class="main-head" style="top:30% !important;">
+      <div class="main-head">
         <h1 class="main-head__content margin-bottom-small">
             <span class="main-head__content--title">Beta Test</span>
         </h1>
@@ -61,7 +61,7 @@
           About
         </h2>
       </div>
-      <b><p style="text-align:left;">When you join our beta test we'll:</p></b>
+      <b><p style="text-align:left;">When you join our beta test, we will:</p></b>
       <p style="text-align:left;">1) <b>Talk to you over the phone</b> about the details of our beta program and ensure we're a good fit for your home need.</p>
       <p style="text-align:left;">2) <b>Walk you through setting up an account in our online portal</b>, where you can view health related analytics based on detections captured.</p>
       <p style="text-align:left;">3) <b>Install our Mercury Home device in a room you choose.</b> We're very cautious about being germ-free, where client health and safety is our first priority! And, if you'd prefer, we can walk you through how to install it yourself over the phone.</p>
@@ -75,6 +75,9 @@
         </h2>
       </div>
       <div class="container">
+        <div class="videoWrapper">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/flv6HH-OfDM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
         <div class="row">
           <div class="col">
                 <img src="../../static/img/install.png" alt="" class="feature-box" alt="medical device installation">
@@ -83,12 +86,17 @@
 
           <div class="col">
               <img src="../../static/img/monitor2.png" alt="" class="feature-box" alt="senior emergency situation">
-              <p class="feature-box__text"><b>CAPTURE + ANALYZE</b> <br> Encrypted sensor data captured by the device are anonymously analyzed and emergency situation information is securely stored as client history.</p>
+              <p class="feature-box__text"><b>CAPTURE</b> <br> Encrypted sensor data captured by the device are anonymously analyzed and emergency situation information is securely stored as client history.</p>
           </div>
 
           <div class="col">
               <img src="../../static/img/alert.png" alt="" class="feature-box" alt="alert system">
               <p class="feature-box__text"><b>ALERT</b> <br> Emergency contacts/services are notified when a fall or other occurrence is detected. </p>
+          </div>
+
+          <div class="col">
+              <img src="../../static/img/userportal.jpg" alt="" class="feature-box" alt="user portal">
+              <p class="feature-box__text"><b>ANALYZE</b> <br>View client activity history in our user portal to spot trends in health data. </p>
           </div>
         </div>
       </div>
@@ -100,14 +108,10 @@
         {% csrf_token %}
 
         <h4>1. Contact Information <span class="required">*required</span></h4>
-        <div class="row">
-          <div class="col joinbeta">
-            <input id="first_name" name="first_name" type="text" placeholder="First Name*" required>
-            <input id="last_name" name="last_name" type="text" placeholder="Last Name*" required><br>
-            <input id="email" name="email" type="email" placeholder="Email Address*" required>
-            <input id="phone_number" name="phone_number" type="text" placeholder="Phone Number"><br>
-          </div>
-        </div>
+        <input required id="first_name" name="first_name" type="text" placeholder="First Name*" aria-required="true"/>
+        <input required id="last_name" name="last_name" type="text" placeholder="Last Name*" aria-required="true"/><br>
+        <input required id="email" name="email" type="email" placeholder="Email Address*" aria-required="true"/>
+        <input id="phone_number" name="phone_number" type="text" placeholder="Phone Number"><br>
 
         <h4>2. Who are you interested in buying this product for? (select all that apply)</h4>
         <div id="q1" class="row">
