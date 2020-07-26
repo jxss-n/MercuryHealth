@@ -81,6 +81,13 @@ body {
  }
 }
 
+.logo {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  vertical-align:middle;
+}
+
 .zoom{
   transition: all ease 500ms; }
   .zoom:hover{
