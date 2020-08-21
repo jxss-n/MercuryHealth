@@ -88,6 +88,55 @@ body {
   vertical-align:middle;
 }
 
+.secondNav {
+  display: flex;
+  justify-content: flex-end;
+  position: sticky !important;
+  background-color: #fff;
+  top: 0;
+  z-index: 1;
+  box-shadow: 0px 10px 18px rgba(50,50,71,0.08);
+}
+
+.navbar-collapse.in {
+    display: block !important;
+}
+
+.secondNav .active {
+  color: #1B698F !important;
+}
+
+.features div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.betaArrow {
+  margin-top: -4em !important;
+  display: block;
+  margin: auto;
+  z-index: 2;
+}
+
+.features img {
+  width: 50%;
+}
+.secondNav a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #1B698F;
+  font-size: 2rem;
+  line-height: 5rem;
+}
+
+.secondNav a:hover {
+  text-decoration: none;
+}
+
+
+
 .zoom{
   transition: all ease 500ms; }
   .zoom:hover{
@@ -416,6 +465,7 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
 .questionnaire h4 {
   font-size: 2rem;
   margin-top:3rem;
+  color: #246889;
 }
 
 .questionnaire label {
@@ -445,12 +495,12 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
   width: 30vw;
 }
 
-#q1 div.col-md, div.q3, div.q4 {
+div.q3, div.q4 {
   display: flex;
   align-items: center;
 }
 
-.questionnaire div.row, div.q2, div.q3, div.q5, .questionnaire input[name="q4"]{
+.questionnaire div.row, div.q2, div.q3, div.q5{
   margin-left: 1rem;
 }
 
@@ -459,10 +509,57 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
   text-align: center;
 }
 
-#first_name, #last_name, #email, #phone_number {
-  width: 25%;
+.contactinfo {
+  width: 75%;
+  display: block;
+  margin: auto;
+}
+
+#last_name {
+  margin-right: 0 !important;
+}
+
+#first_name, #last_name {
+  width: calc(50% - 0.7rem);
+  height: 3.5rem;
+  margin: 0.5rem 1rem 0.5rem 0;
+  font-size: 1.5rem;
+  border: 2px solid #246889;
+  border-radius: 5px;
+  padding-left: 1rem;
+}
+#overview {
+  background: linear-gradient(90deg, #246889 50%, #9AE3EE 50%);
+}
+
+#overview p {
+  font-size: 2.5rem; margin-top: 5rem; margin-left: 5rem; width: 80%;
+}
+
+
+@media only screen and (max-width: 575px) {
+  #first_name, #last_name {
+    width: 100% !important;
+  }
+
+  #overview {
+    background: linear-gradient(180deg, #246889 50%, #9AE3EE 50%) !important;
+  }
+
+  #overview p {
+    margin-top: 20rem !important;
+  }
+}
+
+
+.questionnaire #email, #phone_number {
+  width: 100%;
+  height: 3.5rem;
   margin: 0.5rem 0.5rem 0.5rem 0;
   font-size: 1.5rem;
+  border: 2px solid #246889;
+  border-radius: 5px;
+  padding-left: 1rem;
 }
 
 .joinbeta input[type="submit"] {
@@ -478,6 +575,14 @@ background-image: linear-gradient(to right, rgba(48, 198, 250, 0.8), rgba(38, 94
   margin-top: 2rem;
   padding: 0.75rem 2rem;
   transition: all 250ms ease;
+  white-space: normal;
+  width: 60%;
+}
+
+@media only screen and (max-width: 440px) {
+  .joinbeta input[type="submit"] {
+    width: 80%;
+  }
 }
 
 .joinbeta input[type="submit"]:hover {
