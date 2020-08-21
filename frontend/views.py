@@ -20,6 +20,7 @@ from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse
 import datetime
 
+# from views import errorMsg
 #Static variables for error outputs
 ERROR_FILL_OUT = "Please fill out all fields"
 ERROR_OBTAIN_DATA = "Coudln't obtain your data. Please contact"
@@ -29,9 +30,21 @@ ERROR_SIGNUP = "Invalid Username or Password"
 ERROR_DEVICE = "DeviceID not found"
 ERROR_USEREXISTS = "user already exists"
 
+
 # Routing to the main page of the website
 def index(request):
     auth = request.COOKIES.get('auth')
+    print("[views.py line 37] first auth type: {}".format(type(auth)))
+    auth = auth.replace("'", '"')
+    auth = json.loads(auth)
+
+    #return render(request, 'frontend/index.html', {'auth': None, 'errorMessage': None})
+    try:
+        usersname = auth['usersname']
+    except KeyError:
+        print("[views.py line 46] auth[usersname] doesnt exist")
+        return render(request, 'frontend/index.html', {'auth': None, 'errorMessage': None})
+
     try:
         errorMessage = request.session['errorMessage']
         cred = request.session['cred']
@@ -73,7 +86,7 @@ def beta(request):
     for key in params.keys():
         params[key] = str(params[key])
     try:
-        beta_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/register-beta",   json.dumps(dict(params)))  
+        beta_response = requests.post("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/register-beta",   json.dumps(dict(params)))
         print(beta_response.content)
     except Exception as e:
         print('ERROR')
@@ -117,7 +130,6 @@ def user_page(request):
         print("this is the auth: {}".format(auth))
         usersname = auth["usersname"]
         try:
-            print("it is working 2")
             #obtainning back the user emergency contact infos
             user_data_response = requests.get("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user/data", params = {"AccessToken": auth['AccessToken']}, headers = {"Authorization": auth["token"]})
             print(user_data_response)
@@ -288,7 +300,7 @@ def user_page(request):
 def login(request):
     auth = request.COOKIES.get('auth')
     #if you already logged in and have auth token
-    if auth:
+    if auth.find("usersname") != -1:
         return HttpResponseRedirect(reverse('user_page'))
     #if you are requesting for the login page
     request.session['cred'] = "login"
