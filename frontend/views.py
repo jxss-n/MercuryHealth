@@ -35,8 +35,11 @@ ERROR_USEREXISTS = "user already exists"
 def index(request):
     auth = request.COOKIES.get('auth')
     print("[views.py line 37] first auth type: {}".format(type(auth)))
-    auth = auth.replace("'", '"')
-    auth = json.loads(auth)
+    if auth:
+        auth = auth.replace("'", '"')
+        auth = json.loads(auth)
+    else:
+        auth = {}
 
     #return render(request, 'frontend/index.html', {'auth': None, 'errorMessage': None})
     try:
@@ -132,7 +135,7 @@ def user_page(request):
         try:
             #obtainning back the user emergency contact infos
             user_data_response = requests.get("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/user/data", params = {"AccessToken": auth['AccessToken']}, headers = {"Authorization": auth["token"]})
-            print(user_data_response)
+            # print(user_data_response)
         except Exception as e:
             return render( request, 'frontend/user_page.html', {'message': ERROR_OBTAIN_DATA})
         try:
@@ -140,12 +143,12 @@ def user_page(request):
             User_Analytics = requests.get("https://wzxac2vv46.execute-api.us-west-2.amazonaws.com/mercury-health/device/analytics", params = {"AccessToken": auth['AccessToken'], "position":"situp"} , headers = {"Authorization": auth["token"]})
         except Exception as e:
             return render( request, 'frontend/user_page.html', {'message': ERROR_OBTAIN_DATA})
-        print(User_Analytics.content)
+        # print(User_Analytics.content)
         user_data_response = json.loads(user_data_response.content)
         user_analytics_response = json.loads(User_Analytics.content)
-        print("after user_anaylytsc response")
-        print(user_analytics_response)
-        print(user_data_response)
+        # print("after user_anaylytsc response")
+        # print(user_analytics_response)
+        # print(user_data_response)
         #only load the page if the queries do not have any errors.
         if 'status' in user_data_response and 'status' in user_analytics_response:
             #I need to be more robust about the failed cases, but for not go as it is.
@@ -153,7 +156,7 @@ def user_page(request):
                 print("inside the success")
                 analytics = user_analytics_response['userData']
                 print(analytics)
-                if analytics and analytics is not 'not set' and analytics != "situp" and analytics != "fall":
+                if analytics and analytics != 'not set' and analytics != "situp" and analytics != "fall":
                     userAnalytics = analytics
                     print(userAnalytics)
                     userDataList = {}
@@ -300,7 +303,7 @@ def user_page(request):
 def login(request):
     auth = request.COOKIES.get('auth')
     #if you already logged in and have auth token
-    if auth.find("usersname") != -1:
+    if auth and auth.find("usersname") != -1:
         return HttpResponseRedirect(reverse('user_page'))
     #if you are requesting for the login page
     request.session['cred'] = "login"
@@ -400,14 +403,14 @@ def register(request):
 
 def logout(request):
     auth = request.COOKIES.get('auth')
-    print(auth)
+    # print(auth)
     #TODO keep everything to positive
     if auth:
         login_page = HttpResponseRedirect(reverse('login'))
         login_page.delete_cookie("auth")
         auth = auth.replace("'", '"')
         auth = json.loads(auth)
-        print(auth)
+        # print(auth)
         try:
             username = auth["username"]
         except:
