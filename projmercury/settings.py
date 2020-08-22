@@ -22,7 +22,7 @@ SECRET_KEY = '))*ibet&)+q4$g-b9a5e4b@)q2a##-l3+paxs3qc@0#^7zowq%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['mercuryhealth.us','www.mercuryhealth.us','projmercury.kmvndgzimt.us-east-1.elasticbeanstalk.com','localhost','127.0.0.1', 'django-env1.ndpzmyqfdx.us-west-2.elasticbeanstalk.com', 'django-mercury-dev.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['mercuryhealth.us','www.mercuryhealth.us','projmercury.kmvndgzimt.us-east-1.elasticbeanstalk.com','localhost','127.0.0.1', 'django-env1.ndpzmyqfdx.us-west-2.elasticbeanstalk.com', 'django-mercury-dev.us-west-2.elasticbeanstalk.com', 'mercuryhealth-dev.us-west-2.elasticbeanstalk.com']
 
 
 # Application definition
