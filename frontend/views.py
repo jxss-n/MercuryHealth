@@ -130,7 +130,7 @@ def user_page(request):
     if auth:
         auth = auth.replace("'", '"')
         auth = json.loads(auth)
-        print("this is the auth: {}".format(auth))
+        # print("this is the auth: {}".format(auth))
         usersname = auth["usersname"]
         try:
             #obtainning back the user emergency contact infos
@@ -155,10 +155,10 @@ def user_page(request):
             if user_data_response['status'] == 'Success' and user_analytics_response['status'] == 'Success':
                 print("inside the success")
                 analytics = user_analytics_response['userData']
-                print(analytics)
+                # print(analytics)
                 if analytics and analytics != 'not set' and analytics != "situp" and analytics != "fall":
                     userAnalytics = analytics
-                    print(userAnalytics)
+                    # print(userAnalytics)
                     userDataList = {}
                     for i in userAnalytics:
                         userDatas = i.split(' ')
@@ -166,11 +166,11 @@ def user_page(request):
                             userDataList[userDatas[0]].append(userDatas[1])
                         else:
                             userDataList[userDatas[0]] = [userDatas[1]]
-                            print(userDataList)
+                            # print(userDataList)
                 analytics = ' , '.join(analytics)
-                print(analytics)
+                # print("[views.py line 171] {}".format(analytics))
                 content = user_data_response['emergency_contacts']
-                print(content)
+                # print("[views.py line 173] {}".format(content))
                 if request.method == 'GET':
                     #check if the emergency datas are set from the user or not
                     if content == "not set":
