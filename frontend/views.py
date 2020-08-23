@@ -34,7 +34,7 @@ ERROR_USEREXISTS = "user already exists"
 # Routing to the main page of the website
 def index(request):
     auth = request.COOKIES.get('auth')
-    print("[views.py line 37] first auth type: {}".format(type(auth)))
+    # print("[views.py line 37] first auth type: {}".format(type(auth)))
     if auth:
         auth = auth.replace("'", '"')
         auth = json.loads(auth)
@@ -146,9 +146,9 @@ def user_page(request):
         # print(User_Analytics.content)
         user_data_response = json.loads(user_data_response.content)
         user_analytics_response = json.loads(User_Analytics.content)
-        # print("after user_anaylytsc response")
-        # print(user_analytics_response)
-        # print(user_data_response)
+        print("after user_anaylytsc response")
+        print(user_analytics_response)
+        print(user_data_response)
         #only load the page if the queries do not have any errors.
         if 'status' in user_data_response and 'status' in user_analytics_response:
             #I need to be more robust about the failed cases, but for not go as it is.
