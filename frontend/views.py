@@ -44,8 +44,9 @@ def index(request):
     #return render(request, 'frontend/index.html', {'auth': None, 'errorMessage': None})
     try:
         usersname = auth['usersname']
+        print("[views.py line 47] usersname: {}".format(auth['usersname']))
     except KeyError:
-        print("[views.py line 46] auth[usersname] doesnt exist")
+        print("[views.py line 49] auth[usersname] doesnt exist")
         return render(request, 'frontend/index.html', {'auth': None, 'errorMessage': None})
 
     try:
