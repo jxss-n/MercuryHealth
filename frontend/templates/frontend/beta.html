@@ -9,7 +9,7 @@
       <link rel="icon" href="../../static/favicon/favicon-32x32.png">
       <link rel="stylesheet" href="../../static/frontend/icon-font.css">
       <link rel="stylesheet" href="../../static/frontend/base.css">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151443853-1"></script>
@@ -34,148 +34,254 @@
 
   <body>
     <nav class="nav">
-        <div class="nav__tab" id="nav">
-            <div class="nav__logo"><a href="{% url 'index' %}" class="nav__faq--link nav__link">Mercury Health</a></div>
+        <div class="nav__tab" id="nav" style="color:#094664 !important;">
+            <div class="nav__logo"><a href="{% url 'index' %}" class="nav__faq--link nav__link" style="color:#094664 !important;">Mercury Health</a></div>
             <div class="nav__navigation">
-                <span class="nav__beta"><a href="" class="nav__beta--link nav__link active-text">beta</a></span>
-                <span class="nav__faq"><a href="{% url 'faq' %}" class="nav__faq--link nav__link">faq</a></span>
-                <span class="nav__contact"><a href="{% url 'index' %}#footer" class="nav__contact--link nav__link">contact us</a></span>
-                <span class="nav__signup"><a href="{% url 'index' %}#signup" class="nav__signup--link nav__link">signup</a></span>
-                <span class="nav__login"><a href="{% url 'index' %}#login" class="nav__login--link nav__link">login</a></span>
+                <span class="nav__beta"><a href="" class="nav__beta--link nav__link active-text" style="color:#094664 !important;">beta</a></span>
+                <span class="nav__faq"><a href="{% url 'faq' %}" class="nav__faq--link nav__link" style="color:#094664 !important;">faq</a></span>
+                <span class="nav__contact"><a href="{% url 'index' %}#footer" class="nav__contact--link nav__link" style="color:#094664 !important;">contact us</a></span>
+                <span class="nav__signup"><a href="{% url 'index' %}#signup" class="nav__signup--link nav__link" style="color:#094664 !important;">signup</a></span>
+                <span class="nav__login"><a href="{% url 'index' %}#login" class="nav__login--link nav__link" style="color:#094664 !important;">login</a></span>
             </div>
         </div>
     </nav>
 
-    <header class="beta">
-      <div class="main-head">
-        <h1 class="main-head__content margin-bottom-small">
-            <span class="main-head__content--title">Beta Test</span>
-        </h1>
-        <hr class="headerline">
-        <h1 class="main-head__content--subtitle margin-top-small" style="font-size:2.75rem;">We're now offering our service for free if you sign up as part of our beta test program!</h1>
-        <a class="sign-upbtn" href="#betaForm">SIGN UP</a>
+    <header id="home" style="background-color: #E7F4FC; padding: 10rem 0; padding-top: 20rem; display: flex;">
+      <div class="container" style="display: flex;">
+        <div class="row flex-sm-row-reverse" style="align-items: center; width: 100%;">
+          <div class="col-sm-6">
+              <img src="../../static/img/device.png" alt="" style="width: 30%; display: block; margin: auto;">
+          </div>
+          <div class="col-sm-6">
+            <h1 class="main-head__content--title" style="font-family: 'Lato', sans-serif;color: #246889; text-shadow: none;letter-spacing: 1rem;"><span style="font-size: 3.5rem; letter-spacing: 0; font-weight: normal;">Start Your Journey with</span><br>Mercury Home</h1>
+            <p class="main-head__content--subtitle" style="color: #246889; font-size: 2.5rem;">Join our community of families and carers working together to provide the best care for loved ones, while maintaining peace of mind.</p>
+            <a class="sign-upbtn" href="#betaForm">SIGN UP</a>
+          </div>
+        </div>
       </div>
     </header>
 
-    <section class="container betaBlurb">
-      <div class="center-text margin-bottom-8">
-        <h2 class="heading-secondary margin-bottom-small margin-top-small">
-          About
-        </h2>
+    <nav class="secondNav navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#home"><strong>Mercury Home</strong></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#overview">Overview</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#details">Beta Program Details</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#betaForm">Sign Up</a>
+          </li>
+        </ul>
       </div>
-      <b><p style="text-align:left;">When you join our beta test, we will:</p></b>
-      <p style="text-align:left;">1) <b>Talk to you over the phone</b> about the details of our beta program and ensure we're a good fit for your home need.</p>
-      <p style="text-align:left;">2) <b>Walk you through setting up an account in our online portal</b>, where you can view health related analytics based on detections captured.</p>
-      <p style="text-align:left;">3) <b>Install our Mercury Home device in a room you choose.</b> We're very cautious about being germ-free, where client health and safety is our first priority! And, if you'd prefer, we can walk you through how to install it yourself over the phone.</p>
-      <p style="text-align:left;">4) <b>Apply our detection and alerting subscription services that you're interested in for free </b>(fall detection, lack of movement detection, sitting out of bed detection, sleep monitoring, or wandering detection) while you're enrolled in the beta program!</p>
+    </nav>
+
+    <section id="overview" style="min-height: 100vh;">
+      <div class="row" style="display: flex; align-items: center; width: 100%;">
+        <div class="col-sm-6" style="">
+          <h3 style="width: 80%; color: #FFF; font-size: 3.5rem; display:block; margin: 2rem auto;">Home care reimagined with personalized health monitoring</h3>
+          <iframe style="width: 80%; margin: auto; display: block;"width="560" height="315" src="https://www.youtube.com/embed/CPzuKXa3mew" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="col-sm-6" style="color: #1B698F;">
+          <p>Ensure your loved one is safe. Monitor and receive alerts for:</p>
+          <ul style="font-size: 2.5rem; margin-left: 7rem;">
+            <li>Fall</li>
+            <li>Wandering</li>
+            <li>Night-time disturbances</li>
+            <li>Sleep quality</li>
+          </ul>
+          <img src="../../static/img/alert.png" alt="" class="feature-box" alt="alert system" style="box-shadow: none; width: 50%; height: auto;">
+        </div>
+      </div>
     </section>
 
-    <section class="features margin-top-small">
-      <div class="center-text margin-bottom-8">
-        <h2 class="heading-secondary margin-bottom-small margin-top-small">
-          How Our Service Works
-        </h2>
-      </div>
-      <div class="container">
-        <div class="videoWrapper">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/CPzuKXa3mew" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <section id="features" style="min-height: 100vh; background-color: #E7F4FC;">
+      <div class="row features" style="width: 100%; color: #1B698F;">
+        <div class="col-sm-4" style="vertical-align: bottom;">
+          <img src="../../static/img/FallDetection.png" alt="">
+          <p style="font-size: 2rem;"><strong>Fall</strong></p>
+          <p style="font-size: 1.5rem;">Fallen unexpectedly on the ground </p>
         </div>
-        <div class="row">
-          <div class="col">
-                <img src="../../static/img/install.png" alt="" class="feature-box" alt="medical device installation">
-              <p class="feature-box__text"> <b>INSTALL</b> <br> Our team will install Mercury Home in a desired room.</p>
-          </div>
+        <div class="col-sm-4">
+          <img src="../../static/img/Wandering.png" alt="">
+          <p style="font-size: 2rem;"><strong>Wandering</strong></p>
+          <p style="font-size: 1.5rem;">High amount of activity at odd hours</p>
+        </div>
+        <div class="col-sm-4">
+          <img src="../../static/img/SleepMonitoring.png" alt="">
+          <p style="font-size: 2rem;"><strong>Sleep Monitoring</strong></p>
+          <p style="font-size: 1.5rem;">Overall sleep quality</p>
+        </div>
+        <div class="col-sm-6">
+          <img src="../../static/img/Lack_of_Movement.png" alt="">
+          <p style="font-size: 2rem;"><strong>Lack of Movement</strong></p>
+          <p style="font-size: 1.5rem;">Minimal movement for an extended period of time</p>
+        </div>
+        <div class="col-sm-6">
+          <img src="../../static/img/NightDisturbance.png" alt="">
+          <p style="font-size: 2rem;"><strong>Sit out of Bed (Nighttime Disturbances)</strong></p>
+          <p style="font-size: 1.5rem;">Gotten out of bed and may need help reaching the bathroom at night</p>
+        </div>
+      </div>
+    </section>
 
-          <div class="col">
-              <img src="../../static/img/monitor2.png" alt="" class="feature-box" alt="senior emergency situation">
-              <p class="feature-box__text"><b>CAPTURE</b> <br> Encrypted sensor data captured by the device are anonymously analyzed and emergency situation information is securely stored as client history.</p>
-          </div>
+    <h3 id="details" style="background-color: #1B698F; font-size: 4rem; text-align: center; color: #FFF; line-height: 5rem; padding: 7rem 0;">After You Sign Up, We Will... </h3>
 
-          <div class="col">
-              <img src="../../static/img/alert.png" alt="" class="feature-box" alt="alert system">
-              <p class="feature-box__text"><b>ALERT</b> <br> Emergency contacts/services are notified when a fall or other occurrence is detected. </p>
+    <section style="background-color: #E7F4FC; height: 100vh;">
+      <div class="row flex-sm-row-reverse" style="height: 100%; width: 100%;">
+        <div class="col-sm-4" style="display: flex; justify-content: center; align-items: middle; flex-direction: column;">
+          <img src="../../static/img/call.png" alt="" style="width: 50%; display:block; margin: auto;">
+        </div>
+        <div class="col-sm-8" style="color: #1B698F; display: flex; justify-content: center; align-items: middle; flex-direction: column;">
+          <div class="" style="width: 80%; display: block; margin: auto;">
+            <h2 style="font-size: 3rem;">Chat with you to</h2>
+            <h1 style="font-size: 5rem;">Understand your caregiving needs and personalize the beta program</h1>
+            <p style="font-size: 2rem">We will walk you through the details of the beta test program to ensure the program is a good fit for you, choosing specific detection and alerting subscription services for your home.</p>
           </div>
+        </div>
 
-          <div class="col">
-              <img src="../../static/img/userportal.jpg" alt="" class="feature-box" alt="user portal">
-              <p class="feature-box__text"><b>ANALYZE</b> <br>View client activity history in our user portal to spot trends in health data. </p>
+      </div>
+      <img class="betaArrow" src="../../static/img/downarrow.svg" alt="">
+    </section>
+
+    <!-- <section style="background-color: #E7F4FC; height: 100vh;">
+      <div class="row" style="height: 100%; width: 100%;">
+        <div class="col-sm-4" style="display: flex; justify-content: center; align-items: middle; flex-direction: column;">
+          <img src="../../static/img/call.png" alt="" style="width: 50%; display:block; margin: auto;">
+        </div>
+        <div class="col-sm-8" style="display: flex; justify-content: center; align-items: middle; flex-direction: column;">
+          <div class="" style="width: 80%; display: block; margin: auto; color: #1B698F;">
+            <h1 style="font-size: 5rem;">Personalize the beta program</h1>
+            <p style="font-size: 2rem">Choose specific detection and alerting subscription services for your home.</p>
+          </div>
+        </div>
+      </div>
+      <img class="betaArrow" src="../../static/img/downarrow.svg" alt="">
+    </section> -->
+
+    <section style="background-color: #EDECE7; height: 100vh;">
+      <div class="row flex-sm-row-reverse" style="height: 100%; width: 100%;">
+        <div class="col-sm-4" style="display: flex; justify-content: center; align-items: middle; flex-direction: column;">
+          <img src="../../static/img/install.png" alt="" style="width: 80%; display:block; margin: auto;">
+        </div>
+        <div class="col-sm-8" style="color: #1B698F; display: flex; justify-content: center; align-items: middle; flex-direction: column;">
+          <div class="" style="width: 80%; display: block; margin: auto;">
+            <h1 style="font-size: 5rem;">Install Mercury Home</h1>
+            <p style="font-size: 2rem">Set up Mercury Home in a room of your choice.<br><br>
+              Our team is very cautious about being germ-free; our client's health and safety is our top priority.
+              If you prefer to install the device yourself, we can help with that too.</p>
+          </div>
+        </div>
+      </div>
+      <img class="betaArrow" src="../../static/img/downarrow.svg" alt="">
+    </section>
+
+    <section style="background-color: #E7F4FC; height: 100vh;">
+      <div class="row" style="height: 100%; width: 100%;">
+        <div class="col-sm-4" style="display: flex;">
+          <img src="../../static/img/userportal_empty.png" alt="" style="display:block; width: 80%; margin: auto;">
+        </div>
+        <div class="col-sm-8" style="display: flex; justify-content: center; align-items: middle; flex-direction: column;">
+          <div class="" style="width: 80%; display: block; margin: auto; color: #1B698F;">
+            <h1 style="font-size: 5rem;">Set up user portal</h1>
+            <p style="font-size: 2rem">All the sensor data Mercury Home captures, encrypts, and anonymously analyzes is securely stored as client history.<br><br>
+              Access all the health related analyses from the device’s detections through your user portal.</p>
           </div>
         </div>
       </div>
     </section>
 
     <section class="questionnaire" id="betaForm">
-      <h3>Join the <strong>community</strong> of families and carers working together with Mercury Health to provide the best care for loved ones, while maintaining a peace of mind. Fill out the form below and sign up for our <strong>beta test program</strong> to receive a <em>free</em> trial device.<br><span style="font-size:1.25rem;font-style: italic;text-align:left !important;">Estimated time to complete: 1 minute</span></h3>
+      <h3><strong>Mercury Home Beta Program Sign Up</strong></h3>
+      <p style="color: #246889; font-size: 1.5rem; text-align: center;">Fill out the form below to stay connected with Mercury Health and/or receive a Mercury Home device for free. Thank you for your interest in our work. <br><span style="font-size:1.25rem;font-style: italic;text-align:left !important;">Estimated time to complete: 1 minute</span></p>
       <form id="beta-form" action="" method="post" onsubmit="displayThanks();">
         {% csrf_token %}
 
-        <h4>1. Contact Information <span class="required">*required</span></h4>
-        <input required id="first_name" name="first_name" type="text" placeholder="First Name*" aria-required="true"/>
-        <input required id="last_name" name="last_name" type="text" placeholder="Last Name*" aria-required="true"/><br>
-        <input required id="email" name="email" type="email" placeholder="Email Address*" aria-required="true"/>
-        <input id="phone_number" name="phone_number" type="text" placeholder="Phone Number"><br>
-
-        <h4>2. Who are you interested in buying this product for? (select all that apply)</h4>
-        <div id="q1" class="row">
-          <div class="col-md"><input id="q1a1" name="q1" value="Myself" type="checkbox"><label for="q1a1">Myself</label></div>
-          <div class="col-md"><input id="q1a2" name="q1" value="Parent" type="checkbox"><label for="q1a2">Parent</label></div>
-          <div class="col-md"><input id="q1a3" name="q1" value="Sibling" type="checkbox"><label for="q1a3">Sibling</label></div>
-          <div class="col-md"><input id="q1a4" name="q1" value="Grandparent" type="checkbox"><label for="q1a4">Grandparent</label></div>
-          <div class="col-md"><input id="q1a5" name="q1" value="Spouse" type="checkbox"><label for="q1a5">Spouse</label></div>
-          <div class="col-md"><input id="q1a6" name="q1" value="Child" type="checkbox"><label for="q1a6">Child</label></div>
-          <div class="col-md"><input id="q1a7" name="q1" value="Client" type="checkbox"><label for="q1a7">Client</label></div>
-          <div class="col-md"><input id="q1a8" name="q1" value="Friend" type="checkbox"><label for="q1a8">Friend</label></div>
-          <div class="col-md"><input type="checkbox"><label for="q1a9"><input id="q1a9" name="q1" type="text" placeholder="Other"></label></div>
+        <!-- <h4>1. Contact Information <span class="required">*required</span></h4> -->
+        <div class="contactinfo">
+          <input required id="first_name" name="first_name" type="text" placeholder="First Name*" aria-required="true"/>
+          <input required id="last_name" name="last_name" type="text" placeholder="Last Name*" aria-required="true"/><br>
+          <input required id="email" name="email" type="email" placeholder="Email Address*" aria-required="true"/>
+          <input id="phone_number" name="phone_number" type="text" placeholder="Phone Number"><br>
         </div>
 
-        <h4>3. What service are you most interested in us monitoring for? (select all that apply)</h4>
-        <div class="row q2row">
+        <h4>Would you like to be a part of our beta test program? <span class="required">*required</span></h4>
+        <div class="row" style="width: 75%; margin: auto;">
+          <div class="col q4"><input id="q4a1" type="radio" value="Yes" name="q4" checked required><label for="q4a1">Yes</label></div>
+          <div class="col q4"><input id="q4a2" type="radio" value="No" name="q4"><label for="q4a2">No, but I'd like to sign up for the newsletter!</label></div>
+        </div>
+
+        <h4>Who are you interested in buying this product for? (select all that apply)</h4>
+        <div id="q1" class="row" style="width: 75%; margin: auto;">
+          <div class="col-md">
+            <input id="q1a1" name="q1" value="Myself" type="checkbox"><label for="q1a1">Myself</label><br>
+            <input id="q1a2" name="q1" value="Parent" type="checkbox"><label for="q1a2">Parent</label><br>
+            <input id="q1a3" name="q1" value="Sibling" type="checkbox"><label for="q1a3">Sibling</label><br>
+            <input id="q1a4" name="q1" value="Grandparent" type="checkbox"><label for="q1a4">Grandparent</label><br>
+            <input id="q1a5" name="q1" value="Spouse" type="checkbox"><label for="q1a5">Spouse</label>
+          </div>
+          <div class="col-md"><input id="q1a6" name="q1" value="Child" type="checkbox"><label for="q1a6">Child</label><br>
+            <input id="q1a7" name="q1" value="Client" type="checkbox"><label for="q1a7">Client</label><br>
+            <input id="q1a8" name="q1" value="Friend" type="checkbox"><label for="q1a8">Friend</label><br>
+            <input type="checkbox"><label for="q1a9"><input id="q1a9" name="q1" type="text" placeholder="Other"></label>
+          </div>
+        </div>
+
+        <h4>What service are you most interested in us monitoring for? (select all that apply)</h4>
+        <div class="row q2row" style="width: 75%; margin: auto;">
           <div class="col-md">
             <input id="q2a1" name="q2" value="Fall detection" type="checkbox"><label for="q2a1">Fall detection</label><br>
-            <input id="q2a2" name="q2" value="Sit out of bed detection" type="checkbox"><label for="q2a2">Sit out of bed detection</label>
-          </div>
-          <div class="col-md">
+            <input id="q2a2" name="q2" value="Sit out of bed detection" type="checkbox"><label for="q2a2">Sit out of bed detection</label><br>
             <input id="q2a3" name="q2" value="Lack of movement detection" type="checkbox"><label for="q2a3">Lack of movement detection</label><br>
-            <input id="q2a4" name="q2" value="Wandering detection" type="checkbox"><label for="q2a4">Wandering detection</label>
-          </div>
-          <div class="col-md">
+            <input id="q2a4" name="q2" value="Wandering detection" type="checkbox"><label for="q2a4">Wandering detection</label><br>
             <input id="q2a5" name="q2" value="Sleep monitoring" type="checkbox"><label for="q2a5">Sleep monitoring</label><br>
-            <input id="q2a6" name="q2" value="General Health and Activity Analysis" type="checkbox"><label for="q2a6">General health and activity analysis</label>
+            <input id="q2a6" name="q2" value="General Health and Activity Analysis" type="checkbox"><label for="q2a6">General health and activity analysis</label><br>
+            <input type="checkbox"><label for="q2a7"><input id="q2a7" type="text" name="q2" placeholder="Other - What service are you interested in us adding?"></label>
           </div>
         </div>
-        <div class="col q2"><input type="checkbox"><label for="q2a7"><input id="q2a7" type="text" name="q2" placeholder="Other - What service are you interested in us adding?"></label></div>
 
-        <h4>4. Why are you interested in Mercury Home? (select all that apply)</h4>
-        <div class="q3 col"><input id="q3a1" name="q3" value="Provide additional support for my at-home caregiver" type="checkbox"><label for="q3a1">Provide additional support for my at-home caregiver</label></div><br>
-        <div class="q3 col"><input id="q3a2" name="q3" value="Reduce the amount of time needed for my at-home caregiver’s service" type="checkbox"><label for="q3a2">Reduce the amount of time needed for my at-home caregiver’s service</label></div><br>
-        <div class="q3 col"><input id="q3a3" name="q3" value="Use this product instead of using an at-home caregiver" type="checkbox"><label for="q3a3">Use this product in lieu of using an at-home caregiver</label></div><br>
-        <div class="q3 col"><input id="q3a4" name="q3" value="Reduce person-to-person contact by using remote monitoring technology" type="checkbox"><label for="q3a4">Reduce person-to-person contact by using remote monitoring technology</label></div><br>
-        <div class="q3 col"><input id="q3a5" name="q3" value="Track progressions/regressions in physical and mental wellness" type="checkbox"><label for="q3a5">Track progressions/regressions in physical and mental wellness</label></div><br>
-        <div class="q3 col"><input type="checkbox"><label for="q3a6"><input id="q3a6" name="q3" type="text" placeholder="Other - type answer"></div></label>
+        <h4>Why are you interested in Mercury Home? (select all that apply)</h4>
+        <div class="row q2row" style="width: 75%; margin: auto;">
+          <div class="col-md">
+            <input id="q3a1" name="q3" value="Provide additional support for my at-home caregiver" type="checkbox"><label for="q3a1">Provide additional support for my at-home caregiver</label><br>
+            <input id="q3a2" name="q3" value="Reduce the amount of time needed for my at-home caregiver’s service" type="checkbox"><label for="q3a2">Reduce the amount of time needed for my at-home caregiver’s service</label><br>
+            <input id="q3a3" name="q3" value="Use this product instead of using an at-home caregiver" type="checkbox"><label for="q3a3">Use this product in lieu of using an at-home caregiver</label><br>
+            <input id="q3a4" name="q3" value="Reduce person-to-person contact by using remote monitoring technology" type="checkbox"><label for="q3a4">Reduce person-to-person contact by using remote monitoring technology</label><br>
+            <input id="q3a5" name="q3" value="Track progressions/regressions in physical and mental wellness" type="checkbox"><label for="q3a5">Track progressions/regressions in physical and mental wellness</label><br>
+            <input type="checkbox"><label for="q3a6"><input id="q3a6" name="q3" type="text" placeholder="Other - type answer"></label>
+          </div>
+        </div>
 
-        <h4>5. Are you interested in joining our beta test, where we provide you with a free, trial device and service? <span class="required">*required</span></h4>
-        <div class="col q4"><input id="q4a1" type="radio" value="Yes" name="q4" required><label for="q4a1">Yes</label></div>
-        <div class="col q4"><input id="q4a2" type="radio" value="No" name="q4"><label for="q4a2">No</label></div>
 
-        <h4>6. Is there anything else you want to tell us so we may better understand your story?</h4>
-        <div class="col q5"><input id="q5a1" name="q5" type="text" placeholder="Answer here"></div>
+        <h4>Is there anything else you want to tell us so we may better understand your story?</h4>
+        <div class="row" style="width: 75%; margin: auto;">
+          <div class="col q5"><input id="q5a1" name="q5" type="text" placeholder="Answer here"></div>
+        </div>
 
         <div class="joinbeta">
-          <h3>Thank you for helping Mercury Health grow to serve your caregiving needs.</h3>
           <input id="signupBeta" type="submit" value="SUBMIT & SIGN UP FOR BETA TESTING!">
           <h3 id="confirmBeta">FORM SUBMITTED!</h3>
         </div>
       </form>
     </section>
 
+
     <footer class="footer" id="footer">
         <!--End mc_embed_signup-->
-      <div class="row">
-        <div class="col-2" style="text-align:center;">
+      <div class="row" style="width: 100%;">
+        <div class="col-sm-2" style="text-align:center;">
           <p></p>
         </div>
 
-        <div class="col-4" style="display:inline-block;">
+        <div class="col-sm-4" style="display:inline-block;">
           <img src="../../static/img/logo.png" alt="logo" class="logo"><p style="width: 50%; display:inline-block; margin-left: 1rem; font-size: 2rem; margin-bottom: 0; vertical-align: middle;"><strong>MERCURY HEALTH</strong></p><br>
           <a href="" class="footer__link">beta</a>
           <a href="{% url 'faq' %}" class="footer__link">faq</a>
@@ -183,25 +289,22 @@
           <a href="{% url 'index' %}#login" class="footer__link">login</a>
         </div>
 
-        <div class="col-2">
+        <div class="col-sm-2">
           <p><strong>CONTACT US</strong></p>
           <p>Email: <a id="email" href="mailto:contact@mercuryhealth.us">contact@mercuryhealth.us</a></p>
           <p>Phone Number: (858) 500 - 6186</p>
           <p>Location: 9500 Gilman Dr. La Jolla, CA</p>
         </div>
 
-        <div class="col-2">
+        <div class="col-sm-2">
             <div class="mapouter"><div class="gmap_canvas"><iframe width="200" height="200" id="gmap_canvas" src="https://maps.google.com/maps?q=9500%20Gilman%20Dr.%20La%20Jolla%2C%20CA&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net/blog/nordvpn-coupon-code/">does nordvpn have a free trial</a></div><style>.mapouter{position:relative;text-align:right;height:200px;width:200px;}.gmap_canvas {overflow:hidden;background:none!important;height:200px;width:200px;}</style></div>
-        </div>
-
-        <div class="col-2">
-          <p></p>
         </div>
       </div>
     </footer>
-    <script src="../../static/frontend/index.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
   </body>
 </html>

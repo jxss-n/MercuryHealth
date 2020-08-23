@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+      <!--[if IE]><link rel="shortcut icon" href="../../static/favicon/favicon.ico"><![endif]-->
+      <link rel="icon" href="../../static/favicon/favicon-32x32.png">
+      <link rel="stylesheet" href="../../static/frontend/icon-font.css">
+      <link rel="stylesheet" href="../../static/frontend/base.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151443853-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-151443853-1');
+      </script>
+
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-P5MPMT8');</script>
+      <!-- End Google Tag Manager -->
+
+      <title>Beta Test! | Mercury Health</title>
+  </head>
+
+  <body>
+    <nav class="nav">
+        <div class="nav__tab" id="nav">
+            <div class="nav__logo"><a href="{% url 'index' %}" class="nav__faq--link nav__link">Mercury Health</a></div>
+            <div class="nav__navigation">
+                <span class="nav__beta"><a href="" class="nav__beta--link nav__link active-text">beta</a></span>
+                <span class="nav__faq"><a href="{% url 'faq' %}" class="nav__faq--link nav__link">faq</a></span>
+                <span class="nav__contact"><a href="{% url 'index' %}#footer" class="nav__contact--link nav__link">contact us</a></span>
+                <span class="nav__signup"><a href="{% url 'index' %}#signup" class="nav__signup--link nav__link">signup</a></span>
+                <span class="nav__login"><a href="{% url 'index' %}#login" class="nav__login--link nav__link">login</a></span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="beta">
+      <div class="main-head">
+        <h1 class="main-head__content margin-bottom-small">
+            <span class="main-head__content--title">Beta Test</span>
+        </h1>
+        <hr class="headerline">
+        <h1 class="main-head__content--subtitle margin-top-small" style="font-size:2.75rem;">We're now offering our service for free if you sign up as part of our beta test program!</h1>
+        <a class="sign-upbtn" href="#betaForm">SIGN UP</a>
+      </div>
+    </header>
+
+    <section class="container betaBlurb">
+      <div class="center-text margin-bottom-8">
+        <h2 class="heading-secondary margin-bottom-small margin-top-small">
+          About
+        </h2>
+      </div>
+      <b><p style="text-align:left;">When you join our beta test, we will:</p></b>
+      <p style="text-align:left;">1) <b>Talk to you over the phone</b> about the details of our beta program and ensure we're a good fit for your home need.</p>
+      <p style="text-align:left;">2) <b>Walk you through setting up an account in our online portal</b>, where you can view health related analytics based on detections captured.</p>
+      <p style="text-align:left;">3) <b>Install our Mercury Home device in a room you choose.</b> We're very cautious about being germ-free, where client health and safety is our first priority! And, if you'd prefer, we can walk you through how to install it yourself over the phone.</p>
+      <p style="text-align:left;">4) <b>Apply our detection and alerting subscription services that you're interested in for free </b>(fall detection, lack of movement detection, sitting out of bed detection, sleep monitoring, or wandering detection) while you're enrolled in the beta program!</p>
+    </section>
+
+    <section class="features margin-top-small">
+      <div class="center-text margin-bottom-8">
+        <h2 class="heading-secondary margin-bottom-small margin-top-small">
+          How Our Service Works
+        </h2>
+      </div>
+      <div class="container">
+        <div class="videoWrapper">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/CPzuKXa3mew" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="row">
+          <div class="col">
+                <img src="../../static/img/install.png" alt="" class="feature-box" alt="medical device installation">
+              <p class="feature-box__text"> <b>INSTALL</b> <br> Our team will install Mercury Home in a desired room.</p>
+          </div>
+
+          <div class="col">
+              <img src="../../static/img/monitor2.png" alt="" class="feature-box" alt="senior emergency situation">
+              <p class="feature-box__text"><b>CAPTURE</b> <br> Encrypted sensor data captured by the device are anonymously analyzed and emergency situation information is securely stored as client history.</p>
+          </div>
+
+          <div class="col">
+              <img src="../../static/img/alert.png" alt="" class="feature-box" alt="alert system">
+              <p class="feature-box__text"><b>ALERT</b> <br> Emergency contacts/services are notified when a fall or other occurrence is detected. </p>
+          </div>
+
+          <div class="col">
+              <img src="../../static/img/userportal.jpg" alt="" class="feature-box" alt="user portal">
+              <p class="feature-box__text"><b>ANALYZE</b> <br>View client activity history in our user portal to spot trends in health data. </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="questionnaire" id="betaForm">
+      <h3>Join the <strong>community</strong> of families and carers working together with Mercury Health to provide the best care for loved ones, while maintaining a peace of mind. Fill out the form below and sign up for our <strong>beta test program</strong> to receive a <em>free</em> trial device.<br><span style="font-size:1.25rem;font-style: italic;text-align:left !important;">Estimated time to complete: 1 minute</span></h3>
+      <form id="beta-form" action="" method="post" onsubmit="displayThanks();">
+        {% csrf_token %}
+
+        <h4>1. Contact Information <span class="required">*required</span></h4>
+        <input required id="first_name" name="first_name" type="text" placeholder="First Name*" aria-required="true"/>
+        <input required id="last_name" name="last_name" type="text" placeholder="Last Name*" aria-required="true"/><br>
+        <input required id="email" name="email" type="email" placeholder="Email Address*" aria-required="true"/>
+        <input id="phone_number" name="phone_number" type="text" placeholder="Phone Number"><br>
+
+        <h4>2. Who are you interested in buying this product for? (select all that apply)</h4>
+        <div id="q1" class="row">
+          <div class="col-md"><input id="q1a1" name="q1" value="Myself" type="checkbox"><label for="q1a1">Myself</label></div>
+          <div class="col-md"><input id="q1a2" name="q1" value="Parent" type="checkbox"><label for="q1a2">Parent</label></div>
+          <div class="col-md"><input id="q1a3" name="q1" value="Sibling" type="checkbox"><label for="q1a3">Sibling</label></div>
+          <div class="col-md"><input id="q1a4" name="q1" value="Grandparent" type="checkbox"><label for="q1a4">Grandparent</label></div>
+          <div class="col-md"><input id="q1a5" name="q1" value="Spouse" type="checkbox"><label for="q1a5">Spouse</label></div>
+          <div class="col-md"><input id="q1a6" name="q1" value="Child" type="checkbox"><label for="q1a6">Child</label></div>
+          <div class="col-md"><input id="q1a7" name="q1" value="Client" type="checkbox"><label for="q1a7">Client</label></div>
+          <div class="col-md"><input id="q1a8" name="q1" value="Friend" type="checkbox"><label for="q1a8">Friend</label></div>
+          <div class="col-md"><input type="checkbox"><label for="q1a9"><input id="q1a9" name="q1" type="text" placeholder="Other"></label></div>
+        </div>
+
+        <h4>3. What service are you most interested in us monitoring for? (select all that apply)</h4>
+        <div class="row q2row">
+          <div class="col-md">
+            <input id="q2a1" name="q2" value="Fall detection" type="checkbox"><label for="q2a1">Fall detection</label><br>
+            <input id="q2a2" name="q2" value="Sit out of bed detection" type="checkbox"><label for="q2a2">Sit out of bed detection</label>
+          </div>
+          <div class="col-md">
+            <input id="q2a3" name="q2" value="Lack of movement detection" type="checkbox"><label for="q2a3">Lack of movement detection</label><br>
+            <input id="q2a4" name="q2" value="Wandering detection" type="checkbox"><label for="q2a4">Wandering detection</label>
+          </div>
+          <div class="col-md">
+            <input id="q2a5" name="q2" value="Sleep monitoring" type="checkbox"><label for="q2a5">Sleep monitoring</label><br>
+            <input id="q2a6" name="q2" value="General Health and Activity Analysis" type="checkbox"><label for="q2a6">General health and activity analysis</label>
+          </div>
+        </div>
+        <div class="col q2"><input type="checkbox"><label for="q2a7"><input id="q2a7" type="text" name="q2" placeholder="Other - What service are you interested in us adding?"></label></div>
+
+        <h4>4. Why are you interested in Mercury Home? (select all that apply)</h4>
+        <div class="q3 col"><input id="q3a1" name="q3" value="Provide additional support for my at-home caregiver" type="checkbox"><label for="q3a1">Provide additional support for my at-home caregiver</label></div><br>
+        <div class="q3 col"><input id="q3a2" name="q3" value="Reduce the amount of time needed for my at-home caregiver’s service" type="checkbox"><label for="q3a2">Reduce the amount of time needed for my at-home caregiver’s service</label></div><br>
+        <div class="q3 col"><input id="q3a3" name="q3" value="Use this product instead of using an at-home caregiver" type="checkbox"><label for="q3a3">Use this product in lieu of using an at-home caregiver</label></div><br>
+        <div class="q3 col"><input id="q3a4" name="q3" value="Reduce person-to-person contact by using remote monitoring technology" type="checkbox"><label for="q3a4">Reduce person-to-person contact by using remote monitoring technology</label></div><br>
+        <div class="q3 col"><input id="q3a5" name="q3" value="Track progressions/regressions in physical and mental wellness" type="checkbox"><label for="q3a5">Track progressions/regressions in physical and mental wellness</label></div><br>
+        <div class="q3 col"><input type="checkbox"><label for="q3a6"><input id="q3a6" name="q3" type="text" placeholder="Other - type answer"></div></label>
+
+        <h4>5. Are you interested in joining our beta test, where we provide you with a free, trial device and service? <span class="required">*required</span></h4>
+        <div class="col q4"><input id="q4a1" type="radio" value="Yes" name="q4" required><label for="q4a1">Yes</label></div>
+        <div class="col q4"><input id="q4a2" type="radio" value="No" name="q4"><label for="q4a2">No</label></div>
+
+        <h4>6. Is there anything else you want to tell us so we may better understand your story?</h4>
+        <div class="col q5"><input id="q5a1" name="q5" type="text" placeholder="Answer here"></div>
+
+        <div class="joinbeta">
+          <h3>Thank you for helping Mercury Health grow to serve your caregiving needs.</h3>
+          <input id="signupBeta" type="submit" value="SUBMIT & SIGN UP FOR BETA TESTING!">
+          <h3 id="confirmBeta">FORM SUBMITTED!</h3>
+        </div>
+      </form>
+    </section>
+
+    <footer class="footer" id="footer">
+        <!--End mc_embed_signup-->
+      <div class="row">
+        <div class="col-2" style="text-align:center;">
+          <p></p>
+        </div>
+
+        <div class="col-4" style="display:inline-block;">
+          <img src="../../static/img/logo.png" alt="logo" class="logo"><p style="width: 50%; display:inline-block; margin-left: 1rem; font-size: 2rem; margin-bottom: 0; vertical-align: middle;"><strong>MERCURY HEALTH</strong></p><br>
+          <a href="" class="footer__link">beta</a>
+          <a href="{% url 'faq' %}" class="footer__link">faq</a>
+          <a href="{% url 'index' %}#signup" class="footer__link">signup</a>
+          <a href="{% url 'index' %}#login" class="footer__link">login</a>
+        </div>
+
+        <div class="col-2">
+          <p><strong>CONTACT US</strong></p>
+          <p>Email: <a id="email" href="mailto:contact@mercuryhealth.us">contact@mercuryhealth.us</a></p>
+          <p>Phone Number: (858) 500 - 6186</p>
+          <p>Location: 9500 Gilman Dr. La Jolla, CA</p>
+        </div>
+
+        <div class="col-2">
+            <div class="mapouter"><div class="gmap_canvas"><iframe width="200" height="200" id="gmap_canvas" src="https://maps.google.com/maps?q=9500%20Gilman%20Dr.%20La%20Jolla%2C%20CA&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net/blog/nordvpn-coupon-code/">does nordvpn have a free trial</a></div><style>.mapouter{position:relative;text-align:right;height:200px;width:200px;}.gmap_canvas {overflow:hidden;background:none!important;height:200px;width:200px;}</style></div>
+        </div>
+
+        <div class="col-2">
+          <p></p>
+        </div>
+      </div>
+    </footer>
+    <script src="../../static/frontend/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>
