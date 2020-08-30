@@ -16,19 +16,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
+
 from .views import *
 
 urlpatterns = [
     url(r'^$', index, name='index'),
+    url(r'^faq/$', faq, name='faq'),
+    url(r'^beta/$', beta, name='beta'),
+
     url(r'^user_page/$', user_page, name='user_page'),
+
 	url(r'^login/$', login, name='login'),
     url(r'^register/$', register, name='register'),
     url(r'^logout/$', logout, name='logout'),
-    url(r'^verity/$', verify, name='verify'),
+    # url(r'^verity/$', verify, name='verify'),
+
     url(r'^forgot_password/$', forgot_password, name='forgot_password'),
     url(r'^reset_password/$', reset_password, name='reset_password'),
-    url(r'^faq/$', faq, name='faq'),
-    url(r'^beta/$', beta, name='beta'),
-    path('admin/', admin.site.urls),
 
+    path('admin/', admin.site.urls),
 ]
