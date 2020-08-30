@@ -44,8 +44,27 @@
   <div class="header2__content">
     <div class="container" id="activity_log">
       <h3 id="activity_title">RECENT ACTIVITY</h3>
+      <select class="activity_time" id="activity_start_time">
+        <option value="0" selected>12AM</option>
+        <option value="4">4AM</option>
+        <option value="8">8AM</option>
+        <option value="12">12PM</option>
+        <option value="16">4PM</option>
+        <option value="20">8PM</option>
+      </select>
+      <select class="activity_time" id="activity_end_time">
+        <option value="24" selected>12AM</option>
+        <option value="4">4AM</option>
+        <option value="8">8AM</option>
+        <option value="12">12PM</option>
+        <option value="16">4PM</option>
+        <option value="20">8PM</option>
+      </select>
+      <button type="button" name="button" onClick="populateTimedChart()">Confirm</button>
       <div class="header2__content--activitylog">
-        <div id="chartdiv"></div>
+        <div class="chartdiv" id="falling"></div>
+        <div class="chartdiv" id="situp"></div>
+        <div class="chartdiv" id="standing"></div>
       </div>
       <a class="activity_link" href="#">View Full Activity Log</a>
     </div>
@@ -225,12 +244,12 @@
       $('#sidetabs').on('click','.sidetabs__link', function ( e ) {
         $(this).parents('#sidetabs').find('.sidetabs__link_active').removeClass('sidetabs__link_active').end().end().addClass('sidetabs__link_active');
       });
-      console.log("this is: " + "{{name}}")
+      // console.log("this is: " + "{{name}}")
       if ("{{name}}" !== 'not set') {
         $('.header2__content--emergencycontact').css('display', 'none');
         $('.emergency_list').css('display','block');
         var hideContact = "#contact" + contact;
-        console.log("hide contact" + hideContact);
+        // console.log("hide contact" + hideContact);
         $(hideContact).css('display', 'none');
       } else {
         $('.header2__content--emergencycontact').css('display', 'block');
@@ -280,9 +299,9 @@
       $('.emergency_list').css('display', 'none');
 
       // Toggle contact form based on which emergency contact has been filled out
-      console.log("name 1 not set");
+      // console.log("name 1 not set");
       if ("{{name}}" === 'not set') {
-        console.log("name 1 not set");
+        // console.log("name 1 not set");
         contact = 1;
         $("#contact1").css('display', "block");
         $('[name="Name"]').val('')
@@ -295,7 +314,7 @@
       }
 
       else if ("{{name2}}" === 'not set') {
-        console.log("name 2 not set");
+        // console.log("name 2 not set");
         contact = 2;
         $('[name="' + "Name" + contact + '"]').val('')
         $('[name="' + "Relationship" + contact + '"]').val('')
@@ -308,7 +327,7 @@
       }
 
       else if ("{{name3}}" === 'not set') {
-        console.log("name 3 not set");
+        // console.log("name 3 not set");
         contact = 3;
         $('[name="' + "Name" + contact + '"]').val('')
         $('[name="' + "Relationship" + contact + '"]').val('')
@@ -321,7 +340,7 @@
       }
 
       else if ("{{name4}}" === 'not set') {
-        console.log("name 4 not set");
+        // console.log("name 4 not set");
         contact = 4;
         $('[name="' + "Name" + contact + '"]').val('')
         $('[name="' + "Relationship" + contact + '"]').val('')
@@ -334,7 +353,7 @@
       }
 
       else if ("{{name5}}" === 'not set') {
-        console.log("name 5 not set");
+        // console.log("name 5 not set");
         contact = 5;
         $('[name="' + "Name" + contact + '"]').val('')
         $('[name="' + "Relationship" + contact + '"]').val('')
@@ -348,7 +367,7 @@
     });
 
     $(".submitContacts").click(function(){
-        console.log("submit contacts");
+        // console.log("submit contacts");
         $(".submitContacts").prop("type", "submit");
         $(".header2__form").css('display', 'none');
         $('.emergency_list').css('display','block');
@@ -360,12 +379,12 @@
         $('.emergency_list').css('display', 'block');
         $('.header2__content--emergencycontact').css('display', 'none');
         var hideContact = "#contact" + contact;
-        console.log("hide contact" + hideContact);
+        // console.log("hide contact" + hideContact);
         $(hideContact).css('display', 'none');
       } else {
         $('.header2__content--emergencycontact').css('display', 'block');
         var hideContact = "#contact" + contact;
-        console.log("hide contact" + hideContact);
+        // console.log("hide contact" + hideContact);
         $(hideContact).css('display', 'none');
       }
     });
@@ -411,132 +430,154 @@
 
     });
 
+    // For Time period Button
+    const populateTimedChart = () => {
+        console.log("clicked button")
+        startHour = document.getElementById("activity_start_time").value
+        endHour = document.getElementById("activity_end_time").value
+
+        user_analytics_data = {{ user_analytcs|safe }}
+        for (state in user_analytics_data) {
+            populateChart(state, user_analytics_data[state], startHour, endHour)
+        }
+    }
 
     // Populating Graph and Table
-    am4core.ready(function() {
-      // Themes begin
-      am4core.useTheme(am4themes_dataviz);
-      am4core.useTheme(am4themes_animated);
-      // Themes end
+    const populateChart = (chartDivID, data, startHour = 0, endHour = 24) => {
 
-      // Create chart instance
-      var chart = am4core.create("chartdiv", am4charts.XYChart);
+        am4core.ready(function() {
+          // Themes begin
+          am4core.useTheme(am4themes_dataviz);
+          am4core.useTheme(am4themes_animated);
+          // Themes end
 
-      // Create chart data array
-      chart.data = [];
+          // Create chart instance
+          var chart = am4core.create(chartDivID, am4charts.XYChart);
 
-      var table = document.getElementById("all_data");
-      var i;
+          // Create chart data array
+          chart.data = [];
 
-      // Reformat data from database and store in userDataList
-      var userAnalytics = "{{user_analytcs}}".split(' , ').slice(1);
-      var userDataList = new Object();
-      for (i in userAnalytics){
-        userDatas = userAnalytics[i].split(' ');
-        console.log(userDatas);
-        if (userDatas[0] in userDataList){
-            (userDataList[userDatas[0]]).push(userDatas[1]);
-        }
-        else{
-            userDataList[userDatas[0]] = [userDatas[1]];
-        }
-   }
+          var table = document.getElementById("all_data");
+          var i;
 
-      // Iterate through all timestamps to update table and push to chart data array
-      Object.keys(userDataList).forEach(function eachKey(key) {
+          // Reformat data from database and store in userDataList
+          // console.log("[user_page.html line 432] {{ user_analytcs }}")
+          var userAnalytics = data.split(' , ');
+          var userDataList = new Object();
+          for (i in userAnalytics){
+              userDatas = userAnalytics[i].split(' ');
+              // console.log("[user_page.html lind 462]", userDatas);
 
-        // Format tooltip text
-        var tStamp = "Activity Detected At:\n";
+              activityHour = Number(userDatas[1].substring(0, 2))
+              if (activityHour > startHour && activityHour < endHour) {
+                  if (userDatas[0] in userDataList){
+                      (userDataList[userDatas[0]]).push(userDatas[1]);
+                  }
+                  else{
+                      userDataList[userDatas[0]] = [userDatas[1]];
+                  }
+              }
+       }
 
-        for (var i in userDataList[key]) {
-          var t = userDataList[key][i].substring(0,8);
-          tStamp += t +"\n";
-        }
+          // Iterate through all timestamps to update table and push to chart data array
+          Object.keys(userDataList).forEach(function eachKey(key) {
 
-        console.log(key);
-        var month = parseInt(key.substring(5,7)) - 1;
-        var day = parseInt(key.substring(8,10));
-        var year = parseInt(key.substring(0,4));
-        console.log(month);
-        console.log(day);
-        console.log(year);
-        chart.data.push({"date": key, "value": userDataList[key].length, "timestamps": tStamp});
-        //chart.data.push({"date": new Date(year, month, day), "value": userDataList[key].length, "timestamps": tStamp});
+            // Format tooltip text
+            var tStamp = "Activity Detected At:\n";
 
-        // Update activity log table
-        for (var time in userDataList[key]) {
-          var dataTime = userDataList[key][time].substring(0,8);
-          var row = table.insertRow(0);
-          var cell1 = row.insertCell(0);
-          var cell2 = row.insertCell(1);
-          cell1.className = 'column1';
-          cell2.className = 'column3';
-          cell1.innerHTML = key + " / " + dataTime;
-          cell2.innerHTML = "Sit-up detected";
-        }
-      });
+            for (var i in userDataList[key]) {
+              var t = userDataList[key][i].substring(0,8);
+              tStamp += t +"\n";
+            }
 
-      //Object.keys(userDataList)[0];
+            var month = parseInt(key.substring(5,7)) - 1;
+            var day = parseInt(key.substring(8,10));
+            var year = parseInt(key.substring(0,4));;
+            chart.data.push({"date": key, "value": userDataList[key].length, "timestamps": tStamp});
+            //chart.data.push({"date": new Date(year, month, day), "value": userDataList[key].length, "timestamps": tStamp});
 
-      // Set input format for the dates
-      //chart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
+            // Update activity log table
+            for (var time in userDataList[key]) {
+              var dataTime = userDataList[key][time].substring(0,8);
+              var row = table.insertRow(0);
+              var cell1 = row.insertCell(0);
+              var cell2 = row.insertCell(1);
+              cell1.className = 'column1';
+              cell2.className = 'column3';
+              cell1.innerHTML = key + " / " + dataTime;
+              cell2.innerHTML = "Sit-up detected";
+            }
+          });
 
-      // Create axes
-      var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-      var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-      dateAxis.renderer.grid.template.location = 0.5;
-      dateAxis.renderer.labels.template.location = 0.5;
+          //Object.keys(userDataList)[0];
+
+          // Set input format for the dates
+          //chart.dateFormatter.inputDateFormat = "yyyy-MM-dd";
+
+          // Create axes
+          var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+          var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+          dateAxis.renderer.grid.template.location = 0.5;
+          dateAxis.renderer.labels.template.location = 0.5;
 
 
-      // Create series
-      var series = chart.series.push(new am4charts.LineSeries());
-      series.dataFields.valueY = "value";
-      series.dataFields.dateX = "date";
-      series.dataFields.tStamp = "timestamps";
+          // Create series
+          var series = chart.series.push(new am4charts.LineSeries());
+          series.dataFields.valueY = "value";
+          series.dataFields.dateX = "date";
+          series.dataFields.tStamp = "timestamps";
 
-      series.tooltipText = "{tStamp}";
-      series.strokeWidth = 2;
-      series.minBulletDistance = 15;
+          series.tooltipText = "{tStamp}";
+          series.strokeWidth = 2;
+          series.minBulletDistance = 15;
 
-      // Drop-shaped tooltips
-      series.tooltip.background.cornerRadius = 20;
-      series.tooltip.background.strokeOpacity = 0;
-      series.tooltip.pointerOrientation = "vertical";
-      series.tooltip.label.minWidth = 40;
-      series.tooltip.label.minHeight = 40;
-      series.tooltip.label.textAlign = "middle";
-      series.tooltip.label.textValign = "middle";
+          // Drop-shaped tooltips
+          series.tooltip.background.cornerRadius = 20;
+          series.tooltip.background.strokeOpacity = 0;
+          series.tooltip.pointerOrientation = "vertical";
+          series.tooltip.label.minWidth = 40;
+          series.tooltip.label.minHeight = 40;
+          series.tooltip.label.textAlign = "middle";
+          series.tooltip.label.textValign = "middle";
 
-      // Make bullets grow on hover
-      var bullet = series.bullets.push(new am4charts.CircleBullet());
-      bullet.circle.strokeWidth = 2;
-      bullet.circle.radius = 4;
-      bullet.circle.fill = am4core.color("#fff");
+          // Make bullets grow on hover
+          var bullet = series.bullets.push(new am4charts.CircleBullet());
+          bullet.circle.strokeWidth = 2;
+          bullet.circle.radius = 4;
+          bullet.circle.fill = am4core.color("#fff");
 
-      var bullethover = bullet.states.create("hover");
-      bullethover.properties.scale = 1.3;
+          var bullethover = bullet.states.create("hover");
+          bullethover.properties.scale = 1.3;
 
-      // Make a panning cursor
-      chart.cursor = new am4charts.XYCursor();
-      chart.cursor.behavior = "panXY";
-      chart.cursor.xAxis = dateAxis;
-      chart.cursor.snapToSeries = series;
+          // Make a panning cursor
+          chart.cursor = new am4charts.XYCursor();
+          chart.cursor.behavior = "panXY";
+          chart.cursor.xAxis = dateAxis;
+          chart.cursor.snapToSeries = series;
 
-      // Create vertical scrollbar and place it before the value axis
-      chart.scrollbarY = new am4core.Scrollbar();
-      chart.scrollbarY.parent = chart.leftAxesContainer;
-      chart.scrollbarY.toBack();
+          // Create vertical scrollbar and place it before the value axis
+          chart.scrollbarY = new am4core.Scrollbar();
+          chart.scrollbarY.parent = chart.leftAxesContainer;
+          chart.scrollbarY.toBack();
 
-      // Create a horizontal scrollbar with previe and place it underneath the date axis
-      chart.scrollbarX = new am4charts.XYChartScrollbar();
-      chart.scrollbarX.series.push(series);
-      chart.scrollbarX.parent = chart.bottomAxesContainer;
+          // Create a horizontal scrollbar with previe and place it underneath the date axis
+          chart.scrollbarX = new am4charts.XYChartScrollbar();
+          chart.scrollbarX.series.push(series);
+          chart.scrollbarX.parent = chart.bottomAxesContainer;
 
-      chart.events.on("ready", function () {
-        dateAxis.zoom({start:0.79, end:1});
-      });
+          chart.events.on("ready", function () {
+            dateAxis.zoom({start:0.79, end:1});
+          });
 
-    }); // end am4core.ready()
+        }); // end am4core.ready()
+    }
+
+    // Initial charts
+    user_analytics_data = {{ user_analytcs|safe }}
+    for (state in user_analytics_data) {
+        // console.log("[user_page.html line 549]", state)
+        populateChart(state, user_analytics_data[state])
+    }
 
   </script>
 
