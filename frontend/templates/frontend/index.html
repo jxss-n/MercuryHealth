@@ -1,7 +1,6 @@
 {% extends "./base.html" %}
 {% load static%}
 
-
 {% block navContent%}
   <nav class="nav">
       <div class="nav__tab" id="nav">
@@ -19,7 +18,6 @@
           </div>
       </div>
   </nav>
-
   <header class="header">
     <div class="header__logo-box"></div>
     <div class="main-head">
@@ -34,28 +32,7 @@
   </header>
 {% endblock %}
 
-
 {% block content%}
-{% if errorMessage == None %}
-<script>
-    //window.location.href="http://" + window.location.hostname + "/#";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#";    //Another url redirect
-</script>
-{% endif %}
-
-{% if errorMessage != None and cred == 'login'%}
-<script>
-    //window.location.href="http://" + window.location.hostname + "/#login";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#login";
-</script>
-{% endif %}
-
-{% if errorMessage != None and cred == 'signup'%}
-<script>
-    //window.location.href="http://" + window.location.hostname + "/#signup";
-    //window.location.href="http://" + "127.0.0.1:8000" + "/#signup";
-</script>
-{% endif %}
 
 {% if errorMessage != None and cred == 'forgot-password'%}
 <script>
@@ -73,25 +50,18 @@
 
   <main>
       <section class="invertBackground">
-        <h2 class="heading-secondary margin-bottom-small margin-top-small">
-          What We Do
-        </h2><br>
+        <h2 class="heading-secondary margin-bottom-small margin-top-small">What We Do</h2><br>
         <div class="videoWrapper">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/WhO4fFcm-jM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <h3>Interested in learning more or staying connected?</h3>
-        <!--<p style="font-size: 1.25rem; margin-bottom: 2rem;">Join the community of families and carers working together with Mercury Health to provide the best care for loved ones, while maintaining a peace of mind. </p>-->
         <a class="sign-upbtn" href="/beta">SIGN UP FOR OUR FREE BETA TEST</a>
       </section>
 
-      <!-- OUR DEVICE -->
       <section id="tours">
         <div class="center-text">
-            <h2 class="heading-secondary margin-bottom-small margin-top-small">
-              Our System
-            </h2>
+            <h2 class="heading-secondary margin-bottom-small margin-top-small">Our System</h2>
         </div>
-
         <div class="container">
           <div class="row" style="background-color: #094664">
             <div class="col-sm-4 vertical-align" style="margin-left:15px">
@@ -107,7 +77,6 @@
               <img class="cropped" src="../../static/img/fall.jpg" width="100%" alt="senior falling">
             </div>
           </div>
-
           <div class="row flex-sm-row-reverse" style="background-color: #E7F4FC">
             <div class="col-sm-4 vertical-align">
               <div>
@@ -122,7 +91,6 @@
                 <img class="cropped" src="../../static/img/mercury.jpg" width="100%" alt="medical device">
             </div>
           </div>
-
           <div class="row" style="background-color: #094664">
             <div class="col-sm-4 vertical-align" style="margin-left:15px">
               <div>
@@ -139,8 +107,7 @@
         </div>
       </section>
 
-      <!-- HOW IT WORKS -->
-      <section class="features margin-top-small">
+      <section class="lightBlueBg margin-top-small">
         <div class="center-text margin-bottom-8">
           <h2 class="heading-secondary margin-bottom-small margin-top-small">
             How Our Service Works
@@ -148,22 +115,19 @@
         </div>
         <div class="container">
           <div class="row">
-            <div class="col">
+            <div class="col-3">
                   <img src="../../static/img/install.png" alt="" class="feature-box" alt="medical device installation">
                 <p class="feature-box__text"> <b>INSTALL</b> <br> Our team will install Mercury Home in a desired room.</p>
             </div>
-
-            <div class="col">
+            <div class="col-3">
                 <img src="../../static/img/monitor2.png" alt="" class="feature-box" alt="senior emergency situation">
                 <p class="feature-box__text"><b>CAPTURE</b> <br> Encrypted sensor data captured by the device are anonymously analyzed and emergency situation information is securely stored as client history.</p>
             </div>
-
-            <div class="col">
+            <div class="col-3">
                 <img src="../../static/img/alert.png" alt="" class="feature-box" alt="alert system">
                 <p class="feature-box__text"><b>ALERT</b> <br> Emergency contacts/services are notified when a fall or other occurrence is detected. </p>
             </div>
-
-            <div class="col">
+            <div class="col-3">
                 <img src="../../static/img/userportal.jpg" alt="" class="feature-box" alt="user portal">
                 <p class="feature-box__text"><b>ANALYZE</b> <br>View client activity history in our user portal to spot trends in health data. </p>
             </div>
@@ -171,11 +135,10 @@
         </div>
       </section>
 
-      <!-- AWARDS -->
-      <section style="margin-bottom: 6rem;">
+      <section class="awards">
         <div class="container center-text">
-          <h2 class="heading-secondary margin-bottom-small" style="margin-top: 5rem;">Awards & Recognition</h2>
-          <div class="row" style="text-align:center;">
+          <h2 class="heading-secondary margin-bottom-small">Awards & Recognition</h2>
+          <div class="row">
             <div class="col">
               <p class="award_text"><b>1st place</b> at <i>US Microsoft Imagine Cup 2015</i></p>
               <img src="{%static 'img/firstplace.png'%}" class="award_img" style="width:20% !important; margin-right:1.5rem;" alt="first place award">
@@ -193,122 +156,113 @@
         </div>
       </section>
 
-      <section style="background-color: #E7F4FC;">
+      <section class="lightBlueBg">
         <div class="center-text margin-bottom-8">
-          <h2 class="heading-secondary margin-bottom-small" style="margin-top: 5rem; margin-bottom: 5rem !important;">Our Team</h2>
+          <h2 class="ourteam heading-secondary margin-bottom-small">Our Team</h2>
         </div>
         <div class="container">
           <div class="row">
             <div class="col-sm-3">
                 <div class="card h-100">
                     <img src="{%static 'img/brandonpeckphoto.jpg'%}" class="circular_img" alt="brandon peck" style="margin-top: -3rem !important;">
-                    <p style="margin-bottom:0; font-size:1.5rem;"><b>BRANDON PECK</b></p>
-                    <p style=""><i>CoFounder /<br> Machine Learning Engineer</i></p>
-                    <p style="padding: 1rem 3.5rem;">Recently graduated from University of Virginia with a degree in Computer Science.
+                    <p class="team_name"><b>BRANDON PECK</b></p>
+                    <p><i>CoFounder /<br> Machine Learning Engineer</i></p>
+                    <p class="team_bio">Recently graduated from University of Virginia with a degree in Computer Science.
                       Has work and research experience with developing Machine/Deep Learning models and pipelines.
                     </p>
                 </div>
             </div>
-
             <div class="col-sm-3">
               <div class="card h-100">
                   <img src="../../static/img/Ji.png"class="circular_img" alt="ji lee">
-                  <p style="margin-bottom:0; font-size:1.5rem;"><b>JI LEE</b></p>
-                  <p style=""><i>Co-founder / <br>Nano Engineer</i></p>
-                  <p style="padding: 1rem 3.5rem;">Recently graduated from UC San Diego with a degree in Nanoengineering.
+                  <p class="team_name"><b>JI LEE</b></p>
+                  <p><i>Co-founder / <br>Nano Engineer</i></p>
+                  <p class="team_bio">Recently graduated from UC San Diego with a degree in Nanoengineering.
                     Works with fabricating micro electronics with a passion in personalized health monitoring,
                     especially in geriatrics.
                   </p>
               </div>
             </div>
-
             <div class="col-sm-3">
               <div class="card h-100">
                   <img src="../../static/img/Ricky.jpg" class="circular_img" alt="ricky rueda">
-                  <p style="margin-bottom:0; font-size:1.5rem;"><b>RICKY RUEDA</b></p>
-                  <p style=""><i>Biomedical Engineer</i></p>
-                  <p style="padding: 1rem 3.5rem;">Recently graduated from UC San Diego with a degree in BioEngineering.
+                  <p class="team_name"><b>RICKY RUEDA</b></p>
+                  <p><i>Biomedical Engineer</i></p>
+                  <p class="team_bio">Recently graduated from UC San Diego with a degree in BioEngineering.
                      Researches biosensors for human health monitoring and is
                      passionate about empowering people to live healthier lives via personalized medical analytics.
                   </p>
               </div>
             </div>
-
             <div class="col-sm-3">
               <div class="card h-100">
                   <img src="../../static/img/alex.JPG"class="circular_img" alt="alex tam">
-                  <p style="margin-bottom:0; font-size:1.5rem;"><b>ALEX TAM</b></p>
-                  <p style=""><i>Hardware Engineer</i></p>
-                  <p style="padding: 1rem 3.5rem;">Recently graduated from UC San Diego with a degree in Electrical Engineering.
+                  <p class="team_name"><b>ALEX TAM</b></p>
+                  <p><i>Hardware Engineer</i></p>
+                  <p class="team_bio">Recently graduated from UC San Diego with a degree in Electrical Engineering.
                      Has development experience with circuits and hardware and has a passion to advance living conditions.
                   </p>
               </div>
             </div>
-
-              <div class="col-sm-3">
-                <div class="card h-100">
-                    <img src="../../static/img/alistair.jpg"class="circular_img" alt="alistair twombly">
-                    <p style="margin-bottom:0; font-size:1.5rem;"><b>ALISTAIR TWOMBLY</b></p>
-                    <p style=""><i>Data Engineer</i></p>
-                    <p style="padding: 1rem 3.5rem;">Recently graduated from UC San Diego with a degree in Aerospace Engineering.
-                       Has experience with 3D modeling and mechanical optimization including building a human powered submarine and
-                       is excited to help design the next generation of devices which will improve people’s lives.
-                     </p>
-                </div>
+            <div class="col-sm-3">
+              <div class="card h-100">
+                  <img src="../../static/img/alistair.jpg"class="circular_img" alt="alistair twombly">
+                  <p class="team_name"><b>ALISTAIR TWOMBLY</b></p>
+                  <p><i>Data Engineer</i></p>
+                  <p class="team_bio">Recently graduated from UC San Diego with a degree in Aerospace Engineering.
+                     Has experience with 3D modeling and mechanical optimization including building a human powered submarine and
+                     is excited to help design the next generation of devices which will improve people’s lives.
+                   </p>
               </div>
-
-              <div class="col-sm-3">
-                <div class="card h-100">
-                    <img src="../../static/img/DanielKim.jpg"class="circular_img" alt="daniel kim">
-                    <p style="margin-bottom:0; font-size:1.5rem;"><b>DANIEL KIM</b></p>
-                    <p style=""><i>Full-Stack Developer</i></p>
-                    <p style="padding: 1rem 3.5rem;">Recently graduated from UC San Diego with a degree in Math-Computer Science.
-                       Manages connection, security, and user experience of Mercury Health website and
-                       is passionate about making differences in people’s lives.
-                     </p>
-                </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="card h-100">
+                  <img src="../../static/img/DanielKim.jpg"class="circular_img" alt="daniel kim">
+                  <p class="team_name"><b>DANIEL KIM</b></p>
+                  <p><i>Full-Stack Developer</i></p>
+                  <p class="team_bio">Recently graduated from UC San Diego with a degree in Math-Computer Science.
+                     Manages connection, security, and user experience of Mercury Health website and
+                     is passionate about making differences in people’s lives.
+                   </p>
               </div>
-
-              <div class="col-sm-3">
-                <div class="card h-100">
-                    <img src="../../static/img/jessica.jpg"class="circular_img" alt="jessica nguyen">
-                    <p style="margin-bottom:0; font-size:1.5rem;"><b>JESSICA NGUYEN</b></p>
-                    <p style=""><i>Front-End Developer & Designer</i></p>
-                    <p style="padding: 1rem 3.5rem;">Third year Cognitive Science (Design & Interaction) student at UC San Diego.
-                      Has work experience with front-end development and branding of web applications.
-                      Passionate about designing simple and effective interfaces that enhance user experiences.
-                    </p>
-                </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="card h-100">
+                  <img src="../../static/img/jessica.jpg"class="circular_img" alt="jessica nguyen">
+                  <p class="team_name"><b>JESSICA NGUYEN</b></p>
+                  <p><i>Front-End Developer & Designer</i></p>
+                  <p class="team_bio">Third year Cognitive Science (Design & Interaction) student at UC San Diego.
+                    Has work experience with front-end development and branding of web applications.
+                    Passionate about designing simple and effective interfaces that enhance user experiences.
+                  </p>
               </div>
-
-              <div class="col-sm-3">
-                <div class="card h-100">
-                    <img src="../../static/img/mikhail.jpg"class="circular_img" alt="mikhail kardash">
-                    <p style="margin-bottom:0; font-size:1.5rem;"><b>MIKHAIL KARDASH</b></p>
-                    <p style=""><i>Machine Learning Engineer</i></p>
-                    <p style="padding: 1rem 3.5rem;">Graduate Student studying Machine Learning and Data Science at UC San Diego. Engineers machine learning solutions using both supervised and deep learning methods. Enjoys writing and optimizing algorithms.</p>
-                </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="card h-100">
+                  <img src="../../static/img/mikhail.jpg"class="circular_img" alt="mikhail kardash">
+                  <p class="team_name"><b>MIKHAIL KARDASH</b></p>
+                  <p><i>Machine Learning Engineer</i></p>
+                  <p class="team_bio">Graduate Student studying Machine Learning and Data Science at UC San Diego. Engineers machine learning solutions using both supervised and deep learning methods. Enjoys writing and optimizing algorithms.</p>
               </div>
-
+            </div>
             <div class="col-sm-3">
               <div class="card h-100">
                   <img src="../../static/img/MH_pic.jpg"class="circular_img" alt="meyhaa buvanesh">
-                  <p style="margin-bottom:0; font-size:1.5rem;"><b>MEYHAA BUVANESH</b></p>
-                  <p style=""><i>Research Analyst</i></p>
-                  <p style="padding: 1rem 3.5rem;">Fourth year Cognitive Science (Machine Learning and Neural Computation) student at UC San Diego.
+                  <p class="team_name"><b>MEYHAA BUVANESH</b></p>
+                  <p><i>Research Analyst</i></p>
+                  <p class="team_bio">Fourth year Cognitive Science (Machine Learning and Neural Computation) student at UC San Diego.
                     She combines her technical experience with her passion for public health to work on identifying shortcomings
                     within the intersection of health and technology, aiming to bridge the gap between the two fields by helping
                     companies develop client-centric technology.
                    </p>
               </div>
             </div>
-
             <div class="col-sm-3">
               <div class="card h-100">
                   <img src="../../static/img/alexr.jpg" class="circular_img" alt="alex rivera">
-                  <p style="margin-bottom:0; font-size:1.5rem;"><b>ALEX RIVERA</b></p>
-                  <p style=""><i>Machine Learning Engineer</i></p>
-                  <p style="padding: 1rem 3.5rem;">Third year Cognitive Science (Machine Learning) student at UC San Diego. Has work experience in robotics and deep learning applications. Passionate about robotics and autonomous vehicles.
+                  <p class="team_name"><b>ALEX RIVERA</b></p>
+                  <p><i>Machine Learning Engineer</i></p>
+                  <p class="team_bio">Third year Cognitive Science (Machine Learning) student at UC San Diego. Has work experience in robotics and deep learning applications. Passionate about robotics and autonomous vehicles.
                    </p>
               </div>
             </div>
@@ -319,32 +273,26 @@
 
   <footer class="footer" id="footer" name="footer">
     <div class="row">
-      <div class="col-2" style="text-align:center;">
+      <div class="col-2">
         <p></p>
       </div>
-
       <div class="col-4" style="display:inline-block;">
-        <img src="../../static/img/logo.png" alt="logo" class="logo"><p style="width: 50%; display:inline-block; margin-left: 1rem; font-size: 2rem; margin-bottom: 0; vertical-align: middle;"><strong>MERCURY HEALTH</strong></p><br>
+        <img src="../../static/img/logo.png" alt="logo" class="logo"><p class="footer_title"><strong>MERCURY HEALTH</strong></p><br>
         <a href="/beta" class="footer__link">beta</a>
         <a href="/faq" class="footer__link">faq</a>
         <a href="#signup" class="footer__link">signup</a>
         <a href="#login" class="footer__link">login</a>
       </div>
-
       <div class="col-2">
         <p><strong>CONTACT US</strong></p>
         <p>Email: <a id="email" href="mailto:contact@mercuryhealth.us">contact@mercuryhealth.us</a></p>
         <p>Phone Number: (858) 500 - 6186</p>
         <p>Location: 9500 Gilman Dr. La Jolla, CA</p>
       </div>
-
       <div class="col-2">
           <div class="mapouter"><div class="gmap_canvas"><iframe width="200" height="200" id="gmap_canvas" src="https://maps.google.com/maps?q=9500%20Gilman%20Dr.%20La%20Jolla%2C%20CA&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net/blog/nordvpn-coupon-code/">does nordvpn have a free trial</a></div><style>.mapouter{position:relative;text-align:right;height:200px;width:200px;}.gmap_canvas {overflow:hidden;background:none!important;height:200px;width:200px;}</style></div>
       </div>
-
-      <div class="col-2">
-        <p></p>
-      </div>
+      <div class="col-2"><p></p></div>
     </div>
   </footer>
 
@@ -419,21 +367,6 @@
                         <font color="red">{{ errorMessage }}</font>
                         {% endif %}
                     </div>
-                  <!--<div class="form__group">
-                    <input type="email" name="email" class="form__input" placeholder="your email" id="email3" required>
-                    <label for="email3" class="form__label">Email</label>
-                </div>
-                  <div class="form__group">
-                    <input type="text" name="confirmationCode" class="form__input" placeholder="confirmation code" id="concode" required>
-                    <label for="concode" class="form__label">Confirmation Code</label>
-                  </div>
-                  <div class="form__group">
-                    <input type="text" name="newPassword" class="form__input" placeholder="new password" id="newPassword" required>
-                    <label for="newPassword" class="form__label">New Password</label>
-                  </div>
-                  <div class="form__group">
-                      <input type="submit" class="btn--input btn btn--green" value="Submit" />
-                  </div>-->
               </form>
             </div>
           </div>
@@ -478,8 +411,4 @@
           </div>
       </div>
   </div>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 {% endblock %}
